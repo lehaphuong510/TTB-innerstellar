@@ -99,26 +99,27 @@
                     resultBox.innerHTML = `<p class="text-red-600 font-medium">${data.message}</p>`; return;
                 }
 
-                // XỬ LÝ: Thông tin cá nhân & Số tiền
+                // XỬ LÝ: Thông tin cá nhân & Số tiền (Gộp chung vào 1 block)
+                let moneyContent = "";
+                if (data.donateData.history.length === 1) {
+                    let h = data.donateData.history[0];
+                    moneyContent = `<p><strong>Số tiền đã Donate:</strong> <span class="text-blue-600 font-bold">${formatMoney(h.submittedAmount)}</span> <span class="text-red-500 text-xs italic">${h.note}</span></p>`;
+                } else {
+                    moneyContent = `<table class="w-full text-sm text-left border-collapse mt-2"><tr class="bg-gray-200"><th class="border p-2">Lần</th><th class="border p-2">Số tiền Submit</th><th class="border p-2">Ghi chú</th></tr>`;
+                    data.donateData.history.forEach(h => {
+                        moneyContent += `<tr class="${h.isDiscrepancy ? 'bg-red-50' : 'bg-white'}"><td class="border p-2">Lần ${h.turn}</td><td class="border p-2 font-medium">${formatMoney(h.submittedAmount)}</td><td class="border p-2 text-red-500 text-xs">${h.note}</td></tr>`;
+                    });
+                    moneyContent += `<tr class="bg-gray-100 font-bold"><td class="border p-2">TỔNG CỘNG</td><td class="border p-2 text-blue-600" colspan="2">${data.donateData.totalMessage}</td></tr></table>`;
+                }
+
                 let personalBlock = `
-                    <div class="p-2 text-sm border rounded mt-1 bg-white mb-2">
+                    <div class="p-2 text-sm border rounded mt-1 bg-white mb-2 space-y-1">
                         <p><strong>Tên thật:</strong> ${data.fullName}</p>
                         <p><strong>Nickname:</strong> ${data.nickname}</p>
                         <p><strong>Số điện thoại:</strong> ${data.shippingData.phone}</p>
+                        ${moneyContent}
                     </div>
                 `;
-
-                let moneyBlock = "";
-                if (data.donateData.history.length === 1) {
-                    let h = data.donateData.history[0];
-                    moneyBlock = `<p class="text-sm mt-1 px-2"><strong>Số tiền:</strong> <span class="text-blue-600 font-bold">${formatMoney(h.submittedAmount)}</span> <span class="text-red-500 text-xs italic">${h.note}</span></p>`;
-                } else {
-                    moneyBlock = `<table class="w-full text-sm text-left border-collapse mt-2"><tr class="bg-gray-200"><th class="border p-2">Lần</th><th class="border p-2">Số tiền Submit</th><th class="border p-2">Ghi chú</th></tr>`;
-                    data.donateData.history.forEach(h => {
-                        moneyBlock += `<tr class="${h.isDiscrepancy ? 'bg-red-50' : 'bg-white'}"><td class="border p-2">Lần ${h.turn}</td><td class="border p-2 font-medium">${formatMoney(h.submittedAmount)}</td><td class="border p-2 text-red-500 text-xs">${h.note}</td></tr>`;
-                    });
-                    moneyBlock += `<tr class="bg-gray-100 font-bold"><td class="border p-2">TỔNG CỘNG</td><td class="border p-2 text-blue-600" colspan="2">${data.donateData.totalMessage}</td></tr></table>`;
-                }
 
                 // XỬ LÝ: Thông tin Ship quà (Chỉ còn mặc định là Ship về nhà)
                 let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
@@ -146,7 +147,6 @@
                         <div>
                             <h3 class="font-bold bg-blue-100 p-2 rounded">THÔNG TIN CÁ NHÂN DONATE</h3>
                             ${personalBlock}
-                            ${moneyBlock}
                         </div>
 
                         <div>
@@ -162,14 +162,13 @@
 
                     <!-- HIGHLIGHT NOTE ZALO -->
                     <div class="mt-6 bg-yellow-100 border border-yellow-300 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm font-bold text-yellow-800 text-center mb-1">PẠT 🎀 NHỚ VÀO GROUP ZALO ĐỂ THEO DÕI THÔNG BÁO/ CẬP NHẬT TỪ TỤI MÌNH NHA: <a href="LINK_ZALO_CỦA_BAN_VÀO_ĐÂY" target="_blank" class="text-blue-600 underline break-all">LINK ZALO</a></p>
-                        
+                        <p class="text-sm font-bold text-yellow-800 text-center">PẠT 🎀 NHỚ VÀO GROUP ZALO ĐỂ THEO DÕI THÔNG BÁO/ CẬP NHẬT TỪ TỤI MÌNH NHA: <a href="LINK_ZALO_CỦA_BAN_VÀO_ĐÂY" target="_blank" class="text-blue-600 underline break-all">LINK ZALO</a></p>
                     </div>
 
                     <!-- FOOTER HỖ TRỢ -->
                     <div class="mt-6 text-center border-t pt-4">
                         <p class="text-sm text-gray-600">Liên hệ tụi mình thông qua: <a href="LINK_THREADS_CỦA_BAN_VÀO_ĐÂY" target="_blank" class="text-blue-600 font-bold hover:underline">Acc Threads của Fansite</a> nếu có sai sót về thông tin và cần hỗ trợ nha.</p>
-                        <p class="text-xs text-gray-700 font-medium text-center mt-2">Lưu ý: THỜI GIAN ĐỐI CHIẾU VỚI NGÂN HÀNG và CẬP NHẬT TRẠNG THÁI từ 21h - 23h mỗi ngày.</p>
+                        <p class="text-xs text-gray-500 font-medium text-center mt-2">Lưu ý: THỜI GIAN ĐỐI CHIẾU VỚI NGÂN HÀNG và CẬP NHẬT TRẠNG THÁI từ 21h - 23h mỗi ngày.</p>
                     </div>
                 `;
                 
