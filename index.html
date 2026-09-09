@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khung Test Logic - Endless Library</title>
+    <!-- Nhúng Tailwind CSS để dàn layout cơ bản -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="text-gray-800 p-4 md:p-10">
+
+    <div class="max-w-4xl mx-auto space-y-8">
+        
+        <!-- HEADER -->
+        <div class="text-center bg-white p-6 rounded-xl shadow">
+            <h1 class="text-2xl font-bold text-blue-600">BẢN TEST CHỨC NĂNG (WIREFLOW)</h1>
+            <p class="text-sm text-gray-500 mt-2">Dữ liệu đang được kết nối trực tiếp với Google Sheet API</p>
+        </div>
+
+        <!-- PHẦN 1: OVERVIEW -->
+        <section class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-xl font-bold border-b pb-2 mb-4">1. OVERVIEW (Tiến độ)</h2>
+            <div id="overview-content">
+                <div class="loader"></div> Đang tải dữ liệu tiến độ...
+            </div>
+        </section>
+
+        <!-- PHẦN 2: TOP DONOR -->
+        <section class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-xl font-bold border-b pb-2 mb-4">2. TOP DONOR</h2>
+            <div id="topdonor-content">
+                <div class="loader"></div> Đang tải bảng xếp hạng...
+            </div>
+        </section>
+
+        <!-- PHẦN 3: TRA CỨU -->
+        <section class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-xl font-bold border-b pb-2 mb-4">3. TRA CỨU KẾT QUẢ</h2>
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="border p-2 rounded w-full max-w-sm outline-none focus:ring-2 focus:ring-blue-400">
+                <button onclick="searchPhone()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-medium">Tra cứu</button>
+            </div>
+            <div id="lookup-result" class="hidden border rounded-lg p-4 bg-gray-50">
+                <!-- Kết quả tra cứu sẽ hiển thị ở đây -->
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // ĐIỀN API CỦA BẠN VÀO ĐÂY
+        const API_URL = "https://script.google.com/macros/s/AKfycbxVwOlCJVEwUC-G9WMFvI4T0tPRj-EtWjT8_VZFwoCZ8CBLDdaXI2ZwhObn9mIPcjlh/exec";
+
+        // Hàm format tiền tệ VNĐ
+        const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + "đ";
+
+        // TẢI DỮ LIỆU OVERVIEW
+        async function loadOverview() {
+            try {
+                const res = await fetch(API_URL + "?action=overview");
+                const data = await res.json();
+                
+                let html = `
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-medium">Tiến độ Donate: ${formatMoney(data.currentTotal)} / ${formatMoney(data.maxTarget)}</span>
+                            <span>${data.moneyPercent.toFixed(1)}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="bg-green-500 h-4 rounded-full" style="width: ${Math.min(data.moneyPercent, 100)}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-medium">Thời gian dự án đã trôi qua:</span>
+                            <span>${data.timePercent.toFixed(1)}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="bg-blue-500 h-4 rounded-full" style="width: ${Math.min(data.timePercent, 100)}%"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="font-bold mb-2">Các mốc mục tiêu:</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-sm">
+                `;
+                data.milestones.forEach(m => {
+                    html += `<li><strong>${m.name}</strong> (${formatMoney(m.target)}): ${m.activity}</li>`;
+                });
+                html += `</ul>`;
+                document.getElementById('overview-content').innerHTML = html;
+            } catch (error) {
+                document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`;
+            }
+        }
+
+        // TẢI DỮ LIỆU TOP DONOR
+        async function loadTopDonor() {
+            try {
+                const res = await fetch(API_URL + "?action=topdonor");
+                const data = await res.json();
+                
+                let html = `<p class="text-xs text-gray-500 italic mb-4">Bảng xếp hạng được tính cho các Giao dịch chuyển khoản Donate trước: <span class="font-bold text-gray-700">${data.lastUpdate}</span></p>`;
+                
+                if(data.donors && data.donors.length > 0) {
+                    html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                    data.donors.forEach((donor, index) => {
+                        let rank = index < 3 ? '🏆' : `#${index + 1}`;
+                        html += `
+                            <div class="border p-3 rounded flex justify-between items-center bg-gray-50">
+                                <div><span class="font-bold mr-2 text-yellow-600">${rank}</span> <span class="font-medium">${donor.nickname}</span></div>
+                                <div class="font-bold text-green-600">${formatMoney(donor.totalAmount)}</div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                } else {
+                    html += `<p>Chưa có dữ liệu Top Donor.</p>`;
+                }
+                document.getElementById('topdonor-content').innerHTML = html;
+            } catch (error) {
+                document.getElementById('topdonor-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`;
+            }
+        }
+
+        // HÀM TRA CỨU
+        async function searchPhone() {
+            const phone = document.getElementById('phoneInput').value.trim();
+            const resultBox = document.getElementById('lookup-result');
+            
+            if(!phone) {
+                alert("Vui lòng nhập số điện thoại");
+                return;
+            }
+
+            resultBox.classList.remove('hidden');
+            resultBox.innerHTML = `<div class="loader"></div> Đang tìm kiếm...`;
+
+            try {
+                const res = await fetch(API_URL + `?action=lookup&sdt=${phone}`);
+                const data = await res.json();
+
+                if (data.status === "not_found") {
+                    resultBox.innerHTML = `<p class="text-red-600 font-medium">${data.message}</p>`;
+                    return;
+                }
+
+                // Xử lý dữ liệu History thành bảng
+                let historyHTML = `
+                    <table class="w-full text-sm text-left border-collapse mt-2">
+                        <tr class="bg-gray-200">
+                            <th class="border p-2">Lần</th>
+                            <th class="border p-2">Số tiền Submit</th>
+                            <th class="border p-2">Ghi chú</th>
+                        </tr>
+                `;
+                data.donateData.history.forEach(h => {
+                    historyHTML += `
+                        <tr class="${h.isDiscrepancy ? 'bg-red-50' : 'bg-white'}">
+                            <td class="border p-2">Lần ${h.turn}</td>
+                            <td class="border p-2 font-medium">${formatMoney(h.submittedAmount)}</td>
+                            <td class="border p-2 text-red-500 text-xs">${h.note}</td>
+                        </tr>
+                    `;
+                });
+                historyHTML += `
+                        <tr class="bg-gray-100 font-bold">
+                            <td class="border p-2">TỔNG CỘNG</td>
+                            <td class="border p-2 text-blue-600" colspan="2">${data.donateData.totalMessage}</td>
+                        </tr>
+                    </table>
+                `;
+
+                // Render toàn bộ kết quả Lookup
+                let html = `
+                    <div class="mb-4 border-b pb-4">
+                        <p class="font-medium text-lg">Xin chào <span class="text-blue-600">${data.nickname}</span> 🎀, tụi mình <span class="text-orange-500 font-bold">${data.formStatus}</span>.</p>
+                        <p class="text-sm mt-2">Ngoài ra, bạn kiểm tra thêm các thông tin bên dưới nha, nếu có bất kỳ sai sót nào hay cần được hỗ trợ, bạn có thể liên hệ với tụi mình qua acc threads của fansite để được hỗ trợ nha.</p>
+                        <p class="text-xs text-gray-500 italic mt-2">Lưu ý: THỜI GIAN ĐỐI CHIẾU VỚI NGÂN HÀNG LÀ 21h mỗi ngày, và CẬP NHẬT TRẠNG THÁI lên hệ thống chậm nhất là 23h mỗi ngày. Nếu bạn thực hiện submit form trước 21h, muộn nhất 23h sẽ có cập nhật về trạng thái, còn nếu submit form sau 21h, muộn nhất là 23h hôm sau sẽ có cập nhật cho bạn nha.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-bold bg-blue-100 p-2 rounded">THÔNG TIN CÁ NHÂN DONATE</h3>
+                            ${historyHTML}
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold bg-blue-100 p-2 rounded">THÔNG TIN QUÀ VÀ SHIP QUÀ</h3>
+                            <div class="p-2 text-sm border rounded mt-1 bg-white">
+                                <p><strong>Nơi nhận:</strong> ${data.shippingData.deliveryPlace}</p>
+                                <p><strong>SĐT:</strong> ${data.shippingData.phone}</p>
+                                <p><strong>Địa chỉ:</strong> ${data.shippingData.address}</p>
+                                <p><strong>Lưu ý giao hàng:</strong> ${data.shippingData.deliveryNote}</p>
+                                <hr class="my-2">
+                                <p class="text-xs text-gray-500 italic">Sau concert khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold bg-blue-100 p-2 rounded">LƯU Ý THÊM</h3>
+                            <p class="p-2 text-sm">${data.teamNote || "Không có ghi chú thêm."}</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold bg-blue-100 p-2 rounded">LỜI NHẮN TỪ FANSITE</h3>
+                            <p class="p-2 text-sm font-medium text-green-700">${data.fansiteMessage}</p>
+                        </div>
+                    </div>
+                `;
+                
+                resultBox.innerHTML = html;
+            } catch (error) {
+                resultBox.innerHTML = `<p class="text-red-500">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</p>`;
+            }
+        }
+
+        // Tự động load dữ liệu Overview và Top Donor khi vừa mở trang
+        window.onload = () => {
+            loadOverview();
+            loadTopDonor();
+        };
+    </script>
+</body>
+</html>
