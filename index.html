@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khung Test Logic - Endless Library</title>
+    <title>Khung Test Logic - Innerstellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; }
@@ -99,7 +99,7 @@
                     resultBox.innerHTML = `<p class="text-red-600 font-medium">${data.message}</p>`; return;
                 }
 
-                // XỬ LÝ: Thông tin cá nhân & Số tiền (Text hoặc Bảng)
+                // XỬ LÝ: Thông tin cá nhân & Số tiền
                 let personalBlock = `
                     <div class="p-2 text-sm border rounded mt-1 bg-white mb-2">
                         <p><strong>Tên thật:</strong> ${data.fullName}</p>
@@ -120,37 +120,26 @@
                     moneyBlock += `<tr class="bg-gray-100 font-bold"><td class="border p-2">TỔNG CỘNG</td><td class="border p-2 text-blue-600" colspan="2">${data.donateData.totalMessage}</td></tr></table>`;
                 }
 
-                // XỬ LÝ: Thông tin Ship quà (Concert vs Ship)
-                let shipBlock = "";
-                let place = data.shippingData.deliveryPlace.toLowerCase();
-                
-                if (place.includes("concert")) {
-                    shipBlock = `
-                        <div class="p-2 text-sm border rounded mt-1 bg-white">
-                            <p><strong>Nơi nhận:</strong> ${data.shippingData.deliveryPlace}</p>
-                            <p class="text-pink-600 font-bold mt-2">Hẹn gặp lại Pạt 🎀 ở Concert nha 🥰</p>
-                        </div>
-                    `;
-                } else {
-                    let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
-                    shipBlock = `
-                        <div class="p-2 text-sm border rounded mt-1 bg-white">
-                            <p><strong>Nơi nhận:</strong> ${data.shippingData.deliveryPlace}</p>
-                            <p><strong>SĐT:</strong> ${data.shippingData.phone}</p>
-                            <p><strong>Địa chỉ:</strong> ${data.shippingData.address}</p>
-                            <p><strong>Lưu ý giao hàng:</strong> ${deliveryNote}</p>
-                            <hr class="my-2">
-                            <p class="text-xs text-gray-500 italic">Sau concert khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
-                        </div>
-                    `;
-                }
+                // XỬ LÝ: Thông tin Ship quà (Chỉ còn mặc định là Ship về nhà)
+                let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
+                let shipBlock = `
+                    <div class="p-2 text-sm border rounded mt-1 bg-white">
+                        <p><strong>SĐT:</strong> ${data.shippingData.phone}</p>
+                        <p><strong>Địa chỉ:</strong> ${data.shippingData.address}</p>
+                        <p><strong>Lưu ý giao hàng:</strong> ${deliveryNote}</p>
+                        <hr class="my-2">
+                        <p class="text-xs text-gray-500 italic">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
+                    </div>
+                `;
+
+                // XỬ LÝ LỜI CHÀO
+                let displayName = data.nickname ? data.nickname : (data.fullName ? data.fullName : "");
+                let greetingName = displayName ? `<span class="text-pink-600 font-bold">${displayName}</span>` : "";
 
                 // VẼ TOÀN BỘ KẾT QUẢ
                 let html = `
                     <div class="mb-4 border-b pb-4">
-                        <p class="font-medium text-lg">Xin chào Pạt 🎀 <span class="text-pink-600 font-bold">${data.nickname}</span>, tụi mình <span class="text-pink-600 font-bold">${data.formStatus}</span>.</p>
-                        <p class="text-sm mt-2">Ngoài ra, bạn kiểm tra thêm các thông tin bên dưới nha, nếu có bất kỳ sai sót nào hay cần được hỗ trợ, bạn có thể liên hệ với tụi mình qua acc threads của fansite để được hỗ trợ nha.</p>
-                        <p class="text-xs text-gray-500 italic mt-2">Lưu ý: THỜI GIAN ĐỐI CHIẾU VỚI NGÂN HÀNG LÀ 21h mỗi ngày, và CẬP NHẬT TRẠNG THÁI lên hệ thống chậm nhất là 23h mỗi ngày. Nếu bạn thực hiện submit form trước 21h, muộn nhất 23h sẽ có cập nhật về trạng thái, còn nếu submit form sau 21h, muộn nhất là 23h hôm sau sẽ có cập nhật cho bạn nha.</p>
+                        <p class="font-medium text-lg">Xin chào Pạt 🎀 ${greetingName}, tụi mình <span class="text-pink-600 font-bold">${data.formStatus}</span>.</p>
                     </div>
 
                     <div class="space-y-4">
@@ -169,18 +158,23 @@
                             <h3 class="font-bold bg-blue-100 p-2 rounded uppercase">Lưu ý thêm cho team @trinhtongpartner</h3>
                             <p class="p-2 text-sm">${data.teamNote || "Không có ghi chú thêm."}</p>
                         </div>
+                    </div>
 
-                        <div>
-                            <h3 class="font-bold bg-blue-100 p-2 rounded uppercase">Lời nhắn từ Fansite tới Pạt 🎀</h3>
-                            <p class="p-2 text-sm font-medium text-green-700">${data.fansiteMessage}</p>
-                        </div>
+                    <!-- HIGHLIGHT NOTE ZALO -->
+                    <div class="mt-6 bg-yellow-100 border border-yellow-300 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm font-bold text-yellow-800 text-center mb-1">PẠT 🎀 NHỚ VÀO GROUP ZALO ĐỂ THEO DÕI THÔNG BÁO/ CẬP NHẬT TỪ TỤI MÌNH NHA: <a href="LINK_ZALO_CỦA_BAN_VÀO_ĐÂY" target="_blank" class="text-blue-600 underline break-all">LINK ZALO</a></p>
+                        <p class="text-xs text-gray-700 font-medium text-center mt-2">Lưu ý: THỜI GIAN ĐỐI CHIẾU VỚI NGÂN HÀNG và CẬP NHẬT TRẠNG THÁI từ 21h - 23h mỗi ngày.</p>
+                    </div>
+
+                    <!-- FOOTER HỖ TRỢ -->
+                    <div class="mt-6 text-center border-t pt-4">
+                        <p class="text-sm text-gray-600">Liên hệ tụi mình thông qua: <a href="LINK_THREADS_CỦA_BAN_VÀO_ĐÂY" target="_blank" class="text-blue-600 font-bold hover:underline">Acc Threads của Fansite</a> nếu có sai sót về thông tin và cần hỗ trợ nha.</p>
                     </div>
                 `;
                 
                 resultBox.innerHTML = html;
             } catch (error) { resultBox.innerHTML = `<p class="text-red-500">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</p>`; }
         }
-
         window.onload = () => { loadOverview(); loadTopDonor(); };
     </script>
 </body>
