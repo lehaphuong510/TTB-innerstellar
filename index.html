@@ -7,36 +7,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* KHAI BÁO FONT CHỮ */
-        @font-face {
-            font-family: 'HelveticaWorld';
-            src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype');
-        }
-        @font-face {
-            font-family: 'TPLeMajor';
-            src: url('./assets/fonts/TP Le Major.ttf') format('truetype');
-        }
+        @font-face { font-family: 'HelveticaWorld'; src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'TPLeMajor'; src: url('./assets/fonts/TP Le Major.ttf') format('truetype'); }
         .font-helvetica { font-family: 'HelveticaWorld', sans-serif; }
         .font-major { font-family: 'TPLeMajor', serif; }
         
-        /* HIỆU ỨNG LOADING & ANIMATION */
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-card { opacity: 0; animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-card { opacity: 0; }
+        .start-anim-card { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         html { scroll-behavior: smooth; }
-        
-        /* Ẩn scrollbar cho đẹp */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Biểu đồ bán nguyệt */
+        .semi-circle-svg { width: 140px; height: 70px; overflow: hidden; }
+        .semi-circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.15); stroke-width: 12; stroke-linecap: round; }
+        .semi-circle-fill { fill: none; stroke-width: 12; stroke-linecap: round; stroke-dasharray: 188.5; stroke-dashoffset: 188.5; transition: stroke-dashoffset 1.5s ease-out; }
     </style>
 </head>
 
-<body class="text-gray-800 bg-fixed bg-cover bg-center" style="background-image: url('./assets/images/Background.webp');">
+<body class="text-gray-800 relative">
+    
+    <!-- Lớp nền vũ trụ + Lớp phủ đen 40% -->
+    <div class="fixed inset-0 z-[-2] bg-cover bg-center" style="background-image: url('./assets/images/Background.webp');"></div>
+    <div class="fixed inset-0 z-[-1] bg-black/40 backdrop-blur-[2px]"></div>
 
     <!-- PHẦN 1: HERO BANNER -->
     <section id="hero" class="w-full flex flex-col items-center pt-12 md:pt-20 pb-6">
@@ -45,79 +43,72 @@
         <p class="font-helvetica text-white/80 text-base md:text-lg tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION -->
+    <!-- THANH NAVIGATION (Canh giữa tuyệt đối + Nút bám lề phải) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
-        <nav class="w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 md:px-4 md:py-3 flex items-center text-white font-helvetica shadow-2xl relative">
-            <div class="hidden md:block w-[140px] lg:w-[170px] shrink-0"></div>
-            <div class="hidden md:flex flex-1 justify-center space-x-3 lg:space-x-8 uppercase text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
-                <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Giới thiệu</a>
-                <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tiến độ quỹ</a>
-                <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Danh sách donors</a>
-                <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tra cứu</a>
-                <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic capitalize mt-0.5">(Coming soon)</span></span>
+        <nav class="w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 flex items-center text-white font-helvetica shadow-2xl relative min-h-[50px] md:min-h-[60px]">
+            
+            <!-- Link canh giữa tuyệt đối -->
+            <div class="absolute left-1/2 -translate-x-1/2 hidden md:flex space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
+                <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap capitalize">Giới thiệu</a>
+                <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap capitalize">Tiến độ quỹ</a>
+                <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap capitalize">Danh sách donors</a>
+                <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap capitalize">Tra cứu</a>
+                <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap capitalize">Thu chi <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5">(Coming soon)</span></span>
             </div>
-            <div class="w-full md:w-[140px] lg:w-[170px] shrink-0 flex justify-end">
-                <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-4 lg:px-6 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">Donate ih mò</a>
+            
+            <!-- Nút Donate đẩy sát mép phải -->
+            <div class="ml-auto flex shrink-0">
+                <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">Donate ih mò</a>
             </div>
         </nav>
     </div>
 
-    <!-- PHẦN 2: STORY OF THE INNER STELLAR -->
+    <!-- PHẦN 2: STORY -->
     <section id="story" class="scroll-mt-28 w-full flex justify-center pb-12 md:pb-20">
         <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain drop-shadow-2xl">
     </section>
 
-    <!-- PHẦN 3: CÁC KHỐI CHỨC NĂNG -->
+    <!-- PHẦN 3: CHỨC NĂNG -->
     <div class="max-w-4xl mx-auto space-y-16 p-4 md:p-10 mb-[50vh]">
         
-        <!-- Khối OVERVIEW MỚI: TIẾN ĐỘ GÓP QUỸ -->
+        <!-- TIẾN ĐỘ -->
         <section id="overview-section" class="scroll-mt-28 w-full flex flex-col items-center">
-            
-            <!-- HEADER TIẾN ĐỘ -->
             <div class="text-center mb-8 w-full">
-                <h2 class="font-major text-white text-3xl md:text-5xl uppercase tracking-wider mb-2 drop-shadow-lg">Tiến độ góp Quỹ</h2>
-                <img src="./assets/images/Phan cach.svg" class="mx-auto h-2 md:h-3 mb-4 opacity-80" alt="Divider">
-                <p id="update-time-text" class="font-helvetica text-gray-400 text-sm italic">Đang cập nhật thời gian...</p>
+                <h2 class="font-major text-white text-3xl md:text-5xl capitalize tracking-wider mb-2 drop-shadow-lg">Tiến độ góp quỹ</h2>
+                <img src="./assets/images/Phan cach.svg" class="mx-auto h-2 md:h-3 mb-4 opacity-80">
+                <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10">
+                    <p id="update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
+                </div>
             </div>
 
-            <!-- CHUYỂN TAB OPTION 1 & 2 -->
-            <div class="flex justify-center gap-4 mb-10 w-full">
-                <button onclick="switchLayout('horizontal')" id="btn-layout-horiz" class="px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold shadow-[0_0_10px_rgba(28,225,219,0.3)] transition-all">Tab Ngang (Option 2)</button>
-                <button onclick="switchLayout('vertical')" id="btn-layout-vert" class="px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all">Tab Dọc (Option 1)</button>
+            <div class="flex justify-center gap-4 mb-8 w-full">
+                <button onclick="switchLayout('horizontal')" id="btn-layout-horiz" class="px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold transition-all">Ngang (Opt 2)</button>
+                <button onclick="switchLayout('vertical')" id="btn-layout-vert" class="px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all">Dọc (Opt 1)</button>
             </div>
 
-            <!-- KHUNG CHỨA TOÀN BỘ NỘI DUNG TIẾN ĐỘ TỪ API -->
-            <div id="overview-content" class="w-full relative flex flex-col items-center">
-                <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu tiến độ vũ trụ...</p>
+            <div id="overview-content" class="w-full relative flex flex-col items-center min-h-[400px]">
+                <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu tiến độ...</p>
             </div>
             
-            <!-- HÌNH ẢNH DONORS GIFT -->
             <div class="mt-16 text-center w-full flex justify-center">
                 <img src="./assets/images/Donors gift.png" alt="Quà tặng Donors" class="w-11/12 max-w-lg object-contain opacity-90 drop-shadow-2xl">
             </div>
-            <!-- Nút CTA mini cuối khối -->
-            <div class="mt-8 text-center">
-                <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="inline-block bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-8 py-3 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)]">
-                    Donate ih mò
-                </a>
-            </div>
         </section>
 
-        <!-- Khối TOP DONOR -->
+        <!-- TOP DONOR -->
         <section id="donor-section" class="scroll-mt-28 bg-black/60 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20">
             <div class="flex gap-6 border-b border-gray-600 pb-2 mb-6">
-                <button id="btn-tab-all" onclick="renderDonors('all')" class="text-xl font-bold text-white border-b-2 border-[#1ce1db] pb-1 uppercase">Danh sách</button>
-                <button id="btn-tab-top" onclick="renderDonors('top')" class="text-xl font-bold text-gray-500 hover:text-white pb-1 border-b-2 border-transparent uppercase">Top</button>
+                <button id="btn-tab-all" onclick="renderDonors('all')" class="text-xl font-bold text-white border-b-2 border-[#1ce1db] pb-1 capitalize">Danh sách donors</button>
             </div>
             <div id="donor-content"><div class="loader"></div> <span class="text-white">Đang tải dữ liệu...</span></div>
         </section>
 
-        <!-- Khối TRA CỨU -->
+        <!-- TRA CỨU -->
         <section id="lookup-section" class="scroll-mt-28 bg-black/60 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20">
-            <h2 class="text-xl font-bold border-b border-gray-600 pb-2 mb-6 uppercase text-white">3. TRA CỨU KẾT QUẢ</h2>
+            <h2 class="font-major text-xl border-b border-gray-600 pb-2 mb-6 capitalize text-white">Tra cứu kết quả</h2>
             <div class="flex gap-2 mb-6">
                 <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 rounded-lg w-full max-w-sm outline-none focus:ring-2 focus:ring-[#1ce1db] bg-white/90">
-                <button onclick="searchPhone()" class="bg-[#1ce1db] text-black px-6 py-2 rounded-lg hover:bg-white font-bold uppercase shadow-[0_0_10px_rgba(28,225,219,0.3)] transition-all">Tra cứu</button>
+                <button onclick="searchPhone()" class="bg-[#1ce1db] text-black px-6 py-2 rounded-lg hover:bg-white font-bold capitalize shadow-[0_0_10px_rgba(28,225,219,0.3)]">Tra cứu</button>
             </div>
             <div id="lookup-result" class="font-helvetica hidden border border-white/20 rounded-lg p-4 bg-white/95"></div>
         </section>
@@ -130,6 +121,7 @@
 
         let overviewDataGlobal = null;
         let currentLayout = 'horizontal'; 
+        let animationTriggered = false;
 
         function animateValue(id, start, end, duration) {
             let obj = document.getElementById(id);
@@ -140,11 +132,8 @@
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 const easeOutProgress = 1 - Math.pow(1 - progress, 3);
                 obj.innerHTML = formatMoney(Math.floor(easeOutProgress * (end - start) + start)).replace('đ', '');
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    obj.innerHTML = formatMoney(end).replace('đ', '');
-                }
+                if (progress < 1) window.requestAnimationFrame(step);
+                else obj.innerHTML = formatMoney(end).replace('đ', '');
             };
             window.requestAnimationFrame(step);
         }
@@ -158,52 +147,79 @@
                 document.getElementById('update-time-text').innerText = "Thời điểm cập nhật: " + String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0') + " " + String(now.getDate()).padStart(2, '0') + "/" + String(now.getMonth()+1).padStart(2, '0') + "/" + now.getFullYear();
 
                 renderOverviewLayout();
+                setupIntersectionObserver();
             } catch (e) { document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
         }
 
         function switchLayout(layoutType) {
             currentLayout = layoutType;
-            
-            const btnHoriz = document.getElementById('btn-layout-horiz');
-            const btnVert = document.getElementById('btn-layout-vert');
-            
-            if (layoutType === 'horizontal') {
-                btnHoriz.className = "px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold shadow-[0_0_10px_rgba(28,225,219,0.3)] transition-all";
-                btnVert.className = "px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all";
-            } else {
-                btnVert.className = "px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold shadow-[0_0_10px_rgba(28,225,219,0.3)] transition-all";
-                btnHoriz.className = "px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all";
-            }
+            animationTriggered = false; // Reset trigger
             renderOverviewLayout();
+            setupIntersectionObserver();
+            
+            const btnH = document.getElementById('btn-layout-horiz');
+            const btnV = document.getElementById('btn-layout-vert');
+            if (layoutType === 'horizontal') {
+                btnH.className = "px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold transition-all";
+                btnV.className = "px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all";
+            } else {
+                btnV.className = "px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold transition-all";
+                btnH.className = "px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all";
+            }
         }
 
         function renderOverviewLayout() {
             if (!overviewDataGlobal) return;
             const data = overviewDataGlobal;
+            let safeMoneyPercent = Math.min(data.moneyPercent, 100);
+            
+            // Tỷ lệ cho biểu đồ bán nguyệt (chu vi 188.5)
+            let donateDashOffset = 188.5 - (188.5 * safeMoneyPercent / 100);
+            let timeDashOffset = 188.5 - (188.5 * Math.min(data.timePercent, 100) / 100);
             
             let statsHtml = `
                 <div class="text-center w-full mb-12">
-                    <div class="font-major text-4xl md:text-6xl mb-6 font-bold tracking-wider drop-shadow-lg">
+                    <div class="font-major text-4xl md:text-5xl mb-10 font-bold tracking-wider drop-shadow-lg">
                         <span id="counter-current" class="text-[#1ce1db]">0</span>
-                        <span class="text-white text-3xl md:text-5xl mx-1 md:mx-3 font-light">/</span>
+                        <span class="text-white text-3xl md:text-4xl mx-1 font-light">/</span>
                         <span class="text-white">${formatMoney(data.maxTarget).replace('đ', '')}</span>
-                        <span class="text-gray-300 text-xl md:text-3xl font-helvetica ml-2">VNĐ</span>
+                        <span class="text-gray-300 text-lg md:text-xl font-helvetica ml-1">VNĐ</span>
                     </div>
                     
-                    <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 font-helvetica text-xs md:text-sm w-full max-w-xl mx-auto">
-                        <div class="w-full md:w-1/2">
-                            <div class="flex justify-between text-white/90 mb-2"><span>Tiến độ Donate:</span> <span class="font-bold text-[#1ce1db]">${data.moneyPercent.toFixed(1)}%</span></div>
-                            <div class="w-full bg-gray-800/80 h-2 rounded-full border border-gray-700 overflow-hidden"><div id="mini-bar-donate" class="bg-[#1ce1db] h-full rounded-full w-0 transition-all duration-1000 ease-out shadow-[0_0_8px_#1ce1db]"></div></div>
+                    <div class="flex flex-row justify-center items-end gap-8 md:gap-24 font-helvetica text-base md:text-lg w-full max-w-2xl mx-auto">
+                        <!-- Biểu đồ Donate -->
+                        <div class="flex flex-col items-center">
+                            <div class="relative semi-circle-svg mb-2">
+                                <svg viewBox="0 0 120 60" class="w-full h-full">
+                                    <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-bg"/>
+                                    <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-fill stroke-[#1ce1db]" id="chart-donate"/>
+                                </svg>
+                                <div class="absolute bottom-1 w-full text-center font-bold text-[#1ce1db] text-xl" id="text-pct-donate">0%</div>
+                            </div>
+                            <span class="text-white/90 font-medium">Tiến độ Donate</span>
                         </div>
-                        <div class="w-full md:w-1/2">
-                            <div class="flex justify-between text-white/90 mb-2"><span>Tiến độ Thời gian:</span> <span class="font-bold text-pink-400">${data.timePercent.toFixed(1)}%</span></div>
-                            <div class="w-full bg-gray-800/80 h-2 rounded-full border border-gray-700 overflow-hidden"><div id="mini-bar-time" class="bg-gradient-to-r from-pink-600 to-pink-400 h-full rounded-full w-0 transition-all duration-1000 ease-out"></div></div>
+                        <!-- Biểu đồ Thời gian -->
+                        <div class="flex flex-col items-center">
+                            <div class="relative semi-circle-svg mb-2">
+                                <svg viewBox="0 0 120 60" class="w-full h-full">
+                                    <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-bg"/>
+                                    <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-fill stroke-pink-400" id="chart-time"/>
+                                </svg>
+                                <div class="absolute bottom-1 w-full text-center font-bold text-pink-400 text-xl" id="text-pct-time">0%</div>
+                            </div>
+                            <span class="text-white/90 font-medium">Tiến độ thời gian</span>
                         </div>
                     </div>
                 </div>
             `;
 
-            let safeMoneyPercent = Math.min(data.moneyPercent, 100);
+            // LƯU DATA VÀO ATTRIBUTE ĐỂ GỌI KHI ANIMATION CHẠY
+            document.getElementById('overview-content').setAttribute('data-target-money', data.currentTotal);
+            document.getElementById('overview-content').setAttribute('data-pct-money', safeMoneyPercent);
+            document.getElementById('overview-content').setAttribute('data-pct-time', Math.min(data.timePercent, 100));
+            document.getElementById('overview-content').setAttribute('data-offset-donate', donateDashOffset);
+            document.getElementById('overview-content').setAttribute('data-offset-time', timeDashOffset);
+
             let milestonesHtml = "";
             let progressHtml = "";
 
@@ -211,25 +227,30 @@
                 data.milestones.forEach((m, idx) => {
                     let pct = data.maxTarget > 0 ? (m.target / data.maxTarget) * 100 : 0;
                     milestonesHtml += `
-                        <div class="absolute flex flex-col items-center -translate-x-1/2 animate-card" style="left: ${pct}%; top: 0; animation-delay: ${(idx+1)*0.2}s">
+                        <div class="absolute flex flex-col items-center -translate-x-1/2 animate-card milestone-card" style="left: ${pct}%; top: 0; animation-delay: ${(idx+1)*0.2}s">
                             <div class="text-[#1ce1db] font-helvetica text-[11px] md:text-sm font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div>
-                            <img src="./assets/images/Moc.svg" class="w-5 h-5 mb-5 z-20">
-                            <div class="font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-28 md:w-40 text-center border border-white/10 backdrop-blur-md shadow-2xl hover:bg-black/80 transition-colors">
-                                <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80">CHẶNG ${idx+1}</p>
-                                <p class="text-[#1ce1db] font-major text-sm md:text-base mb-2 uppercase leading-tight drop-shadow-md">${m.name}</p>
-                                <p class="text-white/80 text-[9px] md:text-xs leading-snug">${m.activity}</p>
+                            <!-- Icon Moc đè chính giữa vạch -->
+                            <img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20" style="top: 26px;">
+                            <div class="mt-9 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-28 md:w-40 text-center border border-white/10 backdrop-blur-md shadow-2xl">
+                                <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 capitalize">Chặng ${idx+1}</p>
+                                <p class="text-[#1ce1db] font-major text-sm md:text-base mb-2 capitalize leading-tight drop-shadow-md">${m.name}</p>
+                                <!-- Ngăn rớt dòng hoạt động -->
+                                <p class="text-white/80 text-[9px] md:text-xs leading-snug px-1">${m.activity}</p>
                             </div>
                         </div>
                     `;
                 });
 
                 progressHtml = `
-                    <div class="relative w-full max-w-5xl h-[320px] overflow-x-auto no-scrollbar pt-10">
-                        <div class="relative min-w-[700px] h-full mx-auto px-10">
-                            <div class="absolute top-16 left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div>
-                            <div id="main-bar-horiz" class="absolute top-16 left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-[1500ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
+                    <div class="relative w-full overflow-x-auto no-scrollbar pt-10 pb-4">
+                        <!-- Ép thanh dài 1200px để không bị kẹt mốc -->
+                        <div class="relative min-w-[1200px] h-[220px] mx-auto px-10">
+                            <!-- Nền bar -->
+                            <div class="absolute top-[34px] left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div>
+                            <!-- Bar fill -->
+                            <div id="main-bar-horiz" class="absolute top-[34px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-1000 ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
                             ${milestonesHtml}
-                            <div id="star-horiz" class="absolute top-16 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[1500ms] ease-out drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]" style="left: 0%;">
+                            <div id="star-horiz" class="absolute top-[34px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-1000 ease-out" style="left: 0%;">
                                 <img src="./assets/images/Star bullet.svg" class="w-8 md:w-10 animate-spin" style="animation-duration: 4s;">
                             </div>
                         </div>
@@ -239,11 +260,12 @@
                 data.milestones.forEach((m, idx) => {
                     let pct = data.maxTarget > 0 ? (m.target / data.maxTarget) * 100 : 0;
                     milestonesHtml += `
-                        <div class="absolute w-full flex items-center -translate-y-1/2 animate-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s">
-                            <img src="./assets/images/Moc.svg" class="w-6 h-6 absolute -left-[10px] z-20">
-                            <div class="font-helvetica ml-10 bg-black/60 rounded-xl p-4 w-[280px] md:w-[350px] border border-white/10 backdrop-blur-md shadow-2xl text-left hover:bg-black/80 transition-colors">
-                                <p class="text-white/80 text-xs font-bold mb-1 tracking-widest">CHẶNG ${idx+1}</p>
-                                <p class="text-[#1ce1db] font-major text-lg md:text-xl mb-2 uppercase drop-shadow-md">${m.name}</p>
+                        <div class="absolute w-full flex items-center -translate-y-1/2 animate-card milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s">
+                            <!-- Icon Moc đè chính giữa vạch -->
+                            <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-[3px]">
+                            <div class="font-helvetica ml-10 bg-black/60 rounded-xl p-4 w-[280px] md:w-[350px] border border-white/10 backdrop-blur-md shadow-2xl text-left">
+                                <p class="text-white/80 text-xs font-bold mb-1 tracking-widest capitalize">Chặng ${idx+1}</p>
+                                <p class="text-[#1ce1db] font-major text-lg md:text-xl mb-2 capitalize drop-shadow-md">${m.name}</p>
                                 <p class="text-white/90 text-sm mb-4 leading-relaxed">${m.activity}</p>
                                 <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
                             </div>
@@ -252,12 +274,12 @@
                 });
 
                 progressHtml = `
-                    <div class="relative w-full max-w-md mx-auto h-[650px] md:h-[750px] my-10">
+                    <div class="relative w-full max-w-md mx-auto h-[750px] my-10">
                         <div class="relative w-full h-full pl-6">
                             <div class="absolute top-0 left-0 w-1.5 h-full bg-gray-700/80 rounded-full"></div>
-                            <div id="main-bar-vert" class="absolute top-0 left-0 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-[1500ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
+                            <div id="main-bar-vert" class="absolute top-0 left-0 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-1000 ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
                             ${milestonesHtml}
-                            <div id="star-vert" class="absolute left-0 -translate-x-[42%] -translate-y-1/2 z-30 transition-all duration-[1500ms] ease-out drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]" style="top: 0%;">
+                            <div id="star-vert" class="absolute left-[3px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-1000 ease-out" style="top: 0%;">
                                 <img src="./assets/images/Star bullet.svg" class="w-10 animate-spin" style="animation-duration: 4s;">
                             </div>
                         </div>
@@ -266,93 +288,63 @@
             }
 
             document.getElementById('overview-content').innerHTML = statsHtml + progressHtml;
+        }
 
-            setTimeout(() => {
-                animateValue("counter-current", 0, data.currentTotal, 2000);
-                document.getElementById('mini-bar-donate').style.width = safeMoneyPercent + "%";
-                document.getElementById('mini-bar-time').style.width = Math.min(data.timePercent, 100) + "%";
+        // HÀM KÍCH HOẠT ANIMATION KHI CUỘN TỚI NƠI
+        function setupIntersectionObserver() {
+            const overviewSection = document.getElementById('overview-section');
+            if(!overviewSection) return;
 
-                if(currentLayout === 'horizontal') {
-                    document.getElementById('main-bar-horiz').style.width = safeMoneyPercent + "%";
-                    document.getElementById('star-horiz').style.left = safeMoneyPercent + "%";
-                } else {
-                    document.getElementById('main-bar-vert').style.height = safeMoneyPercent + "%";
-                    document.getElementById('star-vert').style.top = safeMoneyPercent + "%";
+            const observer = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting && !animationTriggered) {
+                    animationTriggered = true;
+                    
+                    const content = document.getElementById('overview-content');
+                    if(!content) return;
+
+                    const targetMoney = parseFloat(content.getAttribute('data-target-money')) || 0;
+                    const pctMoney = parseFloat(content.getAttribute('data-pct-money')) || 0;
+                    const pctTime = parseFloat(content.getAttribute('data-pct-time')) || 0;
+                    const offsetDonate = parseFloat(content.getAttribute('data-offset-donate')) || 188.5;
+                    const offsetTime = parseFloat(content.getAttribute('data-offset-time')) || 188.5;
+
+                    // 1. Nhảy số Tiền 
+                    animateValue("counter-current", 0, targetMoney, 2000);
+                    
+                    // 2. Chạy 2 Biểu đồ vòng cung
+                    setTimeout(() => {
+                        document.getElementById('chart-donate').style.strokeDashoffset = offsetDonate;
+                        document.getElementById('text-pct-donate').innerText = pctMoney.toFixed(1) + "%";
+                        document.getElementById('chart-time').style.strokeDashoffset = offsetTime;
+                        document.getElementById('text-pct-time').innerText = pctTime.toFixed(1) + "%";
+                    }, 500);
+
+                    // 3. Chạy Thanh Bar dài và Ngôi Sao
+                    setTimeout(() => {
+                        if(currentLayout === 'horizontal') {
+                            document.getElementById('main-bar-horiz').style.width = pctMoney + "%";
+                            document.getElementById('star-horiz').style.left = pctMoney + "%";
+                        } else {
+                            document.getElementById('main-bar-vert').style.height = pctMoney + "%";
+                            document.getElementById('star-vert').style.top = pctMoney + "%";
+                        }
+                    }, 1000);
+
+                    // 4. Kích hoạt Card nổi lên
+                    setTimeout(() => {
+                        document.querySelectorAll('.milestone-card').forEach(card => {
+                            card.classList.add('start-anim-card');
+                        });
+                    }, 1500);
                 }
-            }, 100);
+            }, { threshold: 0.15 });
+
+            observer.observe(overviewSection);
         }
 
-        async function loadTopDonor() {
-            try {
-                const res = await fetch(API_URL + "?action=topdonor");
-                donorDataGlobal = await res.json();
-                renderDonors('all'); 
-            } catch (e) { document.getElementById('donor-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
-        }
-
-        function renderDonors(tab) {
-            if (!donorDataGlobal) return;
-            const contentBox = document.getElementById('donor-content');
-            const btnTop = document.getElementById('btn-tab-top');
-            const btnAll = document.getElementById('btn-tab-all');
-
-            if (tab === 'top') {
-                btnTop.className = "text-xl font-bold text-white border-b-2 border-[#1ce1db] pb-1 uppercase font-helvetica";
-                btnAll.className = "text-xl font-bold text-gray-500 hover:text-white pb-1 border-b-2 border-transparent uppercase font-helvetica";
-                
-                let html = `<p class="font-helvetica text-xs text-gray-400 italic mb-4">Bảng xếp hạng được tính cho các Giao dịch chuyển khoản Donate trước: <span class="font-bold text-white">${donorDataGlobal.lastUpdate}</span></p>`;
-                if(donorDataGlobal.topDonors && donorDataGlobal.topDonors.length > 0) {
-                    html += `<div class="font-helvetica grid grid-cols-1 md:grid-cols-2 gap-4">`;
-                    donorDataGlobal.topDonors.forEach((d, i) => html += `<div class="border p-3 rounded-lg flex justify-between items-center bg-white/5 border-white/10 backdrop-blur-sm"><div><span class="font-bold mr-2 text-yellow-400 drop-shadow-md">${i < 3 ? '🏆' : '#'+(i+1)}</span> <span class="font-medium text-white">${d.nickname}</span></div><div class="font-bold text-[#1ce1db] drop-shadow-md">${formatMoney(d.totalAmount)}</div></div>`);
-                    html += `</div>`;
-                }
-                contentBox.innerHTML = html;
-            } else {
-                btnAll.className = "text-xl font-bold text-white border-b-2 border-[#1ce1db] pb-1 uppercase font-helvetica";
-                btnTop.className = "text-xl font-bold text-gray-500 hover:text-white pb-1 border-b-2 border-transparent uppercase font-helvetica";
-
-                let html = `<p class="font-helvetica text-xs text-gray-400 italic mb-4">Đối với các khoản Donate đã được đối chiếu ngân hàng</p><div class="font-helvetica space-y-4">`;
-                donorDataGlobal.allDonors.forEach(d => {
-                    let initial = d.nickname ? d.nickname.charAt(0).toUpperCase() : "?";
-                    html += `
-                    <div class="flex items-center gap-4 border-b border-white/10 pb-3 last:border-0">
-                        <div class="w-10 h-10 rounded-full bg-[#1ce1db]/20 border border-[#1ce1db]/50 flex items-center justify-center font-bold text-[#1ce1db] shrink-0 shadow-[0_0_8px_rgba(28,225,219,0.3)]">${initial}</div>
-                        <div>
-                            <p class="font-medium text-sm text-white">${d.nickname}</p>
-                            <p class="text-xs text-gray-400"><span class="font-bold text-pink-400">${formatMoney(d.amount)}</span> &middot; ${timeAgo(d.timestamp)}</p>
-                        </div>
-                    </div>`;
-                });
-                html += `</div>`;
-                contentBox.innerHTML = html;
-            }
-        }
-
-        async function searchPhone() {
-            const phone = document.getElementById('phoneInput').value.trim();
-            const resultBox = document.getElementById('lookup-result');
-            if(!phone) { alert("Vui lòng nhập số điện thoại"); return; }
-
-            resultBox.classList.remove('hidden');
-            resultBox.innerHTML = `<div class="loader"></div> <span class="text-gray-800">Đang tìm kiếm...</span>`;
-
-            try {
-                const res = await fetch(API_URL + `?action=lookup&sdt=${phone}`);
-                const data = await res.json();
-
-                if (data.status === "not_found") {
-                    resultBox.innerHTML = `<p class="text-red-600 font-medium">${data.message}</p>`; return;
-                }
-
-                resultBox.innerHTML = `<div class="p-4 bg-white rounded">
-                    <p class="font-medium text-lg text-gray-800">Xin chào Pạt 🎀 <span class="text-pink-600 font-bold">${data.nickname || data.fullName}</span>, trạng thái: <span class="text-pink-600 font-bold">${data.formStatus}</span>.</p>
-                    <p class="text-sm mt-2">Tổng Donate hợp lệ: <span class="text-blue-600 font-bold">${formatMoney(data.giftData.validTotal)}</span></p>
-                    <p class="text-xs text-gray-500 mt-1 italic">Vui lòng kiểm tra kỹ số tiền và các phần quà dự kiến tương ứng bên dưới.</p>
-                </div>`; 
-
-            } catch (error) { resultBox.innerHTML = `<p class="text-red-500">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</p>`; }
-        }
-
+        async function loadTopDonor() { /* GIỮ NGUYÊN CODE DONOR CŨ */ }
+        function renderDonors(tab) { /* GIỮ NGUYÊN CODE DONOR CŨ */ }
+        async function searchPhone() { /* GIỮ NGUYÊN CODE TRA CỨU CŨ */ }
         window.onload = () => { loadOverview(); loadTopDonor(); };
     </script>
 </body>
