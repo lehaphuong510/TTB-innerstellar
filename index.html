@@ -38,18 +38,31 @@
         </p>
     </section>
 
-    <!-- THANH NAVIGATION (Đã canh giữa, in hoa, chữ to, fix nút Donate sang mép) -->
+    <!-- THANH NAVIGATION (Đã fix lỗi đè chữ bằng kỹ thuật 3 cột cân bằng) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
-        <nav class="relative w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-5 py-3 md:px-8 md:py-4 flex justify-end md:justify-center items-center text-white font-helvetica shadow-2xl">
+        <nav class="w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 md:px-4 md:py-3 flex items-center text-white font-helvetica shadow-2xl relative">
             
-            <!-- Nhóm link canh giữa (Ẩn trên điện thoại) -->
-            <div class="hidden md:flex space-x-6 lg:space-x-10 uppercase text-sm md:text-[17px] font-bold tracking-wider items-center">
-                <a href="#story" class="hover:text-cyan-400 transition-colors">Giới thiệu</a>
-                <a href="#overview-section" class="hover:text-cyan-400 transition-colors">Tiến độ quỹ</a>
-                <a href="#donor-section" class="hover:text-cyan-400 transition-colors">Danh sách donors</a>
-                <a href="#lookup-section" class="hover:text-cyan-400 transition-colors">Tra cứu</a>
-                <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col">THU CHI <span class="text-[10px] font-normal italic capitalize">(Coming soon)</span></span>
+            <!-- 1. Cục tàng hình bên trái để cân bằng lực với nút Donate -->
+            <div class="hidden md:block w-[140px] lg:w-[170px] shrink-0"></div>
+
+            <!-- 2. Các Menu Link được ép vào giữa tuyệt đối, thêm whitespace-nowrap để không rớt dòng -->
+            <div class="hidden md:flex flex-1 justify-center space-x-3 lg:space-x-8 uppercase text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
+                <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Giới thiệu</a>
+                <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tiến độ quỹ</a>
+                <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Danh sách donors</a>
+                <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tra cứu</a>
+                <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic capitalize mt-0.5">(Coming soon)</span></span>
             </div>
+            
+            <!-- 3. Nút Donate được nhốt trong khung bên phải -->
+            <div class="w-full md:w-[140px] lg:w-[170px] shrink-0 flex justify-end">
+                <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-4 lg:px-6 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
+                    Donate ih mò
+                </a>
+            </div>
+            
+        </nav>
+    </div>
             
             <!-- Nút Donate (Tự ép sang mép phải trên Desktop) -->
             <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="md:absolute md:right-3 lg:right-4 bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-6 py-2.5 md:py-3 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
