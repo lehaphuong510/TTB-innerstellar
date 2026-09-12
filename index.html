@@ -6,14 +6,14 @@
     <title>Innerstellar - Trịnh Thăng Bình Fan Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* KHAI BÁO FONT CHỮ TRONG THƯ MỤC ASSET */
+        /* KHAI BÁO FONT CHỮ TRONG THƯ MỤC ASSETS */
         @font-face {
             font-family: 'HelveticaWorld';
-            src: url('./asset/fonts/HelveticaWorld-Regular.ttf') format('truetype');
+            src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype');
         }
         @font-face {
             font-family: 'TPLeMajor';
-            src: url('./asset/fonts/TP Le Major.ttf') format('truetype');
+            src: url('./assets/fonts/TP Le Major.ttf') format('truetype');
         }
         .font-helvetica { font-family: 'HelveticaWorld', sans-serif; }
         .font-major { font-family: 'TPLeMajor', serif; }
@@ -27,11 +27,11 @@
 </head>
 <body class="text-gray-800 bg-gray-50">
 
-    <!-- PHẦN 1: HERO BANNER (ĐÃ SỬA BG-FIXED VÀ KHOẢNG CÁCH) -->
-    <section id="hero" class="relative w-full h-[100vh] bg-cover bg-center bg-fixed flex flex-col items-center justify-center" style="background-image: url('./asset/images/Background.webp');">
+    <!-- PHẦN 1: HERO BANNER -->
+    <section id="hero" class="relative w-full h-[100vh] bg-cover bg-center bg-fixed flex flex-col items-center justify-center" style="background-image: url('./assets/images/Background.webp');">
         
-        <img src="./asset/images/logowhite.svg" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-4 object-contain">
-        <img src="./asset/images/Title.svg" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4">
+        <img src="./assets/images/logowhite.svg" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-4 object-contain">
+        <img src="./assets/images/Title.svg" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4">
         
         <p class="font-helvetica text-white/80 text-sm md:text-base tracking-widest mb-20">
             Project by @trinhtongpartners
@@ -47,20 +47,19 @@
                 <span class="text-gray-400 cursor-not-allowed">Thu chi <br><span class="text-[10px]">(Coming soon)</span></span>
             </div>
             
-            <!-- Nút Donate vẽ bằng code thay cho hình -->
             <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="bg-[#1ce1db] text-black font-bold px-6 py-2 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 ml-auto md:ml-0 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
                 Donate ih mò
             </a>
         </nav>
     </section>
 
-    <!-- PHẦN 2: STORY OF THE INNER STELLAR (GỌI TRỰC TIẾP HÌNH SVG) -->
+    <!-- PHẦN 2: STORY OF THE INNER STELLAR -->
     <section id="story" class="w-full bg-[#070b24] flex justify-center py-12 md:py-20">
-        <img src="./asset/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain">
+        <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain">
     </section>
 
 
-    <!-- PHẦN 3: CÁC KHỐI CHỨC NĂNG CŨ (BỌC TRONG CONTAINER CÓ LỀ) -->
+    <!-- PHẦN 3: CÁC KHỐI CHỨC NĂNG CŨ -->
     <div class="max-w-4xl mx-auto space-y-8 p-4 md:p-10 mt-6">
         
         <!-- Khối OVERVIEW -->
@@ -88,7 +87,7 @@
             <div id="lookup-result" class="hidden border rounded-lg p-4 bg-gray-50"></div>
         </section>
 
-    </div> <!-- Hết container chức năng -->
+    </div> 
 
     <!-- NÚT CTA LƠ LỬNG GÓC DƯỚI BÊN PHẢI -->
     <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" 
@@ -98,11 +97,9 @@
 
     <!-- PHẦN XỬ LÝ JAVASCRIPT -->
     <script>
-        // LINK API MỚI NHẤT
         const API_URL = "https://script.google.com/macros/s/AKfycbyttyiTTf3yhIyCA53wuvw-pCxF8ruWSbDyOaEpXJyah2wsXB3XBHG4isp8joY-Sgfs/exec";
         const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + "đ";
 
-        // TẢI OVERVIEW
         async function loadOverview() {
             try {
                 const res = await fetch(API_URL + "?action=overview");
@@ -125,7 +122,6 @@
 
         let donorDataGlobal = null; 
 
-        // TÍNH THỜI GIAN DONOR
         function timeAgo(ms) {
             const seconds = Math.floor((new Date() - ms) / 1000);
             let interval = seconds / 86400;
@@ -137,7 +133,6 @@
             return "Vừa xong";
         }
 
-        // TẢI DỮ LIỆU DONOR (TOP + TẤT CẢ)
         async function loadTopDonor() {
             try {
                 const res = await fetch(API_URL + "?action=topdonor");
@@ -146,7 +141,6 @@
             } catch (e) { document.getElementById('donor-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
         }
 
-        // VẼ TAB DONOR
         function renderDonors(tab) {
             if (!donorDataGlobal) return;
             const contentBox = document.getElementById('donor-content');
@@ -185,7 +179,6 @@
             }
         }
 
-        // TRA CỨU
         async function searchPhone() {
             const phone = document.getElementById('phoneInput').value.trim();
             const resultBox = document.getElementById('lookup-result');
@@ -202,7 +195,6 @@
                     resultBox.innerHTML = `<p class="text-red-600 font-medium">${data.message}</p>`; return;
                 }
 
-                // Tiền
                 let moneyContent = "";
                 if (data.donateData.history.length === 1) {
                     let h = data.donateData.history[0];
@@ -224,7 +216,6 @@
                     </div>
                 `;
 
-                // Quà
                 let giftHtml = "";
                 if (data.giftData && data.giftData.names.length > 0) {
                     let ths = "";
@@ -249,7 +240,6 @@
                     `;
                 }
 
-                // Ship
                 let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
                 let shipBlock = `
                     <div class="p-2 text-sm border rounded mt-1 bg-white">
