@@ -38,14 +38,14 @@
         </p>
     </section>
 
-    <!-- THANH NAVIGATION (Đã fix lỗi đè chữ bằng kỹ thuật 3 cột cân bằng) -->
+    <!-- THANH NAVIGATION (Canh giữa 3 cột tuyệt đối, chỉ có 1 nút xanh duy nhất) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
         <nav class="w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 md:px-4 md:py-3 flex items-center text-white font-helvetica shadow-2xl relative">
             
-            <!-- 1. Cục tàng hình bên trái để cân bằng lực với nút Donate -->
+            <!-- 1. Cột tàng hình bên trái -->
             <div class="hidden md:block w-[140px] lg:w-[170px] shrink-0"></div>
 
-            <!-- 2. Các Menu Link được ép vào giữa tuyệt đối, thêm whitespace-nowrap để không rớt dòng -->
+            <!-- 2. Nhóm link canh giữa tuyệt đối -->
             <div class="hidden md:flex flex-1 justify-center space-x-3 lg:space-x-8 uppercase text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
                 <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Giới thiệu</a>
                 <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tiến độ quỹ</a>
@@ -54,30 +54,21 @@
                 <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic capitalize mt-0.5">(Coming soon)</span></span>
             </div>
             
-            <!-- 3. Nút Donate được nhốt trong khung bên phải -->
+            <!-- 3. Nút Donate nằm gọn bên phải -->
             <div class="w-full md:w-[140px] lg:w-[170px] shrink-0 flex justify-end">
                 <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-4 lg:px-6 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
                     Donate ih mò
                 </a>
             </div>
-            
-        </nav>
-    </div>
-            
-            <!-- Nút Donate (Tự ép sang mép phải trên Desktop) -->
-            <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="md:absolute md:right-3 lg:right-4 bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-6 py-2.5 md:py-3 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
-                Donate ih mò
-            </a>
         </nav>
     </div>
 
-    <!-- PHẦN 2: STORY OF THE INNER STELLAR (Đã thêm scroll-mt-28 để ko bị Nav đè) -->
+    <!-- PHẦN 2: STORY OF THE INNER STELLAR -->
     <section id="story" class="scroll-mt-28 w-full flex justify-center pb-12 md:pb-20">
         <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain drop-shadow-2xl">
     </section>
 
-    <!-- PHẦN 3: CÁC KHỐI CHỨC NĂNG CŨ -->
-    <!-- Đã thêm mb-[50vh] (tạo khoảng trống tàng hình dưới đáy) để cuộn được Tra cứu lên top -->
+    <!-- PHẦN 3: CÁC KHỐI CHỨC NĂNG -->
     <div class="max-w-4xl mx-auto space-y-12 p-4 md:p-10 mb-[50vh]">
         
         <!-- Khối OVERVIEW -->
@@ -107,7 +98,7 @@
 
     </div> 
 
-    <!-- NÚT CTA LƠ LỬNG GÓC DƯỚI BÊN PHẢI -->
+    <!-- NÚT CTA BÁM ĐUÔI GÓC DƯỚI BÊN PHẢI (Trùm cuối không bao giờ biến mất) -->
     <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" 
        class="fixed bottom-6 right-6 bg-pink-500 text-white font-bold uppercase tracking-wider py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300 z-50 flex items-center gap-2 animate-bounce">
         <span>💸</span> DONATE IH MÒ 😸
