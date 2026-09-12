@@ -3,91 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khung Test Logic - Innerstellar</title>
+    <title>Innerstellar - Trịnh Thăng Bình Fan Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; }
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* KHAI BÁO FONT CHỮ TRONG THƯ MỤC ASSET */
         @font-face {
             font-family: 'HelveticaWorld';
-            src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype');
+            src: url('./asset/fonts/HelveticaWorld-Regular.ttf') format('truetype');
         }
         @font-face {
             font-family: 'TPLeMajor';
-            src: url('./assets/fonts/TP Le Major.ttf') format('truetype');
+            src: url('./asset/fonts/TP Le Major.ttf') format('truetype');
         }
         .font-helvetica { font-family: 'HelveticaWorld', sans-serif; }
         .font-major { font-family: 'TPLeMajor', serif; }
-        .text-justify-custom { text-align: justify; text-justify: inter-word; }
+        
+        /* HIỆU ỨNG LOADING CHUẨN CŨ */
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="text-gray-800 p-4 md:p-10">
-    <!-- PHẦN 1: HERO BANNER (Hình 1) -->
-    <section id="hero" class="relative w-full min-h-[100vh] bg-cover bg-center flex flex-col items-center pt-12 pb-24" style="background-image: url('./assets/images/Background.webp');">
+<body class="text-gray-800 bg-gray-50">
+
+    <!-- PHẦN 1: HERO BANNER (ĐÃ SỬA BG-FIXED VÀ KHOẢNG CÁCH) -->
+    <section id="hero" class="relative w-full h-[100vh] bg-cover bg-center bg-fixed flex flex-col items-center justify-center" style="background-image: url('./asset/images/Background.webp');">
         
-        <!-- Logo -->
-        <img src="./assets/images/logowhite.svg" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-6 object-contain">
+        <img src="./asset/images/logowhite.svg" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-4 object-contain">
+        <img src="./asset/images/Title.svg" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4">
         
-        <!-- Title -->
-        <img src="./assets/images/Title.svg" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4">
-        
-        <!-- Text 1 -->
-        <p class="font-helvetica text-white/80 text-sm md:text-base tracking-widest mt-2">
+        <p class="font-helvetica text-white/80 text-sm md:text-base tracking-widest mb-20">
             Project by @trinhtongpartners
         </p>
 
         <!-- Menu Navigation Bar -->
-        <nav class="absolute bottom-10 w-11/12 max-w-5xl bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-4 md:px-8 py-3 flex justify-between items-center text-white text-xs md:text-sm font-helvetica shadow-2xl">
+        <nav class="absolute bottom-12 w-11/12 max-w-5xl bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-4 md:px-8 py-3 flex justify-between items-center text-white text-xs md:text-sm font-helvetica shadow-2xl z-10">
             <div class="hidden md:flex space-x-8">
                 <a href="#story" class="hover:text-cyan-400 transition-colors">Giới thiệu</a>
-                <a href="#overview-content" class="hover:text-cyan-400 transition-colors">Tiến độ góp quỹ</a>
-                <a href="#donor-content" class="hover:text-cyan-400 transition-colors">Danh sách donors</a>
-                <a href="#lookup-result" class="hover:text-cyan-400 transition-colors">Tra cứu</a>
+                <a href="#overview-section" class="hover:text-cyan-400 transition-colors">Tiến độ góp quỹ</a>
+                <a href="#donor-section" class="hover:text-cyan-400 transition-colors">Danh sách donors</a>
+                <a href="#lookup-section" class="hover:text-cyan-400 transition-colors">Tra cứu</a>
                 <span class="text-gray-400 cursor-not-allowed">Thu chi <br><span class="text-[10px]">(Coming soon)</span></span>
             </div>
             
-            <!-- Nút Donate ih mò vẽ bằng Code CSS -->
-            <a href="LINK_GOOGLE_FORM_CỦA_BẠN" target="_blank" class="bg-[#1ce1db] text-black font-bold px-6 py-2 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 ml-auto md:ml-0 shadow-[0_0_15px_rgba(28,225,219,0.5)]">
+            <!-- Nút Donate vẽ bằng code thay cho hình -->
+            <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="bg-[#1ce1db] text-black font-bold px-6 py-2 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 ml-auto md:ml-0 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
                 Donate ih mò
             </a>
         </nav>
     </section>
 
-    <!-- PHẦN 2: STORY OF THE INNER STELLAR (Hình 2) -->
-    <section id="story" class="relative w-full py-16 flex justify-center bg-[#070b24]">
-        <!-- Khung nền text -->
-        <div class="relative w-11/12 max-w-5xl p-8 md:p-16 flex flex-col items-center" style="background-image: url('./assets/images/Story-fame.svg'); background-size: 100% 100%; background-position: center; background-repeat: no-repeat;">
-            
-            <!-- Text 2 -->
-            <h2 class="font-major text-white text-3xl md:text-5xl text-center mb-8 leading-snug tracking-wider">
-                STORY OF THE<br>INNER STELLAR
-            </h2>
-            
-            <!-- Text 3 -->
-            <div class="font-helvetica text-white/90 text-sm md:text-base leading-relaxed text-justify-custom max-w-4xl space-y-4">
-                <p>
-                    Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.
-                </p>
-                <p>
-                    Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.
-                </p>
-            </div>
-        </div>
+    <!-- PHẦN 2: STORY OF THE INNER STELLAR (GỌI TRỰC TIẾP HÌNH SVG) -->
+    <section id="story" class="w-full bg-[#070b24] flex justify-center py-12 md:py-20">
+        <img src="./asset/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain">
     </section>
 
-    <div class="max-w-4xl mx-auto space-y-8">
-        
-        <div class="text-center bg-white p-6 rounded-xl shadow">
-            <h1 class="text-2xl font-bold text-blue-600">BẢN TEST CHỨC NĂNG (WIREFLOW)</h1>
-        </div>
 
-        <section class="bg-white p-6 rounded-xl shadow">
+    <!-- PHẦN 3: CÁC KHỐI CHỨC NĂNG CŨ (BỌC TRONG CONTAINER CÓ LỀ) -->
+    <div class="max-w-4xl mx-auto space-y-8 p-4 md:p-10 mt-6">
+        
+        <!-- Khối OVERVIEW -->
+        <section id="overview-section" class="bg-white p-6 rounded-xl shadow">
             <h2 class="text-xl font-bold border-b pb-2 mb-4">1. OVERVIEW (Tiến độ)</h2>
             <div id="overview-content"><div class="loader"></div> Đang tải dữ liệu tiến độ...</div>
         </section>
 
-        <section class="bg-white p-6 rounded-xl shadow">
+        <!-- Khối TOP DONOR -->
+        <section id="donor-section" class="bg-white p-6 rounded-xl shadow">
             <div class="flex gap-6 border-b pb-2 mb-4">
                 <button id="btn-tab-all" onclick="renderDonors('all')" class="text-xl font-bold text-black border-b-2 border-black pb-1">Danh sách</button>
                 <button id="btn-tab-top" onclick="renderDonors('top')" class="text-xl font-bold text-gray-400 hover:text-black pb-1">Top</button>
@@ -95,7 +78,8 @@
             <div id="donor-content"><div class="loader"></div> Đang tải dữ liệu...</div>
         </section>
 
-        <section class="bg-white p-6 rounded-xl shadow">
+        <!-- Khối TRA CỨU -->
+        <section id="lookup-section" class="bg-white p-6 rounded-xl shadow">
             <h2 class="text-xl font-bold border-b pb-2 mb-4">3. TRA CỨU KẾT QUẢ</h2>
             <div class="flex gap-2 mb-4">
                 <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="border p-2 rounded w-full max-w-sm outline-none focus:ring-2 focus:ring-blue-400">
@@ -104,12 +88,18 @@
             <div id="lookup-result" class="hidden border rounded-lg p-4 bg-gray-50"></div>
         </section>
 
-    </div>
+    </div> <!-- Hết container chức năng -->
 
+    <!-- NÚT CTA LƠ LỬNG GÓC DƯỚI BÊN PHẢI -->
+    <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" 
+       class="fixed bottom-6 right-6 bg-pink-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300 z-50 flex items-center gap-2 animate-bounce">
+        <span>💸</span> DONATE IH MÒ 😸
+    </a>
+
+    <!-- PHẦN XỬ LÝ JAVASCRIPT -->
     <script>
-        // KIỂM TRA LẠI: Đảm bảo đường link API này là bản mới nhất đã deploy thành công!
+        // LINK API MỚI NHẤT
         const API_URL = "https://script.google.com/macros/s/AKfycbyttyiTTf3yhIyCA53wuvw-pCxF8ruWSbDyOaEpXJyah2wsXB3XBHG4isp8joY-Sgfs/exec";
-
         const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + "đ";
 
         // TẢI OVERVIEW
@@ -133,9 +123,9 @@
             } catch (e) { document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
         }
 
-        let donorDataGlobal = null; // Biến lưu tạm dữ liệu để chuyển tab không cần tải lại
+        let donorDataGlobal = null; 
 
-        // HÀM TÍNH THỜI GIAN (VD: 5 mins ago, 2 hours ago...)
+        // TÍNH THỜI GIAN DONOR
         function timeAgo(ms) {
             const seconds = Math.floor((new Date() - ms) / 1000);
             let interval = seconds / 86400;
@@ -147,16 +137,16 @@
             return "Vừa xong";
         }
 
-        // TẢI DỮ LIỆU DONOR (Chỉ tải 1 lần)
+        // TẢI DỮ LIỆU DONOR (TOP + TẤT CẢ)
         async function loadTopDonor() {
             try {
                 const res = await fetch(API_URL + "?action=topdonor");
                 donorDataGlobal = await res.json();
-                renderDonors('all'); // Mặc định mở tab Danh sách
+                renderDonors('all'); 
             } catch (e) { document.getElementById('donor-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
         }
 
-        // VẼ GIAO DIỆN THEO TAB ĐƯỢC CHỌN
+        // VẼ TAB DONOR
         function renderDonors(tab) {
             if (!donorDataGlobal) return;
             const contentBox = document.getElementById('donor-content');
@@ -164,11 +154,9 @@
             const btnAll = document.getElementById('btn-tab-all');
 
             if (tab === 'top') {
-                // Style cho nút
                 btnTop.className = "text-xl font-bold text-black border-b-2 border-black pb-1";
                 btnAll.className = "text-xl font-bold text-gray-400 hover:text-black pb-1 border-b-2 border-transparent";
                 
-                // Vẽ Top Donor
                 let html = `<p class="text-xs text-gray-500 italic mb-4">Bảng xếp hạng được tính cho các Giao dịch chuyển khoản Donate trước: <span class="font-bold text-gray-700">${donorDataGlobal.lastUpdate}</span></p>`;
                 if(donorDataGlobal.topDonors && donorDataGlobal.topDonors.length > 0) {
                     html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
@@ -177,11 +165,9 @@
                 }
                 contentBox.innerHTML = html;
             } else {
-                // Style cho nút
                 btnAll.className = "text-xl font-bold text-black border-b-2 border-black pb-1";
                 btnTop.className = "text-xl font-bold text-gray-400 hover:text-black pb-1 border-b-2 border-transparent";
 
-                // Vẽ Danh sách All Donor (Style Avatar)
                 let html = `<p class="text-xs text-gray-500 italic mb-4">Đối với các khoản Donate đã được đối chiếu ngân hàng</p><div class="space-y-4">`;
                 donorDataGlobal.allDonors.forEach(d => {
                     let initial = d.nickname ? d.nickname.charAt(0).toUpperCase() : "?";
@@ -199,7 +185,7 @@
             }
         }
 
-        // TẢI TRA CỨU
+        // TRA CỨU
         async function searchPhone() {
             const phone = document.getElementById('phoneInput').value.trim();
             const resultBox = document.getElementById('lookup-result');
@@ -216,13 +202,13 @@
                     resultBox.innerHTML = `<p class="text-red-600 font-medium">${data.message}</p>`; return;
                 }
 
-                // XỬ LÝ: Thông tin cá nhân & Số tiền (Gộp chung vào 1 block)
+                // Tiền
                 let moneyContent = "";
                 if (data.donateData.history.length === 1) {
                     let h = data.donateData.history[0];
                     moneyContent = `<p><strong>Số tiền đã Donate:</strong> <span class="text-blue-600 font-bold">${formatMoney(h.submittedAmount)}</span> <span class="text-red-500 text-xs italic">${h.note}</span></p>`;
                 } else {
-                    moneyContent = `<table class="w-full text-sm text-left border-collapse mt-2"><tr class="bg-gray-200"><th class="border p-2">Lần</th><th class="border p-2">Số tiền ghi trong form</th><th class="border p-2">Ghi chú</th></tr>`;
+                    moneyContent = `<table class="w-full text-sm text-left border-collapse mt-2"><tr class="bg-gray-200"><th class="border p-2">Lần</th><th class="border p-2">Số tiền</th><th class="border p-2">Ghi chú</th></tr>`;
                     data.donateData.history.forEach(h => {
                         moneyContent += `<tr class="${h.isDiscrepancy ? 'bg-red-50' : 'bg-white'}"><td class="border p-2">Lần ${h.turn}</td><td class="border p-2 font-medium">${formatMoney(h.submittedAmount)}</td><td class="border p-2 text-red-500 text-xs">${h.note}</td></tr>`;
                     });
@@ -238,7 +224,7 @@
                     </div>
                 `;
 
-                // XỬ LÝ: Bảng Danh sách quà dự kiến
+                // Quà
                 let giftHtml = "";
                 if (data.giftData && data.giftData.names.length > 0) {
                     let ths = "";
@@ -252,7 +238,7 @@
                     giftHtml = `
                         <div class="mt-4 border-t pt-4">
                             <p class="font-bold text-sm uppercase text-pink-600 mb-1">DANH SÁCH QUÀ DỰ KIẾN <span class="normal-case text-xs font-normal text-gray-500 ml-1">(vuốt qua trái để thấy đầy đủ hơn)</span></p>
-                            <p class="text-xs text-gray-600 italic mb-2">(tính theo tổng donate của Pạt 🎀 đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-blue-600">${formatMoney(data.giftData.validTotal)}</span>)</p>
+                            <p class="text-xs text-gray-600 italic mb-2">(tính theo tổng donate đã được đối chiếu: <span class="font-bold text-blue-600">${formatMoney(data.giftData.validTotal)}</span>)</p>
                             <div class="overflow-x-auto">
                                 <table class="w-full text-xs border-collapse bg-white shadow-sm">
                                     <tr class="bg-gray-100">${ths}</tr>
@@ -263,7 +249,7 @@
                     `;
                 }
 
-                // XỬ LÝ: Thông tin Ship quà (Chỉ còn mặc định là Ship về nhà)
+                // Ship
                 let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
                 let shipBlock = `
                     <div class="p-2 text-sm border rounded mt-1 bg-white">
@@ -272,59 +258,45 @@
                         <p><strong>Lưu ý giao hàng:</strong> ${deliveryNote}</p>
                         <hr class="my-2">
                         <p class="text-xs text-gray-500 italic">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
-                        
                         ${giftHtml}
                     </div>
                 `;
 
-                // XỬ LÝ LỜI CHÀO
                 let displayName = data.nickname ? data.nickname : (data.fullName ? data.fullName : "");
                 let greetingName = displayName ? `<span class="text-pink-600 font-bold">${displayName}</span>` : "";
 
-                // VẼ TOÀN BỘ KẾT QUẢ
                 let html = `
                     <div class="mb-4 border-b pb-4">
                         <p class="font-medium text-lg">Xin chào Pạt 🎀 ${greetingName}, tụi mình <span class="text-pink-600 font-bold">${data.formStatus}</span>.</p>
                     </div>
-
                     <div class="space-y-4">
                         <div>
                             <h3 class="font-bold bg-blue-100 p-2 rounded">THÔNG TIN CÁ NHÂN DONATE</h3>
                             ${personalBlock}
                         </div>
-
                         <div>
                             <h3 class="font-bold bg-blue-100 p-2 rounded">THÔNG TIN QUÀ VÀ SHIP QUÀ</h3>
                             ${shipBlock}
                         </div>
-
                         <div>
                             <h3 class="font-bold bg-blue-100 p-2 rounded">LƯU Ý THÊM CHO TEAM @trinhtongpartners</h3>
                             <p class="p-2 text-sm">${data.teamNote || "Không có ghi chú thêm."}</p>
                         </div>
                     </div>
-
-                    <!-- HIGHLIGHT NOTE ZALO -->
                     <div class="mt-6 bg-yellow-100 border border-yellow-300 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm font-bold text-yellow-800 text-center">PẠT 🎀 NHỚ VÀO GROUP ZALO ĐỂ THEO DÕI THÔNG BÁO/ CẬP NHẬT TỪ TỤI MÌNH NHA: <a href="LINK_ZALO_CỦA_BAN_VÀO_ĐÂY" target="_blank" class="text-blue-600 underline break-all">LINK ZALO</a></p>
+                        <p class="text-sm font-bold text-yellow-800 text-center">PẠT 🎀 NHỚ VÀO GROUP ZALO ĐỂ THEO DÕI THÔNG BÁO TỪ TỤI MÌNH NHA: <a href="LINK_ZALO_CỦA_BAN" target="_blank" class="text-blue-600 underline break-all">LINK ZALO</a></p>
                     </div>
-
-                    <!-- FOOTER HỖ TRỢ -->
                     <div class="mt-6 text-center border-t pt-4">
-                        <p class="text-sm text-gray-600">Liên hệ tụi mình thông qua: <a href="LINK_THREADS_CỦA_BAN_VÀO_ĐÂY" target="_blank" class="text-blue-600 font-bold hover:underline">Acc Threads của Fansite</a> nếu có sai sót về thông tin và cần hỗ trợ nha.</p>
-                        <p class="text-xs text-gray-500 font-medium text-center mt-2">Lưu ý: THỜI GIAN ĐỐI CHIẾU VỚI NGÂN HÀNG và CẬP NHẬT TRẠNG THÁI từ 21h - 23h mỗi ngày.</p>
+                        <p class="text-sm text-gray-600">Liên hệ qua: <a href="LINK_THREADS" target="_blank" class="text-blue-600 font-bold hover:underline">Acc Threads của Fansite</a> nếu cần hỗ trợ nha.</p>
+                        <p class="text-xs text-gray-500 font-medium text-center mt-2">Lưu ý: THỜI GIAN ĐỐI CHIẾU NGÂN HÀNG từ 21h - 23h mỗi ngày.</p>
                     </div>
                 `;
                 
                 resultBox.innerHTML = html;
             } catch (error) { resultBox.innerHTML = `<p class="text-red-500">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</p>`; }
         }
+
         window.onload = () => { loadOverview(); loadTopDonor(); };
     </script>
-    <!-- NÚT CTA LƠ LỬNG GÓC DƯỚI BÊN PHẢI -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" 
-       class="fixed bottom-6 right-6 bg-pink-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300 z-50 flex items-center gap-2 animate-bounce">
-        <span>💸</span> DONATE IH MÒ 😸
-    </a>
 </body>
 </html>
