@@ -9,9 +9,72 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; }
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @font-face {
+            font-family: 'HelveticaWorld';
+            src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'TPLeMajor';
+            src: url('./assets/fonts/TP Le Major.ttf') format('truetype');
+        }
+        .font-helvetica { font-family: 'HelveticaWorld', sans-serif; }
+        .font-major { font-family: 'TPLeMajor', serif; }
+        .text-justify-custom { text-align: justify; text-justify: inter-word; }
     </style>
 </head>
 <body class="text-gray-800 p-4 md:p-10">
+    <!-- PHẦN 1: HERO BANNER (Hình 1) -->
+    <section id="hero" class="relative w-full min-h-[100vh] bg-cover bg-center flex flex-col items-center pt-12 pb-24" style="background-image: url('./assets/images/Background.webp');">
+        
+        <!-- Logo -->
+        <img src="./assets/images/logowhite.svg" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-6 object-contain">
+        
+        <!-- Title -->
+        <img src="./assets/images/Title.svg" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4">
+        
+        <!-- Text 1 -->
+        <p class="font-helvetica text-white/80 text-sm md:text-base tracking-widest mt-2">
+            Project by @trinhtongpartners
+        </p>
+
+        <!-- Menu Navigation Bar -->
+        <nav class="absolute bottom-10 w-11/12 max-w-5xl bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-4 md:px-8 py-3 flex justify-between items-center text-white text-xs md:text-sm font-helvetica shadow-2xl">
+            <div class="hidden md:flex space-x-8">
+                <a href="#story" class="hover:text-cyan-400 transition-colors">Giới thiệu</a>
+                <a href="#overview-content" class="hover:text-cyan-400 transition-colors">Tiến độ góp quỹ</a>
+                <a href="#donor-content" class="hover:text-cyan-400 transition-colors">Danh sách donors</a>
+                <a href="#lookup-result" class="hover:text-cyan-400 transition-colors">Tra cứu</a>
+                <span class="text-gray-400 cursor-not-allowed">Thu chi <br><span class="text-[10px]">(Coming soon)</span></span>
+            </div>
+            
+            <!-- Nút Donate ih mò vẽ bằng Code CSS -->
+            <a href="LINK_GOOGLE_FORM_CỦA_BẠN" target="_blank" class="bg-[#1ce1db] text-black font-bold px-6 py-2 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 ml-auto md:ml-0 shadow-[0_0_15px_rgba(28,225,219,0.5)]">
+                Donate ih mò
+            </a>
+        </nav>
+    </section>
+
+    <!-- PHẦN 2: STORY OF THE INNER STELLAR (Hình 2) -->
+    <section id="story" class="relative w-full py-16 flex justify-center bg-[#070b24]">
+        <!-- Khung nền text -->
+        <div class="relative w-11/12 max-w-5xl p-8 md:p-16 flex flex-col items-center" style="background-image: url('./assets/images/Story-fame.svg'); background-size: 100% 100%; background-position: center; background-repeat: no-repeat;">
+            
+            <!-- Text 2 -->
+            <h2 class="font-major text-white text-3xl md:text-5xl text-center mb-8 leading-snug tracking-wider">
+                STORY OF THE<br>INNER STELLAR
+            </h2>
+            
+            <!-- Text 3 -->
+            <div class="font-helvetica text-white/90 text-sm md:text-base leading-relaxed text-justify-custom max-w-4xl space-y-4">
+                <p>
+                    Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.
+                </p>
+                <p>
+                    Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.
+                </p>
+            </div>
+        </div>
+    </section>
 
     <div class="max-w-4xl mx-auto space-y-8">
         
