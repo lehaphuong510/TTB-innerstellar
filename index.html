@@ -22,7 +22,8 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .semi-circle-svg { width: 140px; height: 70px; overflow: hidden; }
+        /* CSS Vẽ Biểu đồ Bán nguyệt */
+        .semi-circle-svg { width: 180px; height: 90px; overflow: hidden; }
         .semi-circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.15); stroke-width: 12; stroke-linecap: round; }
         .semi-circle-fill { fill: none; stroke-width: 12; stroke-linecap: round; stroke-dasharray: 188.5; stroke-dashoffset: 188.5; transition: stroke-dashoffset 1.5s ease-out; }
     </style>
@@ -30,6 +31,7 @@
 
 <body class="text-gray-800 relative">
     
+    <!-- Lớp phủ nền làm dịu vũ trụ -->
     <div class="fixed inset-0 z-[-2] bg-cover bg-center" style="background-image: url('./assets/images/Background.webp');"></div>
     <div class="fixed inset-0 z-[-1] bg-black/40 backdrop-blur-[2px]"></div>
 
@@ -40,26 +42,31 @@
         <p class="font-helvetica text-white/80 text-base md:text-lg tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION -->
+    <!-- THANH NAVIGATION (Dùng Grid 3 cột canh giữa tuyệt đối) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
-        <nav class="w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 flex items-center text-white font-helvetica shadow-2xl relative min-h-[50px] md:min-h-[60px]">
-            <div class="absolute left-1/2 -translate-x-1/2 hidden md:flex space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
+        <nav class="grid grid-cols-[1fr_auto_1fr] w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px]">
+            <!-- Cột trái: Trống để cân bằng -->
+            <div></div>
+            
+            <!-- Cột giữa: Nhóm Link -->
+            <div class="hidden md:flex justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
                 <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Giới thiệu</a>
                 <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tiến độ quỹ</a>
                 <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Danh sách donors</a>
                 <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tra cứu</a>
                 <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">Thu chi <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5">(Coming soon)</span></span>
             </div>
-            <div class="ml-auto flex shrink-0">
+            
+            <!-- Cột phải: Nút Donate -->
+            <div class="flex justify-end">
                 <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">Donate ih mò</a>
             </div>
         </nav>
     </div>
 
-    <!-- STORY -->
-    <section id="story" class="scroll-mt-28 w-full flex flex-col items-center pb-12 md:pb-20">
-        <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain drop-shadow-2xl mb-8">
-        <!-- Đã dời Phan cach.svg lên đây -->
+    <!-- STORY & DẤU PHÂN CÁCH NẰM TRÊN -->
+    <section id="story" class="scroll-mt-28 w-full flex flex-col items-center pb-8 md:pb-12">
+        <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain drop-shadow-2xl mb-12">
         <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </section>
 
@@ -68,8 +75,11 @@
         
         <!-- TIẾN ĐỘ -->
         <section id="overview-section" class="scroll-mt-28 w-full flex flex-col items-center">
+            
             <div class="text-center mb-8 w-full">
+                <!-- Chữ cái đầu viết hoa, giữ font Major -->
                 <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-2 drop-shadow-lg">Tiến độ góp quỹ</h2>
+                <!-- Nền xám trong suốt 60% làm nổi bật thời gian -->
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
                     <p id="update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
                 </div>
@@ -88,7 +98,6 @@
                 <img src="./assets/images/Donors gift.png" alt="Quà tặng Donors" class="w-11/12 max-w-lg object-contain opacity-90 drop-shadow-2xl">
             </div>
 
-            <!-- CTA mini cuối khối tiến độ -->
             <div class="mt-8 text-center">
                 <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-8 py-3 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] inline-block">Donate ih mò</a>
             </div>
@@ -97,7 +106,7 @@
         <!-- TOP DONOR -->
         <section id="donor-section" class="scroll-mt-28 bg-black/60 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20">
             <div class="flex gap-6 border-b border-gray-600 pb-2 mb-6">
-                <button id="btn-tab-all" onclick="renderDonors('all')" class="text-xl font-bold text-white border-b-2 border-[#1ce1db] pb-1">Danh sách donors</button>
+                <button id="btn-tab-all" onclick="renderDonors('all')" class="font-helvetica text-xl font-bold text-white border-b-2 border-[#1ce1db] pb-1">Danh sách donors</button>
             </div>
             <div id="donor-content"><div class="loader"></div> <span class="text-white">Đang tải dữ liệu...</span></div>
         </section>
@@ -127,6 +136,20 @@
         let overviewDataGlobal = null;
         let currentLayout = 'horizontal'; 
         let animationTriggered = false;
+
+        // Điểm neo 4 chặng để rải đều không gian bar (Phi tuyến tính)
+        // Thay vì bị nhét sát nhau, ta cố định 4 mốc ở tọa độ % trên màn hình
+        const visualStops = [20, 45, 70, 95]; 
+
+        // Hàm tính toán % độ dài thanh bar thực tế dựa trên thuật toán nội suy
+        function calculateVisualPercentage(current, targets) {
+            if(current <= 0 || !targets || targets.length < 4) return 0;
+            if(current <= targets[0]) return (current / targets[0]) * visualStops[0];
+            if(current <= targets[1]) return visualStops[0] + ((current - targets[0]) / (targets[1] - targets[0])) * (visualStops[1] - visualStops[0]);
+            if(current <= targets[2]) return visualStops[1] + ((current - targets[1]) / (targets[2] - targets[1])) * (visualStops[2] - visualStops[1]);
+            if(current <= targets[3]) return visualStops[2] + ((current - targets[2]) / (targets[3] - targets[2])) * (visualStops[3] - visualStops[2]);
+            return visualStops[3]; // Max out ở mốc 4
+        }
 
         function animateValue(id, start, end, duration) {
             let obj = document.getElementById(id);
@@ -176,10 +199,16 @@
         function renderOverviewLayout() {
             if (!overviewDataGlobal) return;
             const data = overviewDataGlobal;
-            let safeMoneyPercent = Math.min(data.moneyPercent, 100);
             
-            let donateDashOffset = 188.5 - (188.5 * safeMoneyPercent / 100);
-            let timeDashOffset = 188.5 - (188.5 * Math.min(data.timePercent, 100) / 100);
+            // Tính toán % hiển thị của thanh dài dựa vào thuật toán nội suy chéo
+            const targets = data.milestones.map(m => m.target);
+            const visualProgressPct = calculateVisualPercentage(data.currentTotal, targets);
+            
+            // Tính toán % biểu đồ bán nguyệt
+            const moneyStatPct = Math.min(data.moneyPercent, 100);
+            const timeStatPct = Math.min(data.timePercent, 100);
+            const donateDashOffset = 188.5 - (188.5 * moneyStatPct / 100);
+            const timeDashOffset = 188.5 - (188.5 * timeStatPct / 100);
             
             let statsHtml = `
                 <div class="text-center w-full mb-12">
@@ -190,24 +219,26 @@
                         <span class="text-gray-300 text-lg md:text-xl font-helvetica ml-1">VNĐ</span>
                     </div>
                     
-                    <div class="flex flex-row justify-center items-end gap-8 md:gap-24 font-helvetica text-base md:text-lg w-full max-w-2xl mx-auto">
+                    <div class="flex flex-row justify-center items-end gap-10 md:gap-24 font-helvetica text-base md:text-lg w-full max-w-2xl mx-auto">
+                        <!-- Chart Donate -->
                         <div class="flex flex-col items-center">
                             <div class="relative semi-circle-svg mb-2">
                                 <svg viewBox="0 0 120 60" class="w-full h-full">
                                     <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-bg"/>
                                     <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-fill stroke-[#1ce1db]" id="chart-donate"/>
                                 </svg>
-                                <div class="absolute bottom-1 w-full text-center font-bold text-[#1ce1db] text-xl" id="text-pct-donate">0%</div>
+                                <div class="absolute bottom-2 w-full text-center font-bold text-[#1ce1db] text-xl" id="text-pct-donate">0%</div>
                             </div>
                             <span class="text-white/90 font-medium">Tiến độ Donate</span>
                         </div>
+                        <!-- Chart Thời gian -->
                         <div class="flex flex-col items-center">
                             <div class="relative semi-circle-svg mb-2">
                                 <svg viewBox="0 0 120 60" class="w-full h-full">
                                     <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-bg"/>
                                     <path d="M 10 60 A 50 50 0 0 1 110 60" class="semi-circle-fill stroke-pink-400" id="chart-time"/>
                                 </svg>
-                                <div class="absolute bottom-1 w-full text-center font-bold text-pink-400 text-xl" id="text-pct-time">0%</div>
+                                <div class="absolute bottom-2 w-full text-center font-bold text-pink-400 text-xl" id="text-pct-time">0%</div>
                             </div>
                             <span class="text-white/90 font-medium">Tiến độ thời gian</span>
                         </div>
@@ -215,25 +246,28 @@
                 </div>
             `;
 
+            // LƯU DATA VÀO ATTRIBUTE ĐỂ GỌI KHI ANIMATION CHẠY
             document.getElementById('overview-content').setAttribute('data-target-money', data.currentTotal);
-            document.getElementById('overview-content').setAttribute('data-pct-money', safeMoneyPercent);
-            document.getElementById('overview-content').setAttribute('data-pct-time', Math.min(data.timePercent, 100));
+            document.getElementById('overview-content').setAttribute('data-pct-money', moneyStatPct);
+            document.getElementById('overview-content').setAttribute('data-pct-time', timeStatPct);
             document.getElementById('overview-content').setAttribute('data-offset-donate', donateDashOffset);
             document.getElementById('overview-content').setAttribute('data-offset-time', timeDashOffset);
+            document.getElementById('overview-content').setAttribute('data-visual-progress', visualProgressPct);
 
             let milestonesHtml = "";
             let progressHtml = "";
 
             if (currentLayout === 'horizontal') {
                 data.milestones.forEach((m, idx) => {
-                    let pct = data.maxTarget > 0 ? (m.target / data.maxTarget) * 100 : 0;
+                    let pct = visualStops[idx]; 
                     milestonesHtml += `
                         <div class="absolute flex flex-col items-center -translate-x-1/2 animate-card milestone-card" style="left: ${pct}%; top: 0; animation-delay: ${(idx+1)*0.2}s">
                             <div class="text-[#1ce1db] font-helvetica text-[11px] md:text-sm font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div>
                             <img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 26px; left: 50%;">
                             <div class="mt-9 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-36 md:w-48 text-center border border-white/10 backdrop-blur-md shadow-2xl">
                                 <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80">Chặng ${idx+1}</p>
-                                <p class="text-[#1ce1db] font-major text-sm md:text-base mb-2 whitespace-nowrap drop-shadow-md">${m.name}</p>
+                                <p class="text-[#1ce1db] font-major text-sm md:text-base mb-2 drop-shadow-md">${m.name}</p>
+                                <!-- Ngang thả tự do rớt dòng -->
                                 <p class="text-white/80 text-[10px] md:text-xs leading-snug px-1">${m.activity}</p>
                             </div>
                         </div>
@@ -244,27 +278,27 @@
                     <div class="relative w-full overflow-x-auto no-scrollbar pt-10 pb-4">
                         <div class="relative min-w-[1400px] h-[240px] mx-auto px-16">
                             <div class="absolute top-[34px] left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div>
-                            <div id="main-bar-horiz" class="absolute top-[34px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-1000 ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
+                            <div id="main-bar-horiz" class="absolute top-[34px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
                             ${milestonesHtml}
-                            <div id="star-horiz" class="absolute top-[34px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-1000 ease-out" style="left: 0%;">
+                            <div id="star-horiz" class="absolute top-[34px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="left: 0%;">
                                 <img src="./assets/images/Star bullet.svg" class="w-8 md:w-10 animate-spin" style="animation-duration: 4s;">
                             </div>
                         </div>
                     </div>
                 `;
             } else {
-                // Layout DỌC: Trục giữa, xen kẽ trái phải
                 data.milestones.forEach((m, idx) => {
-                    let pct = data.maxTarget > 0 ? (m.target / data.maxTarget) * 100 : 0;
-                    let isEven = idx % 2 === 0; // Chẵn trái, lẻ phải hoặc ngược lại
+                    let pct = visualStops[idx];
+                    let isEven = idx % 2 === 0; 
                     milestonesHtml += `
                         <div class="absolute w-full flex items-center -translate-y-1/2 animate-card milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s">
                             <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2">
                             <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'}">
                                 <div class="font-helvetica bg-black/60 rounded-xl p-4 w-[240px] md:w-[300px] border border-white/10 backdrop-blur-md shadow-2xl text-left">
                                     <p class="text-white/80 text-xs font-bold mb-1 tracking-widest">Chặng ${idx+1}</p>
-                                    <p class="text-[#1ce1db] font-major text-base md:text-lg mb-2 whitespace-nowrap drop-shadow-md">${m.name}</p>
-                                    <p class="text-white/90 text-xs md:text-sm mb-4 leading-relaxed">${m.activity}</p>
+                                    <p class="text-[#1ce1db] font-major text-base md:text-lg mb-2 drop-shadow-md">${m.name}</p>
+                                    <!-- Dọc cấm rớt dòng -->
+                                    <p class="text-white/90 text-xs md:text-sm mb-4 whitespace-nowrap overflow-hidden text-ellipsis">${m.activity}</p>
                                     <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-xs font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
                                 </div>
                             </div>
@@ -276,9 +310,9 @@
                     <div class="relative w-full max-w-2xl mx-auto h-[800px] my-10">
                         <div class="relative w-full h-full">
                             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-full bg-gray-700/80 rounded-full"></div>
-                            <div id="main-bar-vert" class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-1000 ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
+                            <div id="main-bar-vert" class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
                             ${milestonesHtml}
-                            <div id="star-vert" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-1000 ease-out" style="top: 0%;">
+                            <div id="star-vert" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="top: 0%;">
                                 <img src="./assets/images/Star bullet.svg" class="w-10 animate-spin" style="animation-duration: 4s;">
                             </div>
                         </div>
@@ -305,11 +339,12 @@
                     const pctTime = parseFloat(content.getAttribute('data-pct-time')) || 0;
                     const offsetDonate = parseFloat(content.getAttribute('data-offset-donate')) || 188.5;
                     const offsetTime = parseFloat(content.getAttribute('data-offset-time')) || 188.5;
+                    const visualProgress = parseFloat(content.getAttribute('data-visual-progress')) || 0;
 
-                    // 1. Nhảy số Tiền
+                    // 1. Nhảy số thống kê
                     animateValue("counter-current", 0, targetMoney, 2000);
                     
-                    // 2. Chạy Biểu đồ vòng cung
+                    // 2. Chạy Biểu đồ bán nguyệt
                     setTimeout(() => {
                         document.getElementById('chart-donate').style.strokeDashoffset = offsetDonate;
                         document.getElementById('text-pct-donate').innerText = pctMoney.toFixed(1) + "%";
@@ -317,23 +352,23 @@
                         document.getElementById('text-pct-time').innerText = pctTime.toFixed(1) + "%";
                     }, 500);
 
-                    // 3. Hiện các Card chặng trước
+                    // 3. Nổi thẻ chặng lên TRƯỚC
                     setTimeout(() => {
                         document.querySelectorAll('.milestone-card').forEach(card => {
                             card.classList.add('start-anim-card');
                         });
                     }, 1000);
 
-                    // 4. SAU CÙNG MỚI CHẠY FILL THANH BAR VÀ NGÔI SAO
+                    // 4. Fill thanh ngang/dọc chạy ra SAU CÙNG
                     setTimeout(() => {
                         if(currentLayout === 'horizontal') {
-                            document.getElementById('main-bar-horiz').style.width = pctMoney + "%";
-                            document.getElementById('star-horiz').style.left = pctMoney + "%";
+                            document.getElementById('main-bar-horiz').style.width = visualProgress + "%";
+                            document.getElementById('star-horiz').style.left = visualProgress + "%";
                         } else {
-                            document.getElementById('main-bar-vert').style.height = pctMoney + "%";
-                            document.getElementById('star-vert').style.top = pctMoney + "%";
+                            document.getElementById('main-bar-vert').style.height = visualProgress + "%";
+                            document.getElementById('star-vert').style.top = visualProgress + "%";
                         }
-                    }, 2000);
+                    }, 2200); 
                 }
             }, { threshold: 0.15 });
 
