@@ -6,7 +6,7 @@
     <title>Innerstellar - Trịnh Thăng Bình Fan Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* KHAI BÁO FONT CHỮ TRONG THƯ MỤC ASSETS */
+        /* KHAI BÁO FONT CHỮ */
         @font-face {
             font-family: 'HelveticaWorld';
             src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype');
@@ -18,58 +18,60 @@
         .font-helvetica { font-family: 'HelveticaWorld', sans-serif; }
         .font-major { font-family: 'TPLeMajor', serif; }
         
-        /* HIỆU ỨNG LOADING CHUẨN CŨ */
+        /* HIỆU ỨNG LOADING */
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="text-gray-800 bg-gray-50">
 
-    <!-- PHẦN 1: HERO BANNER -->
-    <section id="hero" class="relative w-full h-[100vh] bg-cover bg-center bg-fixed flex flex-col items-center justify-center" style="background-image: url('./assets/images/Background.webp');">
-        
+<!-- GẮN NỀN BACKGROUND CHO TOÀN BỘ TRANG WEB Ở ĐÂY -->
+<body class="text-gray-800 bg-fixed bg-cover bg-center" style="background-image: url('./assets/images/Background.webp');">
+
+    <!-- PHẦN 1: HERO BANNER (Đã căn chỉnh lại khoảng cách, đưa lên trên cùng) -->
+    <section id="hero" class="w-full flex flex-col items-center pt-12 md:pt-20 pb-6">
         <img src="./assets/images/logowhite.svg" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-4 object-contain">
         <img src="./assets/images/Title.svg" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4">
         
-        <p class="font-helvetica text-white/80 text-sm md:text-base tracking-widest mb-20">
+        <p class="font-helvetica text-white/80 text-base md:text-lg tracking-widest">
             Project by @trinhtongpartners
         </p>
+    </section>
 
-        <!-- Menu Navigation Bar -->
-        <nav class="absolute bottom-12 w-11/12 max-w-5xl bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-4 md:px-8 py-3 flex justify-between items-center text-white text-xs md:text-sm font-helvetica shadow-2xl z-10">
-            <div class="hidden md:flex space-x-8">
+    <!-- THANH NAVIGATION (Làm bự chữ lên và dính chặt vào TOP khi cuộn trang) -->
+    <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
+        <nav class="w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-5 py-3 md:px-8 md:py-4 flex justify-between items-center text-white text-sm md:text-base font-helvetica shadow-2xl">
+            <div class="hidden md:flex space-x-8 items-center">
                 <a href="#story" class="hover:text-cyan-400 transition-colors">Giới thiệu</a>
                 <a href="#overview-section" class="hover:text-cyan-400 transition-colors">Tiến độ góp quỹ</a>
                 <a href="#donor-section" class="hover:text-cyan-400 transition-colors">Danh sách donors</a>
                 <a href="#lookup-section" class="hover:text-cyan-400 transition-colors">Tra cứu</a>
-                <span class="text-gray-400 cursor-not-allowed">Thu chi <br><span class="text-[10px]">(Coming soon)</span></span>
+                <span class="text-gray-400 cursor-not-allowed leading-tight text-center">Thu chi <br><span class="text-[11px] font-normal italic">(Coming soon)</span></span>
             </div>
             
-            <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="bg-[#1ce1db] text-black font-bold px-6 py-2 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 ml-auto md:ml-0 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
+            <a href="LINK_GOOGLE_FORM_CUA_BAN" target="_blank" class="bg-[#1ce1db] text-black font-bold px-6 py-2.5 md:py-3 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 ml-auto md:ml-0 shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">
                 Donate ih mò
             </a>
         </nav>
-    </section>
+    </div>
 
     <!-- PHẦN 2: STORY OF THE INNER STELLAR -->
-    <section id="story" class="w-full bg-[#070b24] flex justify-center py-12 md:py-20">
-        <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain">
+    <section id="story" class="w-full flex justify-center pb-12 md:pb-20">
+        <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain drop-shadow-2xl">
     </section>
 
-
     <!-- PHẦN 3: CÁC KHỐI CHỨC NĂNG CŨ -->
-    <div class="max-w-4xl mx-auto space-y-8 p-4 md:p-10 mt-6">
+    <div class="max-w-4xl mx-auto space-y-8 p-4 md:p-10 mb-20">
         
         <!-- Khối OVERVIEW -->
-        <section id="overview-section" class="bg-white p-6 rounded-xl shadow">
+        <section id="overview-section" class="bg-white/95 backdrop-blur p-6 rounded-xl shadow-lg border border-white/20">
             <h2 class="text-xl font-bold border-b pb-2 mb-4">1. OVERVIEW (Tiến độ)</h2>
             <div id="overview-content"><div class="loader"></div> Đang tải dữ liệu tiến độ...</div>
         </section>
 
         <!-- Khối TOP DONOR -->
-        <section id="donor-section" class="bg-white p-6 rounded-xl shadow">
+        <section id="donor-section" class="bg-white/95 backdrop-blur p-6 rounded-xl shadow-lg border border-white/20">
             <div class="flex gap-6 border-b pb-2 mb-4">
                 <button id="btn-tab-all" onclick="renderDonors('all')" class="text-xl font-bold text-black border-b-2 border-black pb-1">Danh sách</button>
                 <button id="btn-tab-top" onclick="renderDonors('top')" class="text-xl font-bold text-gray-400 hover:text-black pb-1">Top</button>
@@ -78,10 +80,10 @@
         </section>
 
         <!-- Khối TRA CỨU -->
-        <section id="lookup-section" class="bg-white p-6 rounded-xl shadow">
+        <section id="lookup-section" class="bg-white/95 backdrop-blur p-6 rounded-xl shadow-lg border border-white/20">
             <h2 class="text-xl font-bold border-b pb-2 mb-4">3. TRA CỨU KẾT QUẢ</h2>
             <div class="flex gap-2 mb-4">
-                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="border p-2 rounded w-full max-w-sm outline-none focus:ring-2 focus:ring-blue-400">
+                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="border p-2 rounded w-full max-w-sm outline-none focus:ring-2 focus:ring-blue-400 bg-white">
                 <button onclick="searchPhone()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-medium">Tra cứu</button>
             </div>
             <div id="lookup-result" class="hidden border rounded-lg p-4 bg-gray-50"></div>
