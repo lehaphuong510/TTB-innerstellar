@@ -25,8 +25,11 @@
         </section>
 
         <section class="bg-white p-6 rounded-xl shadow">
-            <h2 class="text-xl font-bold border-b pb-2 mb-4">2. TOP DONOR</h2>
-            <div id="topdonor-content"><div class="loader"></div> Đang tải bảng xếp hạng...</div>
+            <div class="flex gap-6 border-b pb-2 mb-4">
+                <button id="btn-tab-all" onclick="renderDonors('all')" class="text-xl font-bold text-black border-b-2 border-black pb-1">Danh sách</button>
+                <button id="btn-tab-top" onclick="renderDonors('top')" class="text-xl font-bold text-gray-400 hover:text-black pb-1">Top</button>
+            </div>
+            <div id="donor-content"><div class="loader"></div> Đang tải dữ liệu...</div>
         </section>
 
         <section class="bg-white p-6 rounded-xl shadow">
@@ -67,19 +70,70 @@
             } catch (e) { document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
         }
 
-        // TẢI TOP DONOR
+        let donorDataGlobal = null; // Biến lưu tạm dữ liệu để chuyển tab không cần tải lại
+
+        // HÀM TÍNH THỜI GIAN (VD: 5 mins ago, 2 hours ago...)
+        function timeAgo(ms) {
+            const seconds = Math.floor((new Date() - ms) / 1000);
+            let interval = seconds / 86400;
+            if (interval > 1) return Math.floor(interval) + " ngày trước";
+            interval = seconds / 3600;
+            if (interval > 1) return Math.floor(interval) + " giờ trước";
+            interval = seconds / 60;
+            if (interval > 1) return Math.floor(interval) + " phút trước";
+            return "Vừa xong";
+        }
+
+        // TẢI DỮ LIỆU DONOR (Chỉ tải 1 lần)
         async function loadTopDonor() {
             try {
                 const res = await fetch(API_URL + "?action=topdonor");
-                const data = await res.json();
-                let html = `<p class="text-xs text-gray-500 italic mb-4">Bảng xếp hạng được tính cho các Giao dịch chuyển khoản Donate trước: <span class="font-bold text-gray-700">${data.lastUpdate}</span></p>`;
-                if(data.donors && data.donors.length > 0) {
+                donorDataGlobal = await res.json();
+                renderDonors('all'); // Mặc định mở tab Danh sách
+            } catch (e) { document.getElementById('donor-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
+        }
+
+        // VẼ GIAO DIỆN THEO TAB ĐƯỢC CHỌN
+        function renderDonors(tab) {
+            if (!donorDataGlobal) return;
+            const contentBox = document.getElementById('donor-content');
+            const btnTop = document.getElementById('btn-tab-top');
+            const btnAll = document.getElementById('btn-tab-all');
+
+            if (tab === 'top') {
+                // Style cho nút
+                btnTop.className = "text-xl font-bold text-black border-b-2 border-black pb-1";
+                btnAll.className = "text-xl font-bold text-gray-400 hover:text-black pb-1 border-b-2 border-transparent";
+                
+                // Vẽ Top Donor
+                let html = `<p class="text-xs text-gray-500 italic mb-4">Bảng xếp hạng được tính cho các Giao dịch chuyển khoản Donate trước: <span class="font-bold text-gray-700">${donorDataGlobal.lastUpdate}</span></p>`;
+                if(donorDataGlobal.topDonors && donorDataGlobal.topDonors.length > 0) {
                     html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
-                    data.donors.forEach((d, i) => html += `<div class="border p-3 rounded flex justify-between items-center bg-gray-50"><div><span class="font-bold mr-2 text-yellow-600">${i < 3 ? '🏆' : '#'+(i+1)}</span> <span class="font-medium">${d.nickname}</span></div><div class="font-bold text-green-600">${formatMoney(d.totalAmount)}</div></div>`);
+                    donorDataGlobal.topDonors.forEach((d, i) => html += `<div class="border p-3 rounded flex justify-between items-center bg-gray-50"><div><span class="font-bold mr-2 text-yellow-600">${i < 3 ? '🏆' : '#'+(i+1)}</span> <span class="font-medium">${d.nickname}</span></div><div class="font-bold text-green-600">${formatMoney(d.totalAmount)}</div></div>`);
                     html += `</div>`;
                 }
-                document.getElementById('topdonor-content').innerHTML = html;
-            } catch (e) { document.getElementById('topdonor-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu.</span>`; }
+                contentBox.innerHTML = html;
+            } else {
+                // Style cho nút
+                btnAll.className = "text-xl font-bold text-black border-b-2 border-black pb-1";
+                btnTop.className = "text-xl font-bold text-gray-400 hover:text-black pb-1 border-b-2 border-transparent";
+
+                // Vẽ Danh sách All Donor (Style Avatar)
+                let html = `<p class="text-xs text-gray-500 italic mb-4">Đối với các khoản Donate đã được đối chiếu ngân hàng</p><div class="space-y-4">`;
+                donorDataGlobal.allDonors.forEach(d => {
+                    let initial = d.nickname ? d.nickname.charAt(0).toUpperCase() : "?";
+                    html += `
+                    <div class="flex items-center gap-4 border-b border-gray-100 pb-3 last:border-0">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700 shrink-0">${initial}</div>
+                        <div>
+                            <p class="font-medium text-sm text-gray-800">${d.nickname}</p>
+                            <p class="text-xs text-gray-500"><span class="font-bold text-gray-700">${formatMoney(d.amount)}</span> &middot; ${timeAgo(d.timestamp)}</p>
+                        </div>
+                    </div>`;
+                });
+                html += `</div>`;
+                contentBox.innerHTML = html;
+            }
         }
 
         // TẢI TRA CỨU
@@ -134,7 +188,7 @@
 
                     giftHtml = `
                         <div class="mt-4 border-t pt-4">
-                            <p class="font-bold text-sm uppercase text-pink-600 mb-1">DANH SÁCH QUÀ DỰ KIẾN</p>
+                            <p class="font-bold text-sm uppercase text-pink-600 mb-1">DANH SÁCH QUÀ DỰ KIẾN <span class="normal-case text-xs font-normal text-gray-500 ml-1">(vuốt qua trái để thấy đầy đủ hơn)</span></p>
                             <p class="text-xs text-gray-600 italic mb-2">(tính theo tổng donate của Pạt 🎀 đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-blue-600">${formatMoney(data.giftData.validTotal)}</span>)</p>
                             <div class="overflow-x-auto">
                                 <table class="w-full text-xs border-collapse bg-white shadow-sm">
@@ -207,7 +261,7 @@
     <!-- NÚT CTA LƠ LỬNG GÓC DƯỚI BÊN PHẢI -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" 
        class="fixed bottom-6 right-6 bg-pink-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300 z-50 flex items-center gap-2 animate-bounce">
-        <span>💸</span> Đóng góp ngay!
+        <span>💸</span> DONATE IH MÒ 😸
     </a>
 </body>
 </html>
