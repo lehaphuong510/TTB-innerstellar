@@ -40,18 +40,19 @@
         <p class="font-helvetica text-white/80 text-base md:text-lg tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION (Đã chèn thêm uppercase) -->
+    <!-- THANH NAVIGATION (Đã IN HOA và Canh giữa theo tỷ lệ mới) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
-        <nav class="grid grid-cols-[1fr_auto_1fr] w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px]">
-            <div></div>
-            <div class="hidden md:flex justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center uppercase">
+        <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px]">
+            <!-- Phần link bọc trong flex-1 để tự động chiếm phần không gian còn lại và canh giữa TRONG phần đó -->
+            <div class="hidden md:flex flex-1 justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center uppercase">
                 <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Giới thiệu</a>
                 <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tiến độ quỹ</a>
                 <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Danh sách donors</a>
                 <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tra cứu</a>
                 <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5 capitalize">(Coming soon)</span></span>
             </div>
-            <div class="flex justify-end">
+            <!-- Nút Donate đẩy sát mép phải (flex-none) -->
+            <div class="flex-none ml-4">
                 <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">Donate ih mò</a>
             </div>
         </nav>
@@ -81,7 +82,6 @@
                 <button onclick="switchLayout('vertical')" id="btn-layout-vert" class="px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all">Dọc (Opt 1)</button>
             </div>
 
-            <!-- Mở rộng max-w-6xl để Bar ngang có chỗ nằm thoải mái -->
             <div id="overview-content" class="w-full max-w-6xl relative flex flex-col items-center min-h-[400px]">
                 <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu tiến độ...</p>
             </div>
@@ -129,7 +129,6 @@
         let currentLayout = 'horizontal'; 
         let animationTriggered = false;
 
-        // Điểm neo chia đều, không bị rớt khung
         const visualStops = [12, 38, 64, 90]; 
 
         function calculateVisualPercentage(current, targets) {
@@ -247,24 +246,35 @@
                     let pct = visualStops[idx]; 
                     milestonesHtml += `
                         <div class="absolute flex flex-col items-center -translate-x-1/2 animate-card milestone-card" style="left: ${pct}%; top: 0; animation-delay: ${(idx+1)*0.2}s">
-                            <div class="text-[#1ce1db] font-helvetica text-[11px] md:text-sm font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div>
-                            <img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 26px; left: 50%;">
-                            <div class="mt-9 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-36 md:w-48 text-center border border-white/10 backdrop-blur-md shadow-2xl">
-                                <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80">Chặng ${idx+1}</p>
-                                <p class="text-[#1ce1db] font-major text-sm md:text-base mb-2 drop-shadow-md">${m.name}</p>
-                                <p class="text-white/80 text-[10px] md:text-xs leading-snug px-1">${m.activity}</p>
+                            <!-- Đã tăng size tiền lên text-lg -->
+                            <div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div>
+                            <img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 28px; left: 50%;">
+                            <div class="mt-11 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-40 md:w-56 text-center border border-white/10 backdrop-blur-md shadow-2xl">
+                                <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 uppercase">Chặng ${idx+1}</p>
+                                <p class="text-[#1ce1db] font-major text-base md:text-xl mb-2 drop-shadow-md capitalize">${m.name}</p>
+                                <!-- Chữ hoạt động to hơn và có animate-pulse + Glow -->
+                                <p class="text-[#1ce1db] text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_#1ce1db] animate-pulse">${m.activity}</p>
                             </div>
                         </div>
                     `;
                 });
 
                 progressHtml = `
-                    <div class="relative w-full pt-10 pb-4">
-                        <div class="relative w-full h-[240px]">
-                            <div class="absolute top-[34px] left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div>
-                            <div id="main-bar-horiz" class="absolute top-[34px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
+                    <div class="relative w-full overflow-x-auto no-scrollbar pt-10 pb-4">
+                        <!-- Đẩy khối sang trái -5% để cân bằng thị giác -->
+                        <div class="relative min-w-[1400px] h-[260px] mx-auto px-16 -translate-x-[5%]">
+                            
+                            <!-- Bổ sung mốc 0đ và CHIẾN THÔI -->
+                            <div class="absolute flex flex-col items-center -translate-x-1/2" style="left: 0%; top: 0;">
+                                <div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">0đ</div>
+                                <div class="w-1.5 h-4 bg-[#1ce1db] rounded-full absolute z-20" style="top: 30px;"></div>
+                                <div class="mt-14 font-major text-pink-500 text-lg md:text-xl drop-shadow-md whitespace-nowrap uppercase">Chiến thôi</div>
+                            </div>
+
+                            <div class="absolute top-[36px] left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div>
+                            <div id="main-bar-horiz" class="absolute top-[36px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
                             ${milestonesHtml}
-                            <div id="star-horiz" class="absolute top-[34px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="left: 0%;">
+                            <div id="star-horiz" class="absolute top-[36px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="left: 0%;">
                                 <img src="./assets/images/Star bullet.svg" class="w-8 md:w-10 animate-spin" style="animation-duration: 4s;">
                             </div>
                         </div>
@@ -274,18 +284,20 @@
                 data.milestones.forEach((m, idx) => {
                     let pct = visualStops[idx];
                     let isEven = idx % 2 === 0; 
+                    // Biến m.activity xóa <br> thành khoảng trắng để cấm rớt dòng
+                    let cleanActivity = m.activity.replace(/<br\s*\/?>/gi, ' ');
+
                     milestonesHtml += `
-                        <div class="absolute w-full flex animate-card milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s">
-                            <!-- Ngôi sao & Vạch Mốc -->
-                            <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 z-20 left-1/2">
-                            <!-- Đẩy thẻ chặng lên 100% để đáy chạm trục tâm -->
-                            <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-full">
-                                <div class="font-helvetica bg-black/60 rounded-xl p-4 w-[240px] md:w-[300px] border border-white/10 backdrop-blur-md shadow-2xl text-left">
-                                    <p class="text-white/80 text-xs font-bold mb-1 tracking-widest">Chặng ${idx+1}</p>
-                                    <p class="text-[#1ce1db] font-major text-base md:text-lg mb-2 drop-shadow-md">${m.name}</p>
-                                    <!-- Cấm rớt dòng -->
-                                    <p class="text-white/90 text-xs md:text-sm mb-4 whitespace-nowrap overflow-hidden text-ellipsis">${m.activity}</p>
-                                    <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-xs font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
+                        <div class="absolute w-full flex items-start animate-card milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s">
+                            <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;">
+                            <!-- Đẩy lên 48px để Tâm Tên Chặng đâm ngang Ngôi sao -->
+                            <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px]">
+                                <div class="font-helvetica bg-black/60 rounded-xl p-4 w-[280px] md:w-[340px] border border-white/10 backdrop-blur-md shadow-2xl text-left">
+                                    <p class="text-white/80 text-xs font-bold mb-1 tracking-widest uppercase">Chặng ${idx+1}</p>
+                                    <p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-2 drop-shadow-md capitalize">${m.name}</p>
+                                    <!-- Chữ hoạt động to hơn, có Glow và cấm rớt dòng (truncate) -->
+                                    <p class="text-[#1ce1db] text-sm md:text-base mb-4 whitespace-nowrap overflow-hidden text-ellipsis drop-shadow-[0_0_5px_#1ce1db] animate-pulse">${cleanActivity}</p>
+                                    <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
                                 </div>
                             </div>
                         </div>
@@ -293,7 +305,7 @@
                 });
 
                 progressHtml = `
-                    <div class="relative w-full max-w-2xl mx-auto h-[800px] my-10">
+                    <div class="relative w-full max-w-2xl mx-auto h-[900px] my-10">
                         <div class="relative w-full h-full">
                             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-full bg-gray-700/80 rounded-full"></div>
                             <div id="main-bar-vert" class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
