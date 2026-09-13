@@ -100,8 +100,8 @@
         <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </section>
 
-    <!-- CHỨC NĂNG -->
-    <div class="max-w-5xl mx-auto space-y-16 p-4 md:p-10 mb-[20vh]">
+    <!-- CHỨC NĂNG CHÍNH -->
+    <div class="max-w-5xl mx-auto space-y-16 p-4 md:p-10 mb-10">
         
         <!-- TIẾN ĐỘ -->
         <section id="overview-section" class="scroll-mt-28 w-full flex flex-col items-center">
@@ -142,7 +142,6 @@
                 <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu...</p>
             </div>
 
-            <!-- QUÀ DÀNH CHO DONORS -->
             <div class="mt-20 text-center w-full flex flex-col items-center">
                 <h3 class="font-major text-pink-400 text-2xl md:text-4xl mb-6 drop-shadow-md">Quà dành cho Donors</h3>
                 <img src="./assets/images/Donors gift.png" alt="Quà tặng Donors" class="w-11/12 max-w-lg object-contain opacity-90 drop-shadow-2xl">
@@ -150,16 +149,41 @@
         </section>
 
         <!-- TRA CỨU -->
-        <section id="lookup-section" class="scroll-mt-28 bg-black/60 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20">
-            <h2 class="font-major text-xl border-b border-gray-600 pb-2 mb-6 text-white">Tra cứu kết quả</h2>
-            <div class="flex gap-2 mb-6">
-                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 rounded-lg w-full max-w-sm outline-none focus:ring-2 focus:ring-[#1ce1db] bg-white/90">
-                <button onclick="searchPhone()" class="bg-[#1ce1db] text-black px-6 py-2 rounded-lg hover:bg-white font-bold uppercase shadow-[0_0_10px_rgba(28,225,219,0.3)]">TRA CỨU</button>
+        <section id="lookup-section" class="scroll-mt-28 w-full flex flex-col items-center pt-10">
+            <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80 mb-8" alt="Divider">
+            
+            <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-4 drop-shadow-lg text-center">Tra cứu Thông tin Donate</h2>
+            <p class="font-helvetica text-white/80 text-sm md:text-base text-center max-w-2xl mb-8 px-4">Hãy nhập số điện thoại đã điền trong form để tra cứu lịch sử Donate của mình, các thông tin dưới đây chỉ hiển thị với bạn</p>
+            
+            <div class="flex gap-2 mb-6 w-full max-w-xl justify-center items-center px-4">
+                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 md:p-4 rounded-full w-full outline-none focus:ring-2 focus:ring-[#1ce1db] transition-all bg-white/80 hover:bg-white text-black shadow-lg">
+                <button onclick="searchPhone()" class="shrink-0 hover:scale-105 transition-transform drop-shadow-lg">
+                    <img src="./assets/images/Tra cuu.svg" alt="Tra cứu ngay" class="h-12 md:h-14 object-contain">
+                </button>
             </div>
-            <div id="lookup-result" class="font-helvetica hidden border border-white/20 rounded-lg p-4 bg-white/95"></div>
+            
+            <div id="lookup-result" class="w-full max-w-3xl hidden flex-col gap-8 mt-4 px-4 font-helvetica"></div>
         </section>
 
     </div> 
+
+    <!-- FOOTER LIÊN HỆ -->
+    <footer class="w-full bg-[#0b1021]/90 backdrop-blur-lg py-8 flex flex-col items-center border-t border-white/10 mt-10 relative z-10">
+        <p class="font-helvetica text-white/80 text-sm md:text-base mb-5 text-center px-4">Liên hệ tụi mình nếu có sai sót về thông tin và cần hỗ trợ nha</p>
+        <div class="flex gap-8 items-center">
+            <a href="https://www.facebook.com/trinhtongpartners/" target="_blank" class="hover:scale-110 transition-transform">
+                <img src="./assets/images/FB.svg" alt="Facebook" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+            <a href="mailto:tringtongpartner88@gmail.com" class="hover:scale-110 transition-transform">
+                <img src="./assets/images/Mail.svg" alt="Mail" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+            <a href="https://zalo.me/0931473411" target="_blank" title="Zalo Hotline: 0931473411" class="hover:scale-110 transition-transform flex items-center justify-center relative w-8 h-8 md:w-10 md:h-10">
+                <img src="./assets/images/Mobile 1.svg" class="absolute inset-0 w-full h-full object-contain">
+                <img src="./assets/images/Mobile 2.svg" class="absolute inset-0 w-full h-full object-contain">
+                <img src="./assets/images/Mobile 3.svg" class="absolute inset-0 w-full h-full object-contain">
+            </a>
+        </div>
+    </footer>
 
     <!-- CTA BÁM ĐUÔI -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" 
@@ -292,7 +316,7 @@
             document.getElementById('overview-content').innerHTML = statsHtml + progressHtml;
         }
 
-        // ---- LOGIC DANH SÁCH DONOR & OBSERVER PHÁO HOA ----
+        // ---- LOGIC DANH SÁCH DONOR & OBSERVER ----
         let donorDataGlobal = null;
         let currentDonorTab = 'top'; 
         let donorAnimTriggered = false; 
@@ -352,20 +376,6 @@
                 renderDonorsView(); 
             } catch (e) { 
                 document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
-                // Mock data
-                donorDataGlobal = {
-                    topDonors: [
-                        { nickname: "VivianQiu", amount: 5000000, timestamp: "14/09/2026 08:15:00" },
-                        { nickname: "YunHan1785", amount: 1000000, timestamp: "13/09/2026 19:40:22" },
-                        { nickname: "NBichYBBB", amount: 1000000, timestamp: "12/09/2026 22:10:05" },
-                        { nickname: "XiXinhXan", amount: 500000, timestamp: "11/09/2026 09:00:00" },
-                        { nickname: "OanhNK", amount: 500000, timestamp: "10/09/2026 15:30:00" }
-                    ],
-                    allDonors: Array.from({length: 15}, (_, i) => ({
-                        nickname: `Fan cứng ${15-i}`, amount: Math.floor(Math.random()*50+5)*100000, timestamp: `15/09/2026 10:${10+i}:00`
-                    }))
-                };
-                renderDonorsView();
             }
         }
 
@@ -395,7 +405,6 @@
                 
                 html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow bg-black/60">`;
                 
-                // TOP 1 (GIỮ NGUYÊN Y CẦU: Số tiền 2 dòng, Thời gian 2 dòng, Xóa gạch dưới)
                 if(tops[0]) {
                     html += `
                         <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
@@ -414,7 +423,6 @@
                     `;
                 }
                 
-                // TOP 2 & 3 (GỘP TRÊN 1 DÒNG)
                 if(tops.length > 1) {
                     html += `<div class="flex flex-col md:flex-row justify-between gap-6 md:gap-8 w-full px-0 md:px-4">`;
                     for(let i=1; i<Math.min(3, tops.length); i++) {
@@ -480,8 +488,133 @@
             container.innerHTML = html;
         }
 
-        async function searchPhone() {}
-        window.onload = () => { loadOverview(); loadDonorData(); };
+        // ---- LOGIC TRA CỨU ----
+        async function searchPhone() {
+            const phone = document.getElementById('phoneInput').value.trim();
+            const resDiv = document.getElementById('lookup-result');
+            
+            if(!phone) {
+                alert('Vui lòng nhập số điện thoại');
+                return;
+            }
+            
+            resDiv.innerHTML = '<div class="loader"></div> <span class="text-white ml-2">Đang tra cứu hệ thống...</span>';
+            resDiv.classList.remove('hidden');
+            resDiv.classList.add('flex');
+
+            try {
+                const res = await fetch(API_URL + "?action=lookup&sdt=" + encodeURIComponent(phone));
+                const data = await res.json();
+                
+                if(data.error || data.status === "not_found") {
+                    resDiv.innerHTML = `<div class="bg-red-500/20 text-white p-4 md:p-6 rounded-xl border border-red-500/50 text-center leading-relaxed">${data.message || data.error}</div>`;
+                    return;
+                }
+
+                let html = '';
+
+                // THÔNG TIN CÁ NHÂN DONATE
+                html += `
+                <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.1s">
+                    <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">THÔNG TIN CÁ NHÂN DONATE</div>
+                    <div class="bg-black/60 p-4 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-2.5">
+                        <p>Họ và tên: <span class="text-pink-400 font-bold ml-1">${data.fullName}</span></p>
+                        <p>Nickname: <span class="text-pink-400 font-bold ml-1">${data.nickname}</span></p>
+                        <p>SĐT: <span class="text-pink-400 font-bold ml-1">${data.originalPhone}</span></p>
+                        <p>Trạng thái Form: <span class="text-pink-400 font-bold ml-1">${data.formStatus}</span></p>
+                    </div>
+                </div>`;
+
+                // LỊCH SỬ DONATE
+                if (data.donateData && data.donateData.history && data.donateData.history.length > 0) {
+                    let tableRows = '';
+                    data.donateData.history.forEach(h => {
+                        tableRows += `
+                        <tr class="border-b border-white/10 last:border-0 text-sm md:text-base">
+                            <td class="p-3 text-center text-pink-400 font-bold">${h.turn}</td>
+                            <td class="p-3 text-right text-pink-400 font-bold tracking-wider">${formatMoney(h.submittedAmount)}</td>
+                            <td class="p-3 text-left">${h.isDiscrepancy ? `<span class="text-red-400">${h.note}</span>` : '<span class="text-green-400 font-bold">Khớp</span>'}</td>
+                        </tr>`;
+                    });
+                    
+                    html += `
+                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
+                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">LỊCH SỬ DONATE</div>
+                        <div class="bg-black/60 p-4 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white overflow-x-auto">
+                            <table class="w-full min-w-[400px]">
+                                <thead class="bg-pink-400/60 text-white text-sm md:text-base">
+                                    <tr>
+                                        <th class="p-3 text-center font-normal rounded-tl-lg">Lần</th>
+                                        <th class="p-3 text-right font-normal">Số tiền gửi</th>
+                                        <th class="p-3 text-left font-normal rounded-tr-lg">Tình trạng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${tableRows}</tbody>
+                            </table>
+                            <div class="mt-4 text-right pt-4 border-t border-white/20">
+                                Tổng tiền hợp lệ: <span class="text-pink-400 font-bold text-lg md:text-xl tracking-wider ml-2">${data.donateData.totalMessage}</span>
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                // DS QUÀ DỰ KIẾN
+                if (data.giftData && data.giftData.names && data.giftData.names.length > 0) {
+                    let giftLines = '';
+                    data.giftData.names.forEach((name, i) => {
+                        if(data.giftData.earned[i]) {
+                            giftLines += `<div class="flex items-center gap-3"><img src="./assets/images/checkmark.svg" class="w-5 h-5 drop-shadow-[0_0_3px_#f472b6]" onerror="this.style.display='none'"> <span class="text-pink-400 font-bold">${name}</span></div>`;
+                        } else {
+                            giftLines += `<div class="flex items-center gap-3 opacity-40"><div class="w-5 h-5 border border-white/50 rounded flex-shrink-0"></div> <span>${name}</span></div>`;
+                        }
+                    });
+
+                    html += `
+                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.3s">
+                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">DANH SÁCH QUÀ DỰ KIẾN</div>
+                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white space-y-3.5">
+                            ${giftLines}
+                        </div>
+                    </div>`;
+                }
+
+                // THÔNG TIN NHẬN QUÀ
+                if (data.shippingData) {
+                    html += `
+                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.4s">
+                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">THÔNG TIN NHẬN QUÀ</div>
+                        <div class="bg-black/60 p-4 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-2.5">
+                            <p>Nơi nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryPlace}</span></p>
+                            <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
+                            <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
+                            <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryNote}</span></p>
+                        </div>
+                    </div>`;
+                }
+
+                // LỜI NHẮN TỪ FANSITE (Bắt Link Zalo làm thành Nút Hồng)
+                if (data.fansiteMessage) {
+                    let msg = data.fansiteMessage;
+                    msg = msg.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="inline-block bg-pink-500 text-white px-5 py-2.5 rounded-full font-bold my-3 shadow-[0_0_15px_rgba(244,114,182,0.5)] hover:scale-105 hover:bg-pink-400 transition-all uppercase tracking-wider">Tham gia Zalo Group</a>');
+
+                    html += `
+                    <div class="bg-black/60 p-6 rounded-2xl border border-[#1ce1db]/30 font-helvetica text-center mt-6 shadow-xl animate-card start-anim-card" style="animation-delay: 0.5s">
+                        <p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-3 drop-shadow-md">Lời nhắn từ tụi mình</p>
+                        <div class="text-white leading-relaxed text-sm md:text-base">${msg}</div>
+                    </div>`;
+                }
+
+                resDiv.innerHTML = html;
+
+            } catch(e) {
+                resDiv.innerHTML = `<div class="bg-red-500/20 text-white p-4 rounded-xl border border-red-500/50 text-center">Lỗi kết nối hoặc hệ thống đang bận. Vui lòng thử lại sau.</div>`;
+            }
+        }
+
+        window.onload = () => { 
+            loadOverview(); 
+            loadDonorData(); 
+        };
     </script>
 </body>
 </html>
