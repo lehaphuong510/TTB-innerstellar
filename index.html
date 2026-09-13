@@ -153,7 +153,7 @@
             <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80 mb-8" alt="Divider">
             
             <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-4 drop-shadow-lg text-center">Tra cứu Thông tin Donate</h2>
-            <p class="font-helvetica text-white/80 text-sm md:text-base text-center max-w-2xl mb-8 px-4">Hãy nhập số điện thoại đã điền trong form để tra cứu lịch sử Donate của mình, các thông tin dưới đây chỉ hiển thị với bạn</p>
+            <p class="font-helvetica text-white/80 text-sm md:text-base text-center max-w-2xl mb-8 px-4">Hãy nhập số điện thoại đã điền trong form để tra cứu lịch sử Donate của mình. Các thông tin dưới đây chỉ hiển thị với bạn</p>
             
             <div class="flex gap-2 mb-6 w-full max-w-xl justify-center items-center px-4">
                 <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 md:p-4 rounded-full w-full outline-none focus:ring-2 focus:ring-[#1ce1db] transition-all bg-white/90 text-black shadow-lg">
@@ -167,7 +167,7 @@
 
     </div> 
 
-    <!-- FOOTER LIÊN HỆ (1 Dòng ngang) -->
+    <!-- FOOTER LIÊN HỆ -->
     <footer class="w-full bg-[#0b1021]/90 backdrop-blur-lg py-6 flex flex-col items-center justify-center border-t border-white/10 mt-10 relative z-10 px-4">
         <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-4xl">
             <p class="font-helvetica text-white/80 text-sm md:text-base text-center mb-0">Liên hệ tụi mình nếu có sai sót về thông tin và cần hỗ trợ nha</p>
@@ -185,7 +185,7 @@
         </div>
     </footer>
 
-    <!-- CỤM ICON MẠNG XÃ HỘI BÁM ĐUÔI (NẰM DỌC TRÊN CTA) -->
+    <!-- CỤM ICON MẠNG XÃ HỘI BÁM ĐUÔI -->
     <div class="fixed bottom-24 right-6 z-50 flex flex-col items-center gap-3">
         <a href="https://www.facebook.com/trinhtongpartners/" target="_blank" class="w-10 h-10 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/20 transition-all">
             <img src="./assets/images/FB.svg" alt="Facebook" class="w-5 h-5 object-contain opacity-90">
@@ -236,7 +236,6 @@
         }
         generateUpdateTime();
 
-        // ---- LOGIC TIẾN ĐỘ QUỸ ----
         let overviewDataGlobal = null;
         let progAnimTriggered = false;
         const visualStops = [15, 40, 65, 90]; 
@@ -329,7 +328,6 @@
             document.getElementById('overview-content').innerHTML = statsHtml + progressHtml;
         }
 
-        // ---- LOGIC DANH SÁCH DONOR & OBSERVER ----
         let donorDataGlobal = null;
         let currentDonorTab = 'top'; 
         let donorAnimTriggered = false; 
@@ -416,7 +414,7 @@
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || donorDataGlobal.data || [];
                 
-                html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow bg-black/60">`;
+                html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center bg-black/60 rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
                 
                 if(tops[0]) {
                     html += `
@@ -560,8 +558,8 @@
 
                 let personalBlock = `
                     <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.1s">
-                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN CÁ NHÂN DONATE</div>
-                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-[#1ce1db]/30 border-t-0 font-helvetica text-white/90 space-y-3">
+                        <div class="bg-white/60 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN CÁ NHÂN DONATE</div>
+                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-3">
                             <p>Họ và tên: <span class="text-pink-400 font-bold ml-1">${data.fullName}</span></p>
                             <p>Nickname: <span class="text-pink-400 font-bold ml-1">${data.nickname}</span></p>
                             <p>Số điện thoại: <span class="text-pink-400 font-bold ml-1">${data.originalPhone}</span></p>
@@ -608,13 +606,13 @@
 
                 let shipBlock = `
                     <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
-                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
-                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-[#1ce1db]/30 border-t-0 font-helvetica text-white/90 space-y-3">
+                        <div class="bg-white/60 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
+                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-3">
                             <p>Nơi nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryPlace}</span></p>
                             <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
                             <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
                             <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
-                            <p class="text-[10px] md:text-xs text-gray-500 italic mt-3">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
+                            <p class="text-[10px] md:text-xs text-gray-500 italic mt-3">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông margin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
                             ${giftHtml}
                         </div>
                     </div>
@@ -623,8 +621,8 @@
                 // 4. LƯU Ý THÊM CHO TEAM
                 let teamBlock = `
                     <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.3s">
-                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">LƯU Ý THÊM CHO TEAM @trinhtongpartners</div>
-                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-[#1ce1db]/30 border-t-0 font-helvetica text-white/90">
+                        <div class="bg-white/60 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">LƯU Ý THÊM CHO TEAM @trinhtongpartners</div>
+                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90">
                             <p class="text-sm md:text-base leading-relaxed text-center">${data.teamNote || "Không có ghi chú thêm."}</p>
                         </div>
                     </div>
@@ -632,9 +630,9 @@
 
                 // 5. ZALO GROUP MẶC ĐỊNH (CỨNG)
                 let messageBlock = `
-                    <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card flex flex-col md:flex-row items-center justify-center gap-2" style="animation-delay: 0.4s">
-                        <span class="text-white text-sm md:text-base font-bold uppercase">Pạt 🎀 nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha:</span>
-                        <a href="#" target="_blank" class="text-[#1ce1db] font-bold text-sm md:text-base underline hover:text-white transition-colors uppercase whitespace-nowrap drop-shadow-md">LINK ZALO</a>
+                    <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card" style="animation-delay: 0.4s">
+                        <span class="text-black text-sm md:text-base font-bold uppercase">Pạt 🎀 nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: </span>
+                        <a href="https://zalo.me/g/LINK_NHOM_ZALO_O_DAY" target="_blank" class="text-[#1ce1db] font-bold text-sm md:text-base underline hover:text-white transition-colors uppercase drop-shadow-md">LINK ZALO</a>
                     </div>
                 `;
 
