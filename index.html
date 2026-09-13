@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innerstellar - Trịnh Thăng Bình Fan Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- THƯ VIỆN BẮN PHÁO HOA -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         @font-face { font-family: 'HelveticaWorld'; src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype'); }
@@ -20,13 +19,21 @@
         .animate-card { opacity: 0; }
         .start-anim-card { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        /* Hiệu ứng hào quang chớp nháy cho Top 1 */
+        /* Hiệu ứng hào quang đập nhịp cho Icon Top 1 */
         @keyframes glowPulse {
             0% { filter: drop-shadow(0 0 10px rgba(28,225,219,0.4)); transform: scale(1); }
             50% { filter: drop-shadow(0 0 25px rgba(28,225,219,1)); transform: scale(1.08); }
             100% { filter: drop-shadow(0 0 10px rgba(28,225,219,0.4)); transform: scale(1); }
         }
         .anim-glow-pulse { animation: glowPulse 2s infinite ease-in-out; }
+
+        /* Hiệu ứng viền chạy phát sáng cho Khung Top Donor */
+        @keyframes frameGlow {
+            0% { box-shadow: 0 0 15px rgba(28,225,219,0.2), inset 0 0 10px rgba(28,225,219,0.1); border-color: rgba(28,225,219,0.3); }
+            50% { box-shadow: 0 0 40px rgba(28,225,219,0.7), inset 0 0 20px rgba(28,225,219,0.3); border-color: rgba(28,225,219,1); }
+            100% { box-shadow: 0 0 15px rgba(28,225,219,0.2), inset 0 0 10px rgba(28,225,219,0.1); border-color: rgba(28,225,219,0.3); }
+        }
+        .anim-frame-glow { animation: frameGlow 3s infinite alternate; border-width: 2px; }
 
         html { scroll-behavior: smooth; }
         .custom-scroll::-webkit-scrollbar { width: 6px; }
@@ -52,7 +59,7 @@
         <p class="font-helvetica text-white/80 text-base md:text-lg tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION (IN HOA) -->
+    <!-- THANH NAVIGATION -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
         <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px]">
             <div class="hidden md:flex flex-1 justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center uppercase">
@@ -63,24 +70,23 @@
                 <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">TỔNG KẾT THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5">(COMING SOON)</span></span>
             </div>
             <div class="flex-none ml-4">
-                <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">DONATE IH MÒ</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">DONATE IH MÒ</a>
             </div>
         </nav>
     </div>
 
-    <!-- STORY & PHÂN CÁCH -->
+    <!-- STORY -->
     <section id="story" class="scroll-mt-28 w-full flex flex-col items-center pb-8 md:pb-12">
         <img src="./assets/images/Story-fame.svg" alt="Story of the Inner Stellar" class="w-11/12 max-w-5xl object-contain drop-shadow-2xl mb-12">
         <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </section>
 
-    <!-- CHỨC NĂNG -->
+    <!-- TIẾN ĐỘ & DONOR -->
     <div class="max-w-5xl mx-auto space-y-16 p-4 md:p-10 mb-[20vh]">
         
         <!-- TIẾN ĐỘ -->
         <section id="overview-section" class="scroll-mt-28 w-full flex flex-col items-center">
             <div class="text-center mb-8 w-full">
-                <!-- Tiêu đề: Viết hoa chữ cái đầu theo chuẩn -->
                 <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-2 drop-shadow-lg">Tiến độ góp quỹ</h2>
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
                     <p id="update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
@@ -92,7 +98,7 @@
             </div>
             
             <div class="mt-8 text-center">
-                <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-8 py-3 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] inline-block">DONATE IH MÒ</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-8 py-3 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] inline-block">DONATE IH MÒ</a>
             </div>
         </section>
 
@@ -105,7 +111,6 @@
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
                     <p id="donor-update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
                 </div>
-                <!-- Chữ to bằng Project by... (text-base md:text-lg) -->
                 <p class="font-helvetica text-pink-400 text-base md:text-lg mt-4 italic">Cập nhật danh sách Pạt 🎀 đã donate và trạng thái Đua Top</p>
             </div>
 
@@ -118,6 +123,7 @@
                 <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu...</p>
             </div>
 
+            <!-- QUÀ DÀNH CHO DONORS -->
             <div class="mt-20 text-center w-full flex flex-col items-center">
                 <h3 class="font-major text-pink-400 text-2xl md:text-4xl mb-6 drop-shadow-md">Quà dành cho Donors</h3>
                 <img src="./assets/images/Donors gift.png" alt="Quà tặng Donors" class="w-11/12 max-w-lg object-contain opacity-90 drop-shadow-2xl">
@@ -136,7 +142,8 @@
 
     </div> 
 
-    <a href="LINK_GOOGLE_FORM" target="_blank" 
+    <!-- CTA BÁM ĐUÔI -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" 
        class="fixed bottom-6 right-6 bg-pink-500 text-white font-bold uppercase tracking-wider py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300 z-50 flex items-center gap-2 animate-bounce">
         <span>💸</span> DONATE IH MÒ 😸
     </a>
@@ -145,13 +152,28 @@
         const API_URL = "https://script.google.com/macros/s/AKfycbyttyiTTf3yhIyCA53wuvw-pCxF8ruWSbDyOaEpXJyah2wsXB3XBHG4isp8joY-Sgfs/exec";
         const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + "đ";
 
+        // Hàm thông dịch viên thời gian siêu cấp
+        function parseTimestamp(val) {
+            if (!val) return 'Đang cập nhật';
+            if (typeof val === 'string' && val.includes('/')) return val; 
+            let d = new Date(val);
+            if (isNaN(d.getTime())) return val; 
+            let hh = String(d.getHours()).padStart(2, '0');
+            let min = String(d.getMinutes()).padStart(2, '0');
+            let ss = String(d.getSeconds()).padStart(2, '0');
+            let ddStr = String(d.getDate()).padStart(2, '0');
+            let mmStr = String(d.getMonth() + 1).padStart(2, '0');
+            let yyyy = d.getFullYear();
+            return `${hh}:${min}:${ss} ${ddStr}/${mmStr}/${yyyy}`;
+        }
+
         // Logic 23:00
         let globalUpdateTimeStr = "";
         function generateUpdateTime() {
             let now = new Date();
             let updateDate = new Date(now);
             if (now.getHours() < 23) {
-                updateDate.setDate(updateDate.getDate() - 1); // Lấy 23h hôm trước
+                updateDate.setDate(updateDate.getDate() - 1); 
             }
             let dd = String(updateDate.getDate()).padStart(2, '0');
             let mm = String(updateDate.getMonth() + 1).padStart(2, '0');
@@ -160,7 +182,7 @@
         }
         generateUpdateTime();
 
-        // ---- STATE & LOGIC TIẾN ĐỘ QUỸ ----
+        // ---- LOGIC TIẾN ĐỘ QUỸ ----
         let overviewDataGlobal = null;
         let progAnimTriggered = false;
         const visualStops = [15, 40, 65, 90]; 
@@ -253,40 +275,59 @@
             document.getElementById('overview-content').innerHTML = statsHtml + progressHtml;
         }
 
-        function setupIntersectionObserver() {
-            const os = document.getElementById('overview-section');
-            if(!os) return;
-            const observer = new IntersectionObserver((entries) => {
-                if(entries[0].isIntersecting && !progAnimTriggered) {
-                    progAnimTriggered = true;
-                    const ct = document.getElementById('overview-content');
-                    animateValue("counter-current", 0, parseFloat(ct.getAttribute('data-target-money')), 2000);
-                    setTimeout(() => {
-                        document.getElementById('chart-donate').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-donate'));
-                        document.getElementById('text-pct-donate').innerText = parseFloat(ct.getAttribute('data-pct-money')).toFixed(1) + "%";
-                        document.getElementById('chart-time').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-time'));
-                        document.getElementById('text-pct-time').innerText = parseFloat(ct.getAttribute('data-pct-time')).toFixed(1) + "%";
-                    }, 500);
-                    setTimeout(() => { document.querySelectorAll('.prog-milestone-card').forEach(c => c.classList.add('start-anim-card')); }, 1000);
-                    setTimeout(() => {
-                        let vp = parseFloat(ct.getAttribute('data-visual-progress'));
-                        if(document.getElementById('main-bar-horiz')) {
-                            document.getElementById('main-bar-horiz').style.width = vp + "%";
-                            document.getElementById('star-horiz').style.left = vp + "%";
-                        }
-                        if(document.getElementById('main-bar-vert')) {
-                            document.getElementById('main-bar-vert').style.height = vp + "%";
-                            document.getElementById('star-vert').style.top = vp + "%";
-                        }
-                    }, 2200); 
-                }
-            }, { threshold: 0.15 });
-            observer.observe(os);
-        }
-
-        // ---- STATE & LOGIC DANH SÁCH DONOR ----
+        // ---- LOGIC DANH SÁCH DONOR ----
         let donorDataGlobal = null;
         let currentDonorTab = 'top'; 
+        let donorAnimTriggered = false; // Cờ kiểm tra nổ pháo hoa 1 lần
+
+        function setupIntersectionObserver() {
+            // Observer cho Tiến độ quỹ
+            const os = document.getElementById('overview-section');
+            if(os) {
+                const observer = new IntersectionObserver((entries) => {
+                    if(entries[0].isIntersecting && !progAnimTriggered) {
+                        progAnimTriggered = true;
+                        const ct = document.getElementById('overview-content');
+                        animateValue("counter-current", 0, parseFloat(ct.getAttribute('data-target-money')), 2000);
+                        setTimeout(() => {
+                            document.getElementById('chart-donate').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-donate'));
+                            document.getElementById('text-pct-donate').innerText = parseFloat(ct.getAttribute('data-pct-money')).toFixed(1) + "%";
+                            document.getElementById('chart-time').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-time'));
+                            document.getElementById('text-pct-time').innerText = parseFloat(ct.getAttribute('data-pct-time')).toFixed(1) + "%";
+                        }, 500);
+                        setTimeout(() => { document.querySelectorAll('.prog-milestone-card').forEach(c => c.classList.add('start-anim-card')); }, 1000);
+                        setTimeout(() => {
+                            let vp = parseFloat(ct.getAttribute('data-visual-progress'));
+                            if(document.getElementById('main-bar-horiz')) {
+                                document.getElementById('main-bar-horiz').style.width = vp + "%";
+                                document.getElementById('star-horiz').style.left = vp + "%";
+                            }
+                            if(document.getElementById('main-bar-vert')) {
+                                document.getElementById('main-bar-vert').style.height = vp + "%";
+                                document.getElementById('star-vert').style.top = vp + "%";
+                            }
+                        }, 2200); 
+                    }
+                }, { threshold: 0.15 });
+                observer.observe(os);
+            }
+
+            // Observer riêng cho phần Donor (để bắn pháo hoa khi scroll tới)
+            const ds = document.getElementById('donor-section');
+            if(ds) {
+                const donorObserver = new IntersectionObserver((entries) => {
+                    if(entries[0].isIntersecting && !donorAnimTriggered) {
+                        donorAnimTriggered = true;
+                        if(currentDonorTab === 'top') {
+                            setTimeout(() => {
+                                confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 });
+                            }, 200);
+                        }
+                    }
+                }, { threshold: 0.2 });
+                donorObserver.observe(ds);
+            }
+        }
 
         async function loadDonorData() {
             try {
@@ -298,14 +339,14 @@
                 document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
                 donorDataGlobal = {
                     topDonors: [
-                        { nickname: "VivianQiu", totalAmount: 5000000, lastTime: "14/09/2026 - 08:15:00" },
-                        { nickname: "YunHan1785", totalAmount: 1000000, lastTime: "13/09/2026 - 19:40:22" },
-                        { nickname: "NBichYBBB", totalAmount: 1000000, lastTime: "12/09/2026 - 22:10:05" },
-                        { nickname: "XiXinhXan", totalAmount: 500000, lastTime: "11/09/2026 - 09:00:00" },
-                        { nickname: "OanhNK", totalAmount: 500000, lastTime: "10/09/2026 - 15:30:00" }
+                        { nickname: "VivianQiu", amount: 5000000, timestamp: "14/09/2026 08:15:00" },
+                        { nickname: "YunHan1785", amount: 1000000, timestamp: "13/09/2026 19:40:22" },
+                        { nickname: "NBichYBBB", amount: 1000000, timestamp: "12/09/2026 22:10:05" },
+                        { nickname: "XiXinhXan", amount: 500000, timestamp: "11/09/2026 09:00:00" },
+                        { nickname: "OanhNK", amount: 500000, timestamp: "10/09/2026 15:30:00" }
                     ],
                     allDonors: Array.from({length: 15}, (_, i) => ({
-                        nickname: `Fan cứng ${15-i}`, amount: Math.floor(Math.random()*50+5)*100000, timestamp: `15/09/2026 - 10:${10+i}:00`
+                        nickname: `Fan cứng ${15-i}`, amount: Math.floor(Math.random()*50+5)*100000, timestamp: `15/09/2026 10:${10+i}:00`
                     }))
                 };
                 renderDonorsView();
@@ -320,10 +361,10 @@
             if (tab === 'top') {
                 btnTop.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase";
                 btnAll.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-400 hover:text-white uppercase";
-                // Bắn pháo hoa khi xem Top Donor
+                // Nổ pháo hoa lại khi bấm chuyển tab
                 setTimeout(() => {
                     confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 });
-                }, 200);
+                }, 100);
             } else {
                 btnAll.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase";
                 btnTop.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-400 hover:text-white uppercase";
@@ -339,21 +380,23 @@
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || [];
                 
-                // Khung xám lớn chứa Top 1, 2, 3
-                html += `<div class="flex flex-col items-center bg-black/60 rounded-3xl p-6 md:p-8 border border-white/20 w-full max-w-[800px] shadow-2xl gap-8 mx-auto animate-card start-anim-card">`;
+                // Khung xám lớn chứa Top 1, 2, 3 (Gắn hiệu ứng glow chạy viền xung quanh)
+                html += `<div class="flex flex-col items-center bg-black/60 rounded-3xl p-6 md:p-8 w-full max-w-[800px] gap-8 mx-auto animate-card start-anim-card anim-frame-glow">`;
                 
-                // TOP 1 (Canh giữa tuyệt đối bằng max-w-max, xóa line phân cách, size x1.5)
+                // TOP 1 (Icon trái, Text phải)
                 if(tops[0]) {
                     html += `
                         <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
+                            <!-- Icon to, có animation lấp lánh -->
                             <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse">
                                 <img src="./assets/images/Top 1.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                             </div>
+                            <!-- Khối text bị khóa kích thước flex-none để canh chuẩn giữa -->
                             <div class="text-left font-helvetica flex-none">
-                                <div class="font-major text-[#1ce1db] text-3xl md:text-5xl mb-2 drop-shadow-md">${tops[0].nickname}</div>
+                                <div class="font-major text-[#1ce1db] text-3xl md:text-4xl mb-2 drop-shadow-md">${tops[0].nickname}</div>
                                 <div class="text-white/80 text-base md:text-lg mb-1">Tổng số tiền donate:</div>
-                                <div class="text-pink-400 font-bold text-3xl md:text-4xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-3">${formatMoney(tops[0].totalAmount)}</div>
-                                <div class="text-gray-400 text-sm italic">Lần Donate gần nhất:<br>${tops[0].lastTime}</div>
+                                <div class="text-pink-400 font-bold text-3xl md:text-4xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-3">${formatMoney(tops[0].totalAmount || tops[0].amount)}</div>
+                                <div class="text-gray-400 text-sm italic">Lần Donate gần nhất:<br>${parseTimestamp(tops[0].timestamp || tops[0].lastTime || tops[0].time)}</div>
                             </div>
                         </div>
                     `;
@@ -368,11 +411,12 @@
                                 <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform cursor-pointer">
                                     <img src="./assets/images/Top ${i+1}.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                                 </div>
-                                <div class="text-left font-helvetica flex-1">
-                                    <div class="font-major text-[#1ce1db] text-xl md:text-3xl mb-1 drop-shadow-md">${tops[i].nickname}</div>
-                                    <div class="text-white/80 text-xs md:text-sm mb-1">Tổng số tiền donate:</div>
-                                    <div class="text-pink-400 font-bold text-xl md:text-2xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-2">${formatMoney(tops[i].totalAmount)}</div>
-                                    <div class="text-gray-400 text-[10px] md:text-xs italic">Lần Donate gần nhất:<br>${tops[i].lastTime}</div>
+                                <!-- Khối text canh giữa theo chiều cao của Icon h-28/h-32 -->
+                                <div class="text-left font-helvetica flex-1 flex flex-col justify-center h-28 md:h-32">
+                                    <div class="font-major text-[#1ce1db] text-lg md:text-xl mb-1 drop-shadow-md">${tops[i].nickname}</div>
+                                    <div class="text-white/80 text-[10px] md:text-xs mb-0.5">Tổng số tiền donate:</div>
+                                    <div class="text-pink-400 font-bold text-lg md:text-xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-1">${formatMoney(tops[i].totalAmount || tops[i].amount)}</div>
+                                    <div class="text-gray-400 text-[9px] md:text-[10px] italic">Lần Donate gần nhất:<br>${parseTimestamp(tops[i].timestamp || tops[i].lastTime || tops[i].time)}</div>
                                 </div>
                             </div>
                         `;
@@ -381,7 +425,7 @@
                 }
                 html += `</div>`; 
 
-                // TOP 4 & 5 (Màu trắng, font Helvetica)
+                // TOP 4 & 5 (Trắng chuẩn, font Helvetica)
                 if(tops.length > 3) {
                     html += `<div class="flex flex-col w-full max-w-[800px] gap-3 mt-4 bg-black/40 p-5 rounded-2xl border border-white/5 animate-card start-anim-card" style="animation-delay: 0.4s">`;
                     html += `<div class="text-center font-helvetica text-white/80 italic text-sm md:text-base mb-2">Cố lên, sắp lọt Top rồi 😸</div>`;
@@ -390,7 +434,7 @@
                         html += `
                             <div class="flex flex-row items-center justify-between border-b border-white/10 pb-3 last:border-0 last:pb-0 gap-2 px-4 md:px-8">
                                 <div class="font-helvetica font-bold text-[#1ce1db] text-base md:text-lg flex items-center gap-2"><span class="text-white opacity-50 text-sm italic font-normal">#${i+1}</span> ${tops[i].nickname}</div>
-                                <div class="text-white font-helvetica font-bold text-sm md:text-base tracking-widest text-right">${formatMoney(tops[i].totalAmount)}</div>
+                                <div class="text-white font-helvetica font-bold text-sm md:text-base tracking-widest text-right">${formatMoney(tops[i].totalAmount || tops[i].amount)}</div>
                             </div>
                         `;
                     }
@@ -411,10 +455,10 @@
                         <div class="flex justify-between items-center py-2 md:py-3 font-helvetica px-4">
                             <div class="flex flex-col text-left">
                                 <div class="text-white font-medium text-sm md:text-base mb-1">${d.nickname}</div>
-                                <div class="text-pink-400 font-bold text-sm md:text-lg tracking-wider">${formatMoney(d.amount)}</div>
+                                <div class="text-pink-400 font-bold text-sm md:text-lg tracking-wider">${formatMoney(d.amount || d.totalAmount)}</div>
                             </div>
-                            <div class="text-right">
-                                <div class="text-gray-400 text-[10px] md:text-xs italic">${d.timestamp}</div>
+                            <div class="text-right flex flex-col justify-center h-full">
+                                <div class="text-gray-400 text-[10px] md:text-xs italic mt-auto">${parseTimestamp(d.timestamp || d.time || d.lastTime)}</div>
                             </div>
                         </div>
                     `;
