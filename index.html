@@ -499,7 +499,7 @@
             container.innerHTML = html;
         }
 
-        // ---- LOGIC TRA CỨU ĐÃ CẬP NHẬT ĐIỀU KIỆN 500K & NỀN TIÊU ĐỀ 80% ----
+        // ---- LOGIC TRA CỨU ĐÃ FIX LINK ZALO & TIÊU ĐỀ TRẮNG 20% ----
         async function searchPhone() {
             const phone = document.getElementById('phoneInput').value.trim();
             const resultBox = document.getElementById('lookup-result');
@@ -569,7 +569,7 @@
                     </div>
                 `;
 
-                // 2. THÔNG TIN QUÀ VÀ SHIP QUÀ (CÓ CHECK ĐIỀU KIỆN 500K)
+                // 2. THÔNG TIN QUÀ VÀ SHIP QUÀ
                 let shipBlock = "";
                 let validTotal = (data.giftData && data.giftData.validTotal) ? data.giftData.validTotal : 0;
 
@@ -612,7 +612,7 @@
                         <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
                             <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
                             <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-3">
-                                
+                                <p>Nơi nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryPlace}</span></p>
                                 <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
                                 <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
                                 <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
@@ -622,7 +622,6 @@
                         </div>
                     `;
                 } else {
-                    // Trưởng hợp DƯỚI 500K
                     shipBlock = `
                         <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
                             <div class="bg-black/60 p-5 md:p-6 rounded-xl border border-pink-400/30 font-helvetica text-white/90 text-center shadow-[0_0_15px_rgba(244,114,182,0.15)]">
@@ -642,11 +641,10 @@
                     </div>
                 `;
 
-                // 4. ZALO GROUP MẶC ĐỊNH (CỨNG)
+                // 4. ZALO GROUP (CHUNG DÒNG INLINE TEXT)
                 let messageBlock = `
-                    <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card flex flex-col md:flex-row items-center justify-center gap-2" style="animation-delay: 0.4s">
-                        <span class="text-black text-sm md:text-base font-bold uppercase">Pạt 🎀 nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: </span>
-                        <a href="https://zalo.me/g/LINK_NHOM_ZALO_O_DAY" target="_blank" class="text-[#1ce1db] font-bold text-sm md:text-base underline hover:text-white transition-colors uppercase drop-shadow-md">LINK ZALO</a>
+                    <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card" style="animation-delay: 0.4s">
+                        <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Pạt 🎀 nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/LINK_NHOM_ZALO_O_DAY" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
                     </div>
                 `;
 
