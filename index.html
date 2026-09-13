@@ -499,7 +499,7 @@
             container.innerHTML = html;
         }
 
-        // ---- LOGIC TRA CỨU ĐÃ CẬP NHẬT GIAO DIỆN & YÊU CẦU MỚI NHẤT ----
+        // ---- LOGIC TRA CỨU ĐÃ CẬP NHẬT ĐIỀU KIỆN 500K & NỀN TIÊU ĐỀ 80% ----
         async function searchPhone() {
             const phone = document.getElementById('phoneInput').value.trim();
             const resultBox = document.getElementById('lookup-result');
@@ -518,7 +518,7 @@
                     return;
                 }
 
-                // 1 & 2. THÔNG TIN CÁ NHÂN DONATE & LỊCH SỬ TIỀN BẠC
+                // 1. THÔNG TIN CÁ NHÂN DONATE & LỊCH SỬ TIỀN BẠC
                 let moneyContent = "";
                 if (data.donateData.history.length === 1) {
                     let h = data.donateData.history[0];
@@ -569,56 +569,70 @@
                     </div>
                 `;
 
-                // 3. THÔNG TIN QUÀ VÀ SHIP QUÀ
-                let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
-                let giftHtml = "";
-                if (data.giftData && data.giftData.names.length > 0) {
-                    let giftItems = "";
-                    data.giftData.names.forEach((name, index) => {
-                        let hasGift = data.giftData.earned[index];
-                        if (hasGift) {
-                            giftItems += `
-                                <div class="flex flex-col items-center justify-center p-3 bg-white/5 border border-pink-400/30 rounded-lg gap-2 shadow-inner">
-                                    <img src="./assets/images/checkmark.svg" class="w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_0_3px_#f472b6]" onerror="this.style.display='none'">
-                                    <span class="text-pink-400 font-bold text-center text-xs md:text-sm">${name}</span>
-                                </div>
-                            `;
-                        } else {
-                            giftItems += `
-                                <div class="flex flex-col items-center justify-center p-3 bg-black/40 border border-white/10 rounded-lg gap-2 opacity-50">
-                                    <div class="w-6 h-6 md:w-8 md:h-8 border-2 border-white/20 rounded-full flex-shrink-0"></div>
-                                    <span class="text-white/60 text-center text-xs md:text-sm">${name}</span>
-                                </div>
-                            `;
-                        }
-                    });
+                // 2. THÔNG TIN QUÀ VÀ SHIP QUÀ (CÓ CHECK ĐIỀU KIỆN 500K)
+                let shipBlock = "";
+                let validTotal = (data.giftData && data.giftData.validTotal) ? data.giftData.validTotal : 0;
 
-                    giftHtml = `
-                        <div class="mt-6 border-t border-white/10 pt-5">
-                            <p class="font-bold text-sm md:text-base uppercase text-pink-400 mb-1 text-center">DANH SÁCH QUÀ DỰ KIẾN</p>
-                            <p class="text-[10px] md:text-xs text-gray-400 italic mb-4 text-center">(tính theo tổng donate của Pạt 🎀 đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] ml-1">${formatMoney(data.giftData.validTotal)}</span>)</p>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                ${giftItems}
+                if (validTotal >= 500000) {
+                    let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
+                    let giftHtml = "";
+                    if (data.giftData && data.giftData.names.length > 0) {
+                        let giftItems = "";
+                        data.giftData.names.forEach((name, index) => {
+                            let hasGift = data.giftData.earned[index];
+                            if (hasGift) {
+                                giftItems += `
+                                    <div class="flex flex-col items-center justify-center p-3 bg-white/5 border border-pink-400/30 rounded-lg gap-2 shadow-inner">
+                                        <img src="./assets/images/checkmark.svg" class="w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_0_3px_#f472b6]" onerror="this.style.display='none'">
+                                        <span class="text-pink-400 font-bold text-center text-xs md:text-sm">${name}</span>
+                                    </div>
+                                `;
+                            } else {
+                                giftItems += `
+                                    <div class="flex flex-col items-center justify-center p-3 bg-black/40 border border-white/10 rounded-lg gap-2 opacity-50">
+                                        <div class="w-6 h-6 md:w-8 md:h-8 border-2 border-white/20 rounded-full flex-shrink-0"></div>
+                                        <span class="text-white/60 text-center text-xs md:text-sm">${name}</span>
+                                    </div>
+                                `;
+                            }
+                        });
+
+                        giftHtml = `
+                            <div class="mt-6 border-t border-white/10 pt-5">
+                                <p class="font-bold text-sm md:text-base uppercase text-pink-400 mb-1 text-center">DANH SÁCH QUÀ DỰ KIẾN</p>
+                                <p class="text-[10px] md:text-xs text-gray-400 italic mb-4 text-center">(tính theo tổng donate của Pạt 🎀 đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] ml-1">${formatMoney(validTotal)}</span>)</p>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    ${giftItems}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    shipBlock = `
+                        <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
+                            <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
+                            <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-3">
+                                <p>Nơi nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryPlace}</span></p>
+                                <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
+                                <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
+                                <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
+                                <p class="text-[10px] md:text-xs text-gray-500 italic mt-3">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
+                                ${giftHtml}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Trưởng hợp DƯỚI 500K
+                    shipBlock = `
+                        <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
+                            <div class="bg-black/60 p-5 md:p-6 rounded-xl border border-pink-400/30 font-helvetica text-white/90 text-center shadow-[0_0_15px_rgba(244,114,182,0.15)]">
+                                <p class="text-sm md:text-base leading-relaxed">Xin gửi Pạt 🎀 ngàn cái ôm thắm thiết, cảm ơn Pạt 🎀 đã tin tưởng ủng hộ và đồng hành cùng <span class="text-pink-400 font-bold">@trinhtongpartners</span> trong Project này nha.</p>
                             </div>
                         </div>
                     `;
                 }
 
-                let shipBlock = `
-                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
-                        <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
-                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-3">
-                            <p>Nơi nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryPlace}</span></p>
-                            <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
-                            <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
-                            <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
-                            <p class="text-[10px] md:text-xs text-gray-500 italic mt-3">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông margin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
-                            ${giftHtml}
-                        </div>
-                    </div>
-                `;
-
-                // 4. LƯU Ý THÊM CHO TEAM
+                // 3. LƯU Ý THÊM CHO TEAM
                 let teamBlock = `
                     <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.3s">
                         <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">LƯU Ý THÊM CHO TEAM @trinhtongpartners</div>
@@ -628,9 +642,9 @@
                     </div>
                 `;
 
-                // 5. ZALO GROUP MẶC ĐỊNH (CỨNG)
+                // 4. ZALO GROUP MẶC ĐỊNH (CỨNG)
                 let messageBlock = `
-                    <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card" style="animation-delay: 0.4s">
+                    <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card flex flex-col md:flex-row items-center justify-center gap-2" style="animation-delay: 0.4s">
                         <span class="text-black text-sm md:text-base font-bold uppercase">Pạt 🎀 nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: </span>
                         <a href="https://zalo.me/g/LINK_NHOM_ZALO_O_DAY" target="_blank" class="text-[#1ce1db] font-bold text-sm md:text-base underline hover:text-white transition-colors uppercase drop-shadow-md">LINK ZALO</a>
                     </div>
@@ -656,7 +670,6 @@
                 resultBox.innerHTML = `<div class="bg-red-500/20 text-white p-4 rounded-xl border border-red-500/50 text-center font-helvetica w-full max-w-lg mx-auto">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</div>`; 
             }
         }
-
         window.onload = () => { 
             loadOverview(); 
             loadDonorData(); 
