@@ -100,8 +100,8 @@
         <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </section>
 
-    <!-- CHỨC NĂNG CHÍNH -->
-    <div class="max-w-5xl mx-auto space-y-16 p-4 md:p-10 mb-10">
+    <!-- CHỨC NĂNG -->
+    <div class="max-w-5xl mx-auto space-y-16 p-4 md:p-10 mb-[20vh]">
         
         <!-- TIẾN ĐỘ -->
         <section id="overview-section" class="scroll-mt-28 w-full flex flex-col items-center">
@@ -156,34 +156,47 @@
             <p class="font-helvetica text-white/80 text-sm md:text-base text-center max-w-2xl mb-8 px-4">Hãy nhập số điện thoại đã điền trong form để tra cứu lịch sử Donate của mình, các thông tin dưới đây chỉ hiển thị với bạn</p>
             
             <div class="flex gap-2 mb-6 w-full max-w-xl justify-center items-center px-4">
-                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 md:p-4 rounded-full w-full outline-none focus:ring-2 focus:ring-[#1ce1db] transition-all bg-white/80 hover:bg-white text-black shadow-lg">
+                <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 md:p-4 rounded-full w-full outline-none focus:ring-2 focus:ring-[#1ce1db] transition-all bg-white/90 text-black shadow-lg">
                 <button onclick="searchPhone()" class="shrink-0 hover:scale-105 transition-transform drop-shadow-lg">
                     <img src="./assets/images/Tra cuu.svg" alt="Tra cứu ngay" class="h-12 md:h-14 object-contain">
                 </button>
             </div>
             
-            <div id="lookup-result" class="w-full max-w-3xl hidden flex-col gap-8 mt-4 px-4 font-helvetica"></div>
+            <div id="lookup-result" class="w-full max-w-3xl hidden flex-col gap-6 mt-4 px-4 font-helvetica"></div>
         </section>
 
     </div> 
 
-    <!-- FOOTER LIÊN HỆ -->
-    <footer class="w-full bg-[#0b1021]/90 backdrop-blur-lg py-8 flex flex-col items-center border-t border-white/10 mt-10 relative z-10">
-        <p class="font-helvetica text-white/80 text-sm md:text-base mb-5 text-center px-4">Liên hệ tụi mình nếu có sai sót về thông tin và cần hỗ trợ nha</p>
-        <div class="flex gap-8 items-center">
-            <a href="https://www.facebook.com/trinhtongpartners/" target="_blank" class="hover:scale-110 transition-transform">
-                <img src="./assets/images/FB.svg" alt="Facebook" class="w-8 h-8 md:w-10 md:h-10">
-            </a>
-            <a href="mailto:tringtongpartner88@gmail.com" class="hover:scale-110 transition-transform">
-                <img src="./assets/images/Mail.svg" alt="Mail" class="w-8 h-8 md:w-10 md:h-10">
-            </a>
-            <a href="https://zalo.me/0931473411" target="_blank" title="Zalo Hotline: 0931473411" class="hover:scale-110 transition-transform flex items-center justify-center relative w-8 h-8 md:w-10 md:h-10">
-                <img src="./assets/images/Mobile 1.svg" class="absolute inset-0 w-full h-full object-contain">
-                <img src="./assets/images/Mobile 2.svg" class="absolute inset-0 w-full h-full object-contain">
-                <img src="./assets/images/Mobile 3.svg" class="absolute inset-0 w-full h-full object-contain">
-            </a>
+    <!-- FOOTER LIÊN HỆ (1 Dòng ngang) -->
+    <footer class="w-full bg-[#0b1021]/90 backdrop-blur-lg py-6 flex flex-col items-center justify-center border-t border-white/10 mt-10 relative z-10 px-4">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-4xl">
+            <p class="font-helvetica text-white/80 text-sm md:text-base text-center mb-0">Liên hệ tụi mình nếu có sai sót về thông tin và cần hỗ trợ nha</p>
+            <div class="flex gap-6 items-center">
+                <a href="https://www.facebook.com/trinhtongpartners/" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="./assets/images/FB.svg" alt="Facebook" class="w-6 h-6 md:w-8 md:h-8">
+                </a>
+                <a href="mailto:tringtongpartner88@gmail.com" class="hover:scale-110 transition-transform">
+                    <img src="./assets/images/Mail.svg" alt="Mail" class="w-6 h-6 md:w-8 md:h-8">
+                </a>
+                <a href="https://zalo.me/0931473411" target="_blank" title="Zalo Hotline: 0931473411" class="hover:scale-110 transition-transform flex items-center justify-center relative w-6 h-6 md:w-8 md:h-8">
+                    <img src="./assets/images/Phone.svg" class="absolute inset-0 w-full h-full object-contain">
+                </a>
+            </div>
         </div>
     </footer>
+
+    <!-- CỤM ICON MẠNG XÃ HỘI BÁM ĐUÔI (NẰM DỌC TRÊN CTA) -->
+    <div class="fixed bottom-24 right-6 z-50 flex flex-col items-center gap-3">
+        <a href="https://www.facebook.com/trinhtongpartners/" target="_blank" class="w-10 h-10 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/20 transition-all">
+            <img src="./assets/images/FB.svg" alt="Facebook" class="w-5 h-5 object-contain opacity-90">
+        </a>
+        <a href="mailto:tringtongpartner88@gmail.com" class="w-10 h-10 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/20 transition-all">
+            <img src="./assets/images/Mail.svg" alt="Mail" class="w-5 h-5 object-contain opacity-90">
+        </a>
+        <a href="https://zalo.me/0931473411" target="_blank" class="w-10 h-10 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/20 transition-all">
+            <img src="./assets/images/Phone.svg" alt="Phone" class="w-5 h-5 object-contain opacity-90">
+        </a>
+    </div>
 
     <!-- CTA BÁM ĐUÔI -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" 
@@ -488,126 +501,161 @@
             container.innerHTML = html;
         }
 
-        // ---- LOGIC TRA CỨU ----
+        // ---- LOGIC TRA CỨU ĐÃ CẬP NHẬT GIAO DIỆN & YÊU CẦU MỚI NHẤT ----
         async function searchPhone() {
             const phone = document.getElementById('phoneInput').value.trim();
-            const resDiv = document.getElementById('lookup-result');
-            
-            if(!phone) {
-                alert('Vui lòng nhập số điện thoại');
-                return;
-            }
-            
-            resDiv.innerHTML = '<div class="loader"></div> <span class="text-white ml-2">Đang tra cứu hệ thống...</span>';
-            resDiv.classList.remove('hidden');
-            resDiv.classList.add('flex');
+            const resultBox = document.getElementById('lookup-result');
+            if(!phone) { alert("Vui lòng nhập số điện thoại"); return; }
+
+            resultBox.classList.remove('hidden');
+            resultBox.classList.add('flex');
+            resultBox.innerHTML = `<div class="loader mx-auto"></div> <span class="text-white/80 text-center mt-2">Đang tìm kiếm trong hệ thống...</span>`;
 
             try {
-                const res = await fetch(API_URL + "?action=lookup&sdt=" + encodeURIComponent(phone));
+                const res = await fetch(API_URL + `?action=lookup&sdt=${encodeURIComponent(phone)}`);
                 const data = await res.json();
-                
-                if(data.error || data.status === "not_found") {
-                    resDiv.innerHTML = `<div class="bg-red-500/20 text-white p-4 md:p-6 rounded-xl border border-red-500/50 text-center leading-relaxed">${data.message || data.error}</div>`;
+
+                if (data.error || data.status === "not_found") {
+                    resultBox.innerHTML = `<div class="bg-red-500/20 text-white p-4 md:p-6 rounded-xl border border-red-500/50 text-center leading-relaxed font-helvetica shadow-lg w-full max-w-lg mx-auto">${data.message || data.error}</div>`;
                     return;
                 }
 
-                let html = '';
-
-                // THÔNG TIN CÁ NHÂN DONATE
-                html += `
-                <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.1s">
-                    <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">THÔNG TIN CÁ NHÂN DONATE</div>
-                    <div class="bg-black/60 p-4 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-2.5">
-                        <p>Họ và tên: <span class="text-pink-400 font-bold ml-1">${data.fullName}</span></p>
-                        <p>Nickname: <span class="text-pink-400 font-bold ml-1">${data.nickname}</span></p>
-                        <p>SĐT: <span class="text-pink-400 font-bold ml-1">${data.originalPhone}</span></p>
-                        <p>Trạng thái Form: <span class="text-pink-400 font-bold ml-1">${data.formStatus}</span></p>
-                    </div>
-                </div>`;
-
-                // LỊCH SỬ DONATE
-                if (data.donateData && data.donateData.history && data.donateData.history.length > 0) {
-                    let tableRows = '';
+                // 1 & 2. THÔNG TIN CÁ NHÂN DONATE & LỊCH SỬ TIỀN BẠC
+                let moneyContent = "";
+                if (data.donateData.history.length === 1) {
+                    let h = data.donateData.history[0];
+                    moneyContent = `<p>Số tiền đã Donate: <span class="text-pink-400 font-bold ml-1">${formatMoney(h.submittedAmount)}</span> ${h.note ? `<span class="text-gray-400 text-xs italic ml-2">(${h.note})</span>` : ''}</p>`;
+                } else {
+                    let tableRows = "";
                     data.donateData.history.forEach(h => {
                         tableRows += `
-                        <tr class="border-b border-white/10 last:border-0 text-sm md:text-base">
-                            <td class="p-3 text-center text-pink-400 font-bold">${h.turn}</td>
-                            <td class="p-3 text-right text-pink-400 font-bold tracking-wider">${formatMoney(h.submittedAmount)}</td>
-                            <td class="p-3 text-left">${h.isDiscrepancy ? `<span class="text-red-400">${h.note}</span>` : '<span class="text-green-400 font-bold">Khớp</span>'}</td>
-                        </tr>`;
+                            <tr class="border-b border-white/10 last:border-0 text-sm md:text-base">
+                                <td class="p-3 text-center text-white/90">Lần ${h.turn}</td>
+                                <td class="p-3 text-right text-pink-400 font-bold tracking-wider">${formatMoney(h.submittedAmount)}</td>
+                                <td class="p-3 text-left ${h.isDiscrepancy ? 'text-gray-400 italic text-xs' : 'text-white/80'}">${h.isDiscrepancy ? h.note : 'Khớp'}</td>
+                            </tr>
+                        `;
                     });
-                    
-                    html += `
-                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
-                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">LỊCH SỬ DONATE</div>
-                        <div class="bg-black/60 p-4 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white overflow-x-auto">
-                            <table class="w-full min-w-[400px]">
-                                <thead class="bg-pink-400/60 text-white text-sm md:text-base">
+                    moneyContent = `
+                        <div class="mt-4 border border-white/20 rounded-lg overflow-hidden">
+                            <table class="w-full text-left">
+                                <thead class="bg-pink-400/60 text-white text-sm md:text-base font-bold">
                                     <tr>
-                                        <th class="p-3 text-center font-normal rounded-tl-lg">Lần</th>
-                                        <th class="p-3 text-right font-normal">Số tiền gửi</th>
-                                        <th class="p-3 text-left font-normal rounded-tr-lg">Tình trạng</th>
+                                        <th class="p-3 text-center border-r border-white/10">Lần</th>
+                                        <th class="p-3 text-right border-r border-white/10">Số tiền form</th>
+                                        <th class="p-3 text-left">Ghi chú</th>
                                     </tr>
                                 </thead>
-                                <tbody>${tableRows}</tbody>
+                                <tbody class="bg-black/40">
+                                    ${tableRows}
+                                    <tr class="bg-white/10 font-bold">
+                                        <td class="p-3 text-center text-white">TỔNG</td>
+                                        <td class="p-3 text-right text-pink-400 tracking-wider" colspan="2">${data.donateData.totalMessage}</td>
+                                    </tr>
+                                </tbody>
                             </table>
-                            <div class="mt-4 text-right pt-4 border-t border-white/20">
-                                Tổng tiền hợp lệ: <span class="text-pink-400 font-bold text-lg md:text-xl tracking-wider ml-2">${data.donateData.totalMessage}</span>
-                            </div>
                         </div>
-                    </div>`;
+                    `;
                 }
 
-                // DS QUÀ DỰ KIẾN
-                if (data.giftData && data.giftData.names && data.giftData.names.length > 0) {
-                    let giftLines = '';
-                    data.giftData.names.forEach((name, i) => {
-                        if(data.giftData.earned[i]) {
-                            giftLines += `<div class="flex items-center gap-3"><img src="./assets/images/checkmark.svg" class="w-5 h-5 drop-shadow-[0_0_3px_#f472b6]" onerror="this.style.display='none'"> <span class="text-pink-400 font-bold">${name}</span></div>`;
+                let personalBlock = `
+                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.1s">
+                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN CÁ NHÂN DONATE</div>
+                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-[#1ce1db]/30 border-t-0 font-helvetica text-white/90 space-y-3">
+                            <p>Họ và tên: <span class="text-pink-400 font-bold ml-1">${data.fullName}</span></p>
+                            <p>Nickname: <span class="text-pink-400 font-bold ml-1">${data.nickname}</span></p>
+                            <p>Số điện thoại: <span class="text-pink-400 font-bold ml-1">${data.originalPhone}</span></p>
+                            ${moneyContent}
+                            <p class="text-gray-400 text-xs italic mt-3 pt-3 border-t border-white/10">Lưu ý: Thời gian đối chiếu ngân hàng và cập nhật trạng thái từ 21h - 23h mỗi ngày</p>
+                        </div>
+                    </div>
+                `;
+
+                // 3. THÔNG TIN QUÀ VÀ SHIP QUÀ
+                let deliveryNote = data.shippingData.deliveryNote ? data.shippingData.deliveryNote : "(không có)";
+                let giftHtml = "";
+                if (data.giftData && data.giftData.names.length > 0) {
+                    let giftItems = "";
+                    data.giftData.names.forEach((name, index) => {
+                        let hasGift = data.giftData.earned[index];
+                        if (hasGift) {
+                            giftItems += `
+                                <div class="flex flex-col items-center justify-center p-3 bg-white/5 border border-pink-400/30 rounded-lg gap-2 shadow-inner">
+                                    <img src="./assets/images/checkmark.svg" class="w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_0_3px_#f472b6]" onerror="this.style.display='none'">
+                                    <span class="text-pink-400 font-bold text-center text-xs md:text-sm">${name}</span>
+                                </div>
+                            `;
                         } else {
-                            giftLines += `<div class="flex items-center gap-3 opacity-40"><div class="w-5 h-5 border border-white/50 rounded flex-shrink-0"></div> <span>${name}</span></div>`;
+                            giftItems += `
+                                <div class="flex flex-col items-center justify-center p-3 bg-black/40 border border-white/10 rounded-lg gap-2 opacity-50">
+                                    <div class="w-6 h-6 md:w-8 md:h-8 border-2 border-white/20 rounded-full flex-shrink-0"></div>
+                                    <span class="text-white/60 text-center text-xs md:text-sm">${name}</span>
+                                </div>
+                            `;
                         }
                     });
 
-                    html += `
-                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.3s">
-                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">DANH SÁCH QUÀ DỰ KIẾN</div>
-                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white space-y-3.5">
-                            ${giftLines}
+                    giftHtml = `
+                        <div class="mt-6 border-t border-white/10 pt-5">
+                            <p class="font-bold text-sm md:text-base uppercase text-pink-400 mb-1 text-center">DANH SÁCH QUÀ DỰ KIẾN</p>
+                            <p class="text-[10px] md:text-xs text-gray-400 italic mb-4 text-center">(tính theo tổng donate của Pạt 🎀 đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] ml-1">${formatMoney(data.giftData.validTotal)}</span>)</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                ${giftItems}
+                            </div>
                         </div>
-                    </div>`;
+                    `;
                 }
 
-                // THÔNG TIN NHẬN QUÀ
-                if (data.shippingData) {
-                    html += `
-                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.4s">
-                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-4 py-2.5 rounded-t-xl text-sm md:text-base uppercase">THÔNG TIN NHẬN QUÀ</div>
-                        <div class="bg-black/60 p-4 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-2.5">
+                let shipBlock = `
+                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
+                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
+                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-[#1ce1db]/30 border-t-0 font-helvetica text-white/90 space-y-3">
                             <p>Nơi nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryPlace}</span></p>
                             <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
                             <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
-                            <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryNote}</span></p>
+                            <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
+                            <p class="text-[10px] md:text-xs text-gray-500 italic mt-3">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
+                            ${giftHtml}
                         </div>
-                    </div>`;
-                }
+                    </div>
+                `;
 
-                // LỜI NHẮN TỪ FANSITE (Bắt Link Zalo làm thành Nút Hồng)
-                if (data.fansiteMessage) {
-                    let msg = data.fansiteMessage;
-                    msg = msg.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="inline-block bg-pink-500 text-white px-5 py-2.5 rounded-full font-bold my-3 shadow-[0_0_15px_rgba(244,114,182,0.5)] hover:scale-105 hover:bg-pink-400 transition-all uppercase tracking-wider">Tham gia Zalo Group</a>');
+                // 4. LƯU Ý THÊM CHO TEAM
+                let teamBlock = `
+                    <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.3s">
+                        <div class="bg-[#1ce1db]/60 text-black font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">LƯU Ý THÊM CHO TEAM @trinhtongpartners</div>
+                        <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-[#1ce1db]/30 border-t-0 font-helvetica text-white/90">
+                            <p class="text-sm md:text-base leading-relaxed text-center">${data.teamNote || "Không có ghi chú thêm."}</p>
+                        </div>
+                    </div>
+                `;
 
-                    html += `
-                    <div class="bg-black/60 p-6 rounded-2xl border border-[#1ce1db]/30 font-helvetica text-center mt-6 shadow-xl animate-card start-anim-card" style="animation-delay: 0.5s">
-                        <p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-3 drop-shadow-md">Lời nhắn từ tụi mình</p>
-                        <div class="text-white leading-relaxed text-sm md:text-base">${msg}</div>
-                    </div>`;
-                }
+                // 5. ZALO GROUP MẶC ĐỊNH (CỨNG)
+                let messageBlock = `
+                    <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card flex flex-col md:flex-row items-center justify-center gap-2" style="animation-delay: 0.4s">
+                        <span class="text-white text-sm md:text-base font-bold uppercase">Pạt 🎀 nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha:</span>
+                        <a href="#" target="_blank" class="text-[#1ce1db] font-bold text-sm md:text-base underline hover:text-white transition-colors uppercase whitespace-nowrap drop-shadow-md">LINK ZALO</a>
+                    </div>
+                `;
 
-                resDiv.innerHTML = html;
+                let displayName = data.nickname ? data.nickname : (data.fullName ? data.fullName : "");
+                let greetingName = displayName ? `<span class="text-pink-400 font-bold font-major tracking-wider text-xl md:text-2xl mx-1">${displayName}</span>` : "";
 
-            } catch(e) {
-                resDiv.innerHTML = `<div class="bg-red-500/20 text-white p-4 rounded-xl border border-red-500/50 text-center">Lỗi kết nối hoặc hệ thống đang bận. Vui lòng thử lại sau.</div>`;
+                let html = `
+                    <div class="text-center mb-8 animate-card start-anim-card">
+                        <p class="font-helvetica text-white/90 text-lg md:text-xl">Xin chào Pạt 🎀 ${greetingName},</p>
+                        <p class="font-helvetica text-white/90 text-lg md:text-xl mt-1">tụi mình <span class="text-pink-400 font-bold">${data.formStatus}</span>.</p>
+                    </div>
+                    ${personalBlock}
+                    ${shipBlock}
+                    ${teamBlock}
+                    ${messageBlock}
+                `;
+
+                resultBox.innerHTML = html;
+
+            } catch (error) { 
+                resultBox.innerHTML = `<div class="bg-red-500/20 text-white p-4 rounded-xl border border-red-500/50 text-center font-helvetica w-full max-w-lg mx-auto">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</div>`; 
             }
         }
 
