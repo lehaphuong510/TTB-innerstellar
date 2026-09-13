@@ -78,7 +78,7 @@
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION (IN HOA TOÀN BỘ) -->
+    <!-- THANH NAVIGATION -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
         <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
             <div class="hidden md:flex flex-1 justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
@@ -161,6 +161,7 @@
 
     </div> 
 
+    <!-- CTA BÁM ĐUÔI -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" 
        class="fixed bottom-6 right-6 bg-pink-500 text-white font-bold uppercase tracking-wider py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300 z-50 flex items-center gap-2 animate-bounce">
         <span>💸</span> DONATE IH MÒ 😸
@@ -392,26 +393,28 @@
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || donorDataGlobal.data || [];
                 
-                html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
+                html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow bg-black/60">`;
                 
+                // TOP 1 (GIỮ NGUYÊN Y CẦU: Số tiền 2 dòng, Thời gian 2 dòng, Xóa gạch dưới)
                 if(tops[0]) {
                     html += `
-                        <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4 border-b border-white/10">
+                        <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
                             <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse">
                                 <img src="./assets/images/Top 1.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                             </div>
                             <div class="text-left font-helvetica flex-none flex flex-col justify-center">
                                 <div class="font-major text-[#1ce1db] text-3xl md:text-4xl mb-2 drop-shadow-md leading-none">${tops[0].nickname}</div>
-                                <div class="flex items-baseline gap-2 mb-1.5 whitespace-nowrap">
-                                    <div class="text-white/80 text-base md:text-lg">Tổng số tiền donate:</div>
-                                    <div class="text-pink-400 font-bold text-2xl md:text-3xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse leading-none">${formatMoney(tops[0].totalAmount || tops[0].amount)}</div>
+                                <div>
+                                    <div class="text-white/80 text-base md:text-lg mb-1">Tổng số tiền donate:</div>
+                                    <div class="text-pink-400 font-bold text-3xl md:text-4xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-3 leading-none">${formatMoney(tops[0].totalAmount || tops[0].amount)}</div>
                                 </div>
-                                <div class="text-gray-400 text-xs md:text-sm italic leading-tight whitespace-nowrap">Lần Donate gần nhất: ${parseTimestamp(tops[0].timestamp || tops[0].lastTime || tops[0].time)}</div>
+                                <div class="text-gray-400 text-sm italic leading-tight">Lần Donate gần nhất:<br>${parseTimestamp(tops[0].timestamp || tops[0].lastTime || tops[0].time)}</div>
                             </div>
                         </div>
                     `;
                 }
                 
+                // TOP 2 & 3 (GỘP TRÊN 1 DÒNG)
                 if(tops.length > 1) {
                     html += `<div class="flex flex-col md:flex-row justify-between gap-6 md:gap-8 w-full px-0 md:px-4">`;
                     for(let i=1; i<Math.min(3, tops.length); i++) {
