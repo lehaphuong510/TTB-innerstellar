@@ -18,6 +18,14 @@
         .animate-card { opacity: 0; }
         .start-anim-card { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
+        /* Hiệu ứng hào quang cho Huy chương Top 1 */
+        @keyframes glowPulse {
+            0% { filter: drop-shadow(0 0 5px rgba(28,225,219,0.5)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 20px rgba(28,225,219,0.9)); transform: scale(1.05); }
+            100% { filter: drop-shadow(0 0 5px rgba(28,225,219,0.5)); transform: scale(1); }
+        }
+        .anim-glow-pulse { animation: glowPulse 2.5s infinite ease-in-out; }
+
         html { scroll-behavior: smooth; }
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
@@ -42,7 +50,7 @@
         <p class="font-helvetica text-white/80 text-base md:text-lg tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION -->
+    <!-- THANH NAVIGATION (IN HOA TOÀN BỘ) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
         <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px]">
             <div class="hidden md:flex flex-1 justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center uppercase">
@@ -50,10 +58,10 @@
                 <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tiến độ quỹ</a>
                 <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Danh sách donors</a>
                 <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tra cứu</a>
-                <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5 capitalize">(Coming soon)</span></span>
+                <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5">(COMING SOON)</span></span>
             </div>
             <div class="flex-none ml-4">
-                <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">Donate ih mò</a>
+                <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">DONATE IH MÒ</a>
             </div>
         </nav>
     </div>
@@ -70,52 +78,47 @@
         <!-- TIẾN ĐỘ -->
         <section id="overview-section" class="scroll-mt-28 w-full flex flex-col items-center">
             <div class="text-center mb-8 w-full">
-                <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-2 drop-shadow-lg capitalize">Tiến độ góp quỹ</h2>
+                <!-- Tiêu đề chuẩn Casing -->
+                <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-2 drop-shadow-lg">Tiến độ góp quỹ</h2>
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
                     <p id="update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
                 </div>
             </div>
 
-            <div class="flex justify-center gap-4 mb-8 w-full">
-                <button onclick="switchProgressLayout('horizontal')" id="btn-prog-horiz" class="px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold transition-all">Ngang (Opt 2)</button>
-                <button onclick="switchProgressLayout('vertical')" id="btn-prog-vert" class="px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all">Dọc (Opt 1)</button>
-            </div>
-
+            <!-- ĐÃ BỎ NÚT CHUYỂN NGANG/DỌC. BÂY GIỜ LÀ RESPONSIVE TỰ ĐỘNG -->
+            
             <div id="overview-content" class="w-full relative flex flex-col items-center min-h-[400px]">
                 <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu tiến độ...</p>
             </div>
             
             <div class="mt-8 text-center">
-                <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-8 py-3 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] inline-block">Donate ih mò</a>
+                <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-8 py-3 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] inline-block">DONATE IH MÒ</a>
             </div>
         </section>
 
         <!-- DANH SÁCH DONORS -->
         <section id="donor-section" class="scroll-mt-28 w-full flex flex-col items-center pt-10">
-            <!-- Đã thêm Phan cach.svg trước Tiêu đề -->
             <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80 mb-8" alt="Divider">
             
             <div class="text-center mb-8 w-full">
-                <!-- Chữ chính xác không dùng CSS ép hoa -->
-                <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-2 drop-shadow-lg">Danh sách Donor</h2>
+                <!-- Tiêu đề chuẩn Casing -->
+                <h2 class="font-major text-white text-3xl md:text-5xl tracking-wider mb-2 drop-shadow-lg">Danh sách donors</h2>
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
-                    <p class="font-helvetica text-gray-300 text-xs md:text-sm italic">Cập nhật danh sách Pạt 🎀 đã donate và trạng thái Đua Top</p>
+                    <p id="donor-update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
                 </div>
+                <p class="font-helvetica text-pink-400 text-sm md:text-base mt-4 italic">Cập nhật danh sách Pạt 🎀 đã donate và trạng thái Đua Top</p>
             </div>
 
             <div class="flex bg-black/60 rounded-full border border-white/20 p-1 mb-8">
                 <button id="tab-top-btn" onclick="switchDonorTab('top')" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase">Top Donor</button>
-                <button id="tab-all-btn" onclick="switchDonorTab('all')" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-400 hover:text-white uppercase">Danh sách Donors</button>
+                <button id="tab-all-btn" onclick="switchDonorTab('all')" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-400 hover:text-white uppercase">Danh sách donors</button>
             </div>
 
-            <!-- Khung chứa nội dung Donor -->
             <div id="donor-content" class="w-full relative flex flex-col items-center min-h-[300px]">
                 <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu...</p>
             </div>
 
-            <!-- QUÀ DÀNH CHO DONORS -->
             <div class="mt-20 text-center w-full flex flex-col items-center">
-                <!-- Chữ chính xác không dùng CSS ép hoa -->
                 <h3 class="font-major text-pink-400 text-2xl md:text-4xl mb-6 drop-shadow-md">Quà dành cho Donors</h3>
                 <img src="./assets/images/Donors gift.png" alt="Quà tặng Donors" class="w-11/12 max-w-lg object-contain opacity-90 drop-shadow-2xl">
             </div>
@@ -123,7 +126,7 @@
 
         <!-- TRA CỨU -->
         <section id="lookup-section" class="scroll-mt-28 bg-black/60 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20">
-            <h2 class="font-major text-xl border-b border-gray-600 pb-2 mb-6 text-white uppercase">Tra cứu kết quả</h2>
+            <h2 class="font-major text-xl border-b border-gray-600 pb-2 mb-6 text-white">Tra cứu kết quả</h2>
             <div class="flex gap-2 mb-6">
                 <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 rounded-lg w-full max-w-sm outline-none focus:ring-2 focus:ring-[#1ce1db] bg-white/90">
                 <button onclick="searchPhone()" class="bg-[#1ce1db] text-black px-6 py-2 rounded-lg hover:bg-white font-bold uppercase shadow-[0_0_10px_rgba(28,225,219,0.3)]">Tra cứu</button>
@@ -153,13 +156,12 @@
             let dd = String(updateDate.getDate()).padStart(2, '0');
             let mm = String(updateDate.getMonth() + 1).padStart(2, '0');
             let yyyy = updateDate.getFullYear();
-            globalUpdateTimeStr = `23:00 ${dd}/${mm}/${yyyy}`;
+            globalUpdateTimeStr = `Thời điểm cập nhật: 23:00 ${dd}/${mm}/${yyyy}`;
         }
         generateUpdateTime();
 
         // ---- STATE & LOGIC TIẾN ĐỘ QUỸ ----
         let overviewDataGlobal = null;
-        let progLayout = 'horizontal'; 
         let progAnimTriggered = false;
         const visualStops = [15, 40, 65, 90]; 
 
@@ -191,26 +193,10 @@
             try {
                 const res = await fetch(API_URL + "?action=overview");
                 overviewDataGlobal = await res.json();
-                document.getElementById('update-time-text').innerText = "Thời điểm cập nhật: " + globalUpdateTimeStr;
+                document.getElementById('update-time-text').innerText = globalUpdateTimeStr;
                 renderOverviewLayout();
                 setupIntersectionObserver();
             } catch (e) { document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu tiến độ.</span>`; }
-        }
-
-        function switchProgressLayout(layoutType) {
-            progLayout = layoutType;
-            progAnimTriggered = false; 
-            renderOverviewLayout();
-            setupIntersectionObserver();
-            const btnH = document.getElementById('btn-prog-horiz');
-            const btnV = document.getElementById('btn-prog-vert');
-            if (layoutType === 'horizontal') {
-                btnH.className = "px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold transition-all";
-                btnV.className = "px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all";
-            } else {
-                btnV.className = "px-6 py-2 border-2 border-[#1ce1db] bg-[#1ce1db]/20 text-[#1ce1db] rounded-full text-sm font-bold transition-all";
-                btnH.className = "px-6 py-2 border-2 border-gray-500 text-gray-400 hover:text-white rounded-full text-sm font-bold transition-all";
-            }
         }
 
         function renderOverviewLayout() {
@@ -232,24 +218,42 @@
             document.getElementById('overview-content').setAttribute('data-offset-time', timeDashOffset);
             document.getElementById('overview-content').setAttribute('data-visual-progress', visualProgressPct);
 
-            let milestonesHtml = "";
-            let progressHtml = "";
+            let milestonesHorizHtml = "";
+            let milestonesVertHtml = "";
 
-            if (progLayout === 'horizontal') {
-                data.milestones.forEach((m, idx) => {
-                    let pct = visualStops[idx]; 
-                    milestonesHtml += `<div class="absolute flex flex-col items-center -translate-x-1/2 animate-card prog-milestone-card w-40 md:w-56" style="left: ${pct}%; top: 0; animation-delay: ${(idx+1)*0.2}s"><div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div><img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 28px; left: 50%;"><div class="mt-7 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-full text-center border border-white/10 backdrop-blur-md shadow-2xl"><p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 uppercase">Chặng ${idx+1}</p><p class="text-[#1ce1db] font-major text-base md:text-xl mb-2 drop-shadow-md capitalize">${m.name}</p><p class="text-pink-400 font-bold text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p></div></div>`;
-                });
-                progressHtml = `<div class="relative w-full pt-10 pb-4"><div class="relative w-full min-w-[900px] h-[260px] mx-auto px-10"><div class="absolute flex flex-col items-center -translate-x-1/2" style="left: 0%; top: 0;"><div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">0đ</div><div class="w-1.5 h-4 bg-[#1ce1db] rounded-full absolute z-20" style="top: 30px;"></div><div class="mt-10 font-helvetica font-bold text-pink-500 text-lg md:text-xl drop-shadow-md whitespace-nowrap uppercase">CHIẾN THÔI!</div></div><div class="absolute top-[36px] left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div><div id="main-bar-horiz" class="absolute top-[36px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>${milestonesHtml}<div id="star-horiz" class="absolute top-[36px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="left: 0%;"><img src="./assets/images/Star bullet.svg" class="w-8 md:w-10 animate-spin" style="animation-duration: 4s;"></div></div></div>`;
-            } else {
-                data.milestones.forEach((m, idx) => {
-                    let pct = visualStops[idx];
-                    let isEven = idx % 2 === 0; 
-                    let cleanAct = m.activity.replace(/<br\s*\/?>/gi, ' ');
-                    milestonesHtml += `<div class="absolute w-full flex items-start animate-card prog-milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s"><img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;"><div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px]"><div class="font-helvetica bg-black/60 rounded-xl p-4 w-[280px] md:w-[340px] border border-white/10 backdrop-blur-md shadow-2xl text-left"><p class="text-white/80 text-xs font-bold mb-1 tracking-widest uppercase">Chặng ${idx+1}</p><p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-2 drop-shadow-md capitalize">${m.name}</p><p class="text-pink-400 font-bold text-sm md:text-base mb-4 whitespace-nowrap overflow-hidden text-ellipsis drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${cleanAct}</p><div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div></div></div></div>`;
-                });
-                progressHtml = `<div class="relative w-full max-w-2xl mx-auto h-[650px] my-10"><div class="relative w-full h-full"><div class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-full bg-gray-700/80 rounded-full"></div><div id="main-bar-vert" class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>${milestonesHtml}<div id="star-vert" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="top: 0%;"><img src="./assets/images/Star bullet.svg" class="w-10 animate-spin" style="animation-duration: 4s;"></div></div></div>`;
-            }
+            data.milestones.forEach((m, idx) => {
+                let pct = visualStops[idx]; 
+                let isEven = idx % 2 === 0; 
+                
+                // Horizontal Items (BỎ CASE/TRUNCATE - Dùng data thô)
+                milestonesHorizHtml += `<div class="absolute flex flex-col items-center -translate-x-1/2 animate-card prog-milestone-card w-40 md:w-56" style="left: ${pct}%; top: 0; animation-delay: ${(idx+1)*0.2}s"><div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div><img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 28px; left: 50%;"><div class="mt-7 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-full text-center border border-white/10 backdrop-blur-md shadow-2xl"><p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 uppercase">Chặng ${idx+1}</p><p class="text-[#1ce1db] font-major text-base md:text-xl mb-2 drop-shadow-md">${m.name}</p><p class="text-pink-400 font-bold text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p></div></div>`;
+                
+                // Vertical Items
+                milestonesVertHtml += `<div class="absolute w-full flex items-start animate-card prog-milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s"><img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;"><div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px]"><div class="font-helvetica bg-black/60 rounded-xl p-4 w-[280px] md:w-[340px] border border-white/10 backdrop-blur-md shadow-2xl text-left"><p class="text-white/80 text-xs font-bold mb-1 tracking-widest uppercase">Chặng ${idx+1}</p><p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-2 drop-shadow-md">${m.name}</p><p class="text-pink-400 font-bold text-sm md:text-base mb-4 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p><div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div></div></div></div>`;
+            });
+
+            let progressHtml = `
+                <!-- KHỐI NGANG (Chỉ hiện trên Laptop - lg) -->
+                <div class="hidden lg:block w-full pt-10 pb-4 relative">
+                    <div class="relative w-full min-w-[900px] h-[260px] mx-auto px-10">
+                        <div class="absolute flex flex-col items-center -translate-x-1/2" style="left: 0%; top: 0;"><div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">0đ</div><div class="w-1.5 h-4 bg-[#1ce1db] rounded-full absolute z-20" style="top: 30px;"></div><div class="mt-10 font-helvetica font-bold text-pink-500 text-lg md:text-xl drop-shadow-md whitespace-nowrap">CHIẾN THÔI!</div></div>
+                        <div class="absolute top-[36px] left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div>
+                        <div id="main-bar-horiz" class="absolute top-[36px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
+                        ${milestonesHorizHtml}
+                        <div id="star-horiz" class="absolute top-[36px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="left: 0%;"><img src="./assets/images/Star bullet.svg" class="w-8 md:w-10 animate-spin" style="animation-duration: 4s;"></div>
+                    </div>
+                </div>
+
+                <!-- KHỐI DỌC (Chỉ hiện trên Mobile/Tablet) -->
+                <div class="block lg:hidden w-full relative max-w-2xl mx-auto h-[650px] my-10">
+                    <div class="relative w-full h-full">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-full bg-gray-700/80 rounded-full"></div>
+                        <div id="main-bar-vert" class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
+                        ${milestonesVertHtml}
+                        <div id="star-vert" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="top: 0%;"><img src="./assets/images/Star bullet.svg" class="w-10 animate-spin" style="animation-duration: 4s;"></div>
+                    </div>
+                </div>
+            `;
             document.getElementById('overview-content').innerHTML = statsHtml + progressHtml;
         }
 
@@ -270,10 +274,11 @@
                     setTimeout(() => { document.querySelectorAll('.prog-milestone-card').forEach(c => c.classList.add('start-anim-card')); }, 1000);
                     setTimeout(() => {
                         let vp = parseFloat(ct.getAttribute('data-visual-progress'));
-                        if(progLayout === 'horizontal') {
+                        if(document.getElementById('main-bar-horiz')) {
                             document.getElementById('main-bar-horiz').style.width = vp + "%";
                             document.getElementById('star-horiz').style.left = vp + "%";
-                        } else {
+                        }
+                        if(document.getElementById('main-bar-vert')) {
                             document.getElementById('main-bar-vert').style.height = vp + "%";
                             document.getElementById('star-vert').style.top = vp + "%";
                         }
@@ -291,8 +296,10 @@
             try {
                 const res = await fetch(API_URL + "?action=topdonor");
                 donorDataGlobal = await res.json();
+                document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
                 renderDonorsView(); 
             } catch (e) { 
+                document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
                 donorDataGlobal = {
                     topDonors: [
                         { nickname: "VivianQiu", totalAmount: 5000000, lastTime: "14/09/2026 - 08:15:00" },
@@ -332,63 +339,61 @@
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || [];
                 
-                // Khung chứa tổng có max-w-[700px] để canh đều kích thước
-                html += `<div class="flex flex-col items-center w-full max-w-[700px] mx-auto gap-6 pt-4">`;
+                // Khung xám lớn chứa nguyên cụm Top 1, 2, 3
+                html += `<div class="flex flex-col items-center bg-black/60 rounded-3xl p-6 md:p-8 border border-white/20 w-full max-w-[800px] shadow-2xl gap-8 mx-auto animate-card start-anim-card">`;
                 
-                // TOP 1 (Thiết kế ngang)
+                // TOP 1 (Centered, Font x1.5, Animation Glow)
                 if(tops[0]) {
                     html += `
-                        <div class="flex flex-row items-center justify-center bg-black/60 rounded-3xl p-6 md:p-8 border border-[#1ce1db]/40 shadow-[0_0_20px_rgba(28,225,219,0.2)] animate-card start-anim-card w-full gap-6 md:gap-10" style="animation-delay: 0.1s">
-                            <div class="relative w-28 h-32 md:w-36 md:h-40 shrink-0 hover:scale-110 transition-transform cursor-pointer">
+                        <div class="flex flex-row items-center justify-center w-full gap-6 md:gap-10 border-b border-white/10 pb-8">
+                            <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse">
                                 <img src="./assets/images/Top 1.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                             </div>
-                            <div class="text-left font-helvetica flex-1">
-                                <!-- Chữ lấy y nguyên data -->
-                                <div class="font-major text-[#1ce1db] text-2xl md:text-3xl mb-2 drop-shadow-md">${tops[0].nickname}</div>
-                                <div class="text-white/80 text-sm mb-1">Tổng số tiền donate:</div>
-                                <div class="text-pink-400 font-bold text-2xl md:text-3xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-3">${formatMoney(tops[0].totalAmount)}</div>
-                                <div class="text-gray-400 text-xs italic">Lần Donate gần nhất:<br>${tops[0].lastTime || globalUpdateTimeStr}</div>
+                            <div class="text-left font-helvetica flex-1 max-w-sm">
+                                <div class="font-major text-[#1ce1db] text-3xl md:text-4xl mb-2 drop-shadow-md">${tops[0].nickname}</div>
+                                <div class="text-white/80 text-base mb-1">Tổng số tiền donate:</div>
+                                <div class="text-pink-400 font-bold text-3xl md:text-4xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-3">${formatMoney(tops[0].totalAmount)}</div>
+                                <div class="text-gray-400 text-sm italic">Lần Donate gần nhất:<br>${tops[0].lastTime || 'Đang cập nhật'}</div>
                             </div>
                         </div>
                     `;
                 }
                 
-                // TOP 2 & 3
+                // TOP 2 & 3 (Side by side)
                 if(tops.length > 1) {
-                    html += `<div class="flex flex-row justify-between gap-6 w-full">`;
+                    html += `<div class="flex flex-col md:flex-row justify-between gap-6 md:gap-10 w-full px-0 md:px-8">`;
                     for(let i=1; i<Math.min(3, tops.length); i++) {
                         html += `
-                            <div class="w-1/2 flex flex-col items-center bg-black/60 rounded-3xl p-5 border border-white/10 shadow-xl animate-card start-anim-card" style="animation-delay: ${(i+1)*0.2}s">
-                                <div class="relative w-24 h-28 mb-4 hover:scale-110 transition-transform cursor-pointer">
+                            <div class="w-full md:w-1/2 flex flex-row items-center justify-center gap-4 md:gap-6">
+                                <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform cursor-pointer">
                                     <img src="./assets/images/Top ${i+1}.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                                 </div>
-                                <div class="text-center font-helvetica w-full">
-                                    <div class="font-major text-[#1ce1db] text-lg md:text-xl mb-1 drop-shadow-md">${tops[i].nickname}</div>
-                                    <div class="text-white/80 text-[11px] mb-1">Tổng số tiền donate:</div>
-                                    <div class="text-pink-400 font-bold text-lg drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-2">${formatMoney(tops[i].totalAmount)}</div>
-                                    <div class="text-gray-400 text-[9px] italic">Lần Donate gần nhất:<br>${tops[i].lastTime || globalUpdateTimeStr}</div>
+                                <div class="text-left font-helvetica flex-1">
+                                    <div class="font-major text-[#1ce1db] text-xl md:text-2xl mb-1 drop-shadow-md">${tops[i].nickname}</div>
+                                    <div class="text-white/80 text-[11px] md:text-xs mb-1">Tổng số tiền donate:</div>
+                                    <div class="text-pink-400 font-bold text-xl md:text-2xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-2">${formatMoney(tops[i].totalAmount)}</div>
+                                    <div class="text-gray-400 text-[10px] italic">Lần Donate gần nhất:<br>${tops[i].lastTime || 'Đang cập nhật'}</div>
                                 </div>
                             </div>
                         `;
                     }
                     html += `</div>`;
                 }
+                html += `</div>`; // Đóng khung xám lớn Top 1-3
 
-                // TOP 4 & 5 (Giới hạn tối đa 5)
+                // TOP 4 & 5 (Giới hạn List, canh bằng chiều rộng khối trên, đổi font Helvetica)
                 if(tops.length > 3) {
-                    html += `<div class="flex flex-col w-full gap-3 mt-2 bg-black/40 p-5 rounded-2xl border border-white/5 animate-card start-anim-card" style="animation-delay: 0.8s">`;
+                    html += `<div class="flex flex-col w-full max-w-[800px] gap-3 mt-4 bg-black/40 p-5 rounded-2xl border border-white/5 animate-card start-anim-card" style="animation-delay: 0.4s">`;
                     for(let i=3; i<Math.min(5, tops.length); i++) {
                         html += `
-                            <div class="flex flex-row items-center justify-between border-b border-white/10 pb-3 last:border-0 last:pb-0 gap-2">
-                                <div class="font-major text-[#1ce1db] text-base md:text-lg flex items-center gap-2"><span class="text-white opacity-50 text-sm font-helvetica italic">#${i+1}</span> ${tops[i].nickname}</div>
+                            <div class="flex flex-row items-center justify-between border-b border-white/10 pb-3 last:border-0 last:pb-0 gap-2 px-4 md:px-8">
+                                <div class="font-helvetica font-bold text-[#1ce1db] text-base md:text-lg flex items-center gap-2"><span class="text-white opacity-50 text-sm font-helvetica italic font-normal">#${i+1}</span> ${tops[i].nickname}</div>
                                 <div class="text-pink-400 font-helvetica font-bold text-sm md:text-base drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse tracking-widest text-right">${formatMoney(tops[i].totalAmount)}</div>
                             </div>
                         `;
                     }
                     html += `</div>`;
                 }
-                
-                html += `</div>`;
 
             } else {
                 // ---- RENDER DANH SÁCH DONOR FULL ----
@@ -401,11 +406,13 @@
                 
                 allList.forEach((d, idx) => {
                     html += `
-                        <div class="flex justify-between items-center py-2 md:py-3 font-helvetica px-2">
-                            <div class="text-white font-medium text-xs md:text-base">${d.nickname}</div>
-                            <div class="text-right">
-                                <div class="text-gray-300 text-[9px] md:text-[11px] mb-1">${d.timestamp}</div>
+                        <div class="flex justify-between items-center py-2 md:py-3 font-helvetica px-4">
+                            <div class="flex flex-col text-left">
+                                <div class="text-white font-medium text-sm md:text-base mb-1">${d.nickname}</div>
                                 <div class="text-pink-400 font-bold text-sm md:text-lg tracking-wider">${formatMoney(d.amount)}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-gray-400 text-[10px] md:text-xs italic">${d.timestamp}</div>
                             </div>
                         </div>
                     `;
