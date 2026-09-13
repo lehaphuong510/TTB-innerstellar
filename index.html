@@ -40,19 +40,18 @@
         <p class="font-helvetica text-white/80 text-base md:text-lg tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION (Đã IN HOA và Canh giữa theo tỷ lệ mới) -->
+    <!-- THANH NAVIGATION -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
-        <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px]">
-            <!-- Phần link bọc trong flex-1 để tự động chiếm phần không gian còn lại và canh giữa TRONG phần đó -->
-            <div class="hidden md:flex flex-1 justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center uppercase">
+        <nav class="grid grid-cols-[1fr_auto_1fr] w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px]">
+            <div></div>
+            <div class="hidden md:flex justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center uppercase">
                 <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Giới thiệu</a>
                 <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tiến độ quỹ</a>
                 <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Danh sách donors</a>
                 <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tra cứu</a>
                 <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5 capitalize">(Coming soon)</span></span>
             </div>
-            <!-- Nút Donate đẩy sát mép phải (flex-none) -->
-            <div class="flex-none ml-4">
+            <div class="flex justify-end">
                 <a href="LINK_GOOGLE_FORM" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">Donate ih mò</a>
             </div>
         </nav>
@@ -115,7 +114,7 @@
 
     </div> 
 
-    <!-- NÚT CTA BÁM ĐUÔI XUYÊN SUỐT -->
+    <!-- NÚT CTA BÁM ĐUÔI -->
     <a href="LINK_GOOGLE_FORM" target="_blank" 
        class="fixed bottom-6 right-6 bg-pink-500 text-white font-bold uppercase tracking-wider py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300 z-50 flex items-center gap-2 animate-bounce">
         <span>💸</span> DONATE IH MÒ 😸
@@ -129,6 +128,7 @@
         let currentLayout = 'horizontal'; 
         let animationTriggered = false;
 
+        // Các mốc phân bổ đều đẹp mắt (12%, 38%, 64%, 90%)
         const visualStops = [12, 38, 64, 90]; 
 
         function calculateVisualPercentage(current, targets) {
@@ -246,14 +246,13 @@
                     let pct = visualStops[idx]; 
                     milestonesHtml += `
                         <div class="absolute flex flex-col items-center -translate-x-1/2 animate-card milestone-card" style="left: ${pct}%; top: 0; animation-delay: ${(idx+1)*0.2}s">
-                            <!-- Đã tăng size tiền lên text-lg -->
                             <div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div>
                             <img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 28px; left: 50%;">
                             <div class="mt-11 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-40 md:w-56 text-center border border-white/10 backdrop-blur-md shadow-2xl">
                                 <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 uppercase">Chặng ${idx+1}</p>
                                 <p class="text-[#1ce1db] font-major text-base md:text-xl mb-2 drop-shadow-md capitalize">${m.name}</p>
-                                <!-- Chữ hoạt động to hơn và có animate-pulse + Glow -->
-                                <p class="text-[#1ce1db] text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_#1ce1db] animate-pulse">${m.activity}</p>
+                                <!-- Chữ hoạt động màu Hồng, hiệu ứng phát sáng mờ -->
+                                <p class="text-pink-400 text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p>
                             </div>
                         </div>
                     `;
@@ -261,10 +260,10 @@
 
                 progressHtml = `
                     <div class="relative w-full overflow-x-auto no-scrollbar pt-10 pb-4">
-                        <!-- Đẩy khối sang trái -5% để cân bằng thị giác -->
-                        <div class="relative min-w-[1400px] h-[260px] mx-auto px-16 -translate-x-[5%]">
+                        <!-- Trả lại kích thước w-full (max 1152px) để vừa khung màn hình, không bị cắt nội dung -->
+                        <div class="relative w-full min-w-[900px] h-[260px] mx-auto px-10">
                             
-                            <!-- Bổ sung mốc 0đ và CHIẾN THÔI -->
+                            <!-- Mốc 0đ và CHIẾN THÔI -->
                             <div class="absolute flex flex-col items-center -translate-x-1/2" style="left: 0%; top: 0;">
                                 <div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">0đ</div>
                                 <div class="w-1.5 h-4 bg-[#1ce1db] rounded-full absolute z-20" style="top: 30px;"></div>
@@ -284,19 +283,17 @@
                 data.milestones.forEach((m, idx) => {
                     let pct = visualStops[idx];
                     let isEven = idx % 2 === 0; 
-                    // Biến m.activity xóa <br> thành khoảng trắng để cấm rớt dòng
                     let cleanActivity = m.activity.replace(/<br\s*\/?>/gi, ' ');
 
                     milestonesHtml += `
                         <div class="absolute w-full flex items-start animate-card milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${(idx+1)*0.2}s">
                             <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;">
-                            <!-- Đẩy lên 48px để Tâm Tên Chặng đâm ngang Ngôi sao -->
                             <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px]">
                                 <div class="font-helvetica bg-black/60 rounded-xl p-4 w-[280px] md:w-[340px] border border-white/10 backdrop-blur-md shadow-2xl text-left">
                                     <p class="text-white/80 text-xs font-bold mb-1 tracking-widest uppercase">Chặng ${idx+1}</p>
                                     <p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-2 drop-shadow-md capitalize">${m.name}</p>
-                                    <!-- Chữ hoạt động to hơn, có Glow và cấm rớt dòng (truncate) -->
-                                    <p class="text-[#1ce1db] text-sm md:text-base mb-4 whitespace-nowrap overflow-hidden text-ellipsis drop-shadow-[0_0_5px_#1ce1db] animate-pulse">${cleanActivity}</p>
+                                    <!-- Chữ hoạt động màu Hồng, hiệu ứng phát sáng mờ -->
+                                    <p class="text-pink-400 text-sm md:text-base mb-4 whitespace-nowrap overflow-hidden text-ellipsis drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${cleanActivity}</p>
                                     <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
                                 </div>
                             </div>
@@ -339,10 +336,8 @@
                     const offsetTime = parseFloat(content.getAttribute('data-offset-time')) || 188.5;
                     const visualProgress = parseFloat(content.getAttribute('data-visual-progress')) || 0;
 
-                    // 1. Nhảy số thống kê
                     animateValue("counter-current", 0, targetMoney, 2000);
                     
-                    // 2. Chạy Biểu đồ bán nguyệt
                     setTimeout(() => {
                         document.getElementById('chart-donate').style.strokeDashoffset = offsetDonate;
                         document.getElementById('text-pct-donate').innerText = pctMoney.toFixed(1) + "%";
@@ -350,14 +345,12 @@
                         document.getElementById('text-pct-time').innerText = pctTime.toFixed(1) + "%";
                     }, 500);
 
-                    // 3. Nổi thẻ chặng lên TRƯỚC
                     setTimeout(() => {
                         document.querySelectorAll('.milestone-card').forEach(card => {
                             card.classList.add('start-anim-card');
                         });
                     }, 1000);
 
-                    // 4. Fill thanh ngang/dọc chạy ra SAU CÙNG
                     setTimeout(() => {
                         if(currentLayout === 'horizontal') {
                             document.getElementById('main-bar-horiz').style.width = visualProgress + "%";
