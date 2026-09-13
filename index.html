@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innerstellar - Trịnh Thăng Bình Fan Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- THƯ VIỆN BẮN PHÁO HOA -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         @font-face { font-family: 'HelveticaWorld'; src: url('./assets/fonts/HelveticaWorld-Regular.ttf') format('truetype'); }
@@ -20,7 +19,6 @@
         .animate-card { opacity: 0; }
         .start-anim-card { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        /* Hiệu ứng hào quang cho Icon Top 1 */
         @keyframes glowPulse {
             0% { filter: drop-shadow(0 0 10px rgba(28,225,219,0.4)); transform: scale(1); }
             50% { filter: drop-shadow(0 0 25px rgba(28,225,219,1)); transform: scale(1.08); }
@@ -28,17 +26,16 @@
         }
         .anim-glow-pulse { animation: glowPulse 2s infinite ease-in-out; }
 
-        /* HIỆU ỨNG VIỀN XANH - HỒNG CHẠY VÒNG QUANH KHUNG TOP DONOR */
         .anim-frame-glow {
             position: relative;
             z-index: 1;
-            border: none !important; /* Gỡ border mặc định */
+            border: none !important; 
         }
         .anim-frame-glow::before {
             content: "";
             position: absolute;
-            inset: -2px; /* Độ dày của viền chạy */
-            border-radius: 1.6rem; /* Khớp với độ bo tròn của khung 3xl */
+            inset: -2px; 
+            border-radius: 1.6rem; 
             background: linear-gradient(90deg, #1ce1db, #f472b6, #1ce1db, #f472b6);
             background-size: 300% 300%;
             animation: runningBorder 3s linear infinite;
@@ -48,8 +45,8 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.7); /* Lớp nền đen trong mờ để đè lên gradient */
-            border-radius: 1.5rem; /* Khớp với rounded-3xl */
+            background: rgba(0, 0, 0, 0.75); 
+            border-radius: 1.5rem; 
             z-index: -1;
         }
         @keyframes runningBorder {
@@ -81,7 +78,7 @@
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION -->
+    <!-- THANH NAVIGATION (IN HOA TOÀN BỘ) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
         <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
             <div class="hidden md:flex flex-1 justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
@@ -201,6 +198,7 @@
         }
         generateUpdateTime();
 
+        // ---- LOGIC TIẾN ĐỘ QUỸ ----
         let overviewDataGlobal = null;
         let progAnimTriggered = false;
         const visualStops = [15, 40, 65, 90]; 
@@ -293,6 +291,7 @@
             document.getElementById('overview-content').innerHTML = statsHtml + progressHtml;
         }
 
+        // ---- LOGIC DANH SÁCH DONOR & OBSERVER PHÁO HOA ----
         let donorDataGlobal = null;
         let currentDonorTab = 'top'; 
         let donorAnimTriggered = false; 
@@ -393,42 +392,41 @@
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || donorDataGlobal.data || [];
                 
-                // KHUNG XÁM LỚN VỚI HIỆU ỨNG CHẠY VIỀN XANH HỒNG (anim-frame-glow)
-                html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center bg-black/60 rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
+                html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
                 
                 if(tops[0]) {
                     html += `
-                        <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
+                        <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4 border-b border-white/10">
                             <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse">
                                 <img src="./assets/images/Top 1.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                             </div>
                             <div class="text-left font-helvetica flex-none flex flex-col justify-center">
                                 <div class="font-major text-[#1ce1db] text-3xl md:text-4xl mb-2 drop-shadow-md leading-none">${tops[0].nickname}</div>
-                                <div>
-                                    <div class="text-white/80 text-base md:text-lg mb-1">Tổng số tiền donate:</div>
-                                    <div class="text-pink-400 font-bold text-3xl md:text-4xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse mb-3 leading-none">${formatMoney(tops[0].totalAmount || tops[0].amount)}</div>
+                                <div class="flex items-baseline gap-2 mb-1.5 whitespace-nowrap">
+                                    <div class="text-white/80 text-base md:text-lg">Tổng số tiền donate:</div>
+                                    <div class="text-pink-400 font-bold text-2xl md:text-3xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse leading-none">${formatMoney(tops[0].totalAmount || tops[0].amount)}</div>
                                 </div>
-                                <div class="text-gray-400 text-sm italic leading-tight">Lần Donate gần nhất:<br>${parseTimestamp(tops[0].timestamp || tops[0].lastTime || tops[0].time)}</div>
+                                <div class="text-gray-400 text-xs md:text-sm italic leading-tight whitespace-nowrap">Lần Donate gần nhất: ${parseTimestamp(tops[0].timestamp || tops[0].lastTime || tops[0].time)}</div>
                             </div>
                         </div>
                     `;
                 }
                 
                 if(tops.length > 1) {
-                    html += `<div class="flex flex-col md:flex-row justify-between gap-8 md:gap-10 w-full px-0 md:px-8">`;
+                    html += `<div class="flex flex-col md:flex-row justify-between gap-6 md:gap-8 w-full px-0 md:px-4">`;
                     for(let i=1; i<Math.min(3, tops.length); i++) {
                         html += `
-                            <div class="w-full md:w-1/2 flex flex-row items-center justify-center gap-4 md:gap-6">
+                            <div class="w-full md:w-1/2 flex flex-row items-center justify-start md:justify-center gap-3 md:gap-4 overflow-hidden">
                                 <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform cursor-pointer">
                                     <img src="./assets/images/Top ${i+1}.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                                 </div>
-                                <div class="text-left font-helvetica flex-1 flex flex-col justify-between h-28 md:h-32 py-1">
-                                    <div class="font-major text-[#1ce1db] text-lg md:text-xl drop-shadow-md leading-none">${tops[i].nickname}</div>
-                                    <div>
-                                        <div class="text-white/80 text-[10px] md:text-xs mb-0.5">Tổng số tiền donate:</div>
-                                        <div class="text-pink-400 font-bold text-lg md:text-xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse leading-none">${formatMoney(tops[i].totalAmount || tops[i].amount)}</div>
+                                <div class="text-left font-helvetica flex-1 flex flex-col justify-center h-28 md:h-32 py-1 overflow-hidden">
+                                    <div class="font-major text-[#1ce1db] text-lg md:text-xl drop-shadow-md leading-none mb-1.5 md:mb-2">${tops[i].nickname}</div>
+                                    <div class="flex items-baseline gap-1 md:gap-1.5 mb-1 md:mb-1.5 whitespace-nowrap">
+                                        <div class="text-white/80 text-[10px] md:text-xs">Tổng số tiền donate:</div>
+                                        <div class="text-pink-400 font-bold text-base md:text-xl drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse leading-none">${formatMoney(tops[i].totalAmount || tops[i].amount)}</div>
                                     </div>
-                                    <div class="text-gray-400 text-[9px] md:text-[10px] italic leading-tight">Lần Donate gần nhất:<br>${parseTimestamp(tops[i].timestamp || tops[i].lastTime || tops[i].time)}</div>
+                                    <div class="text-gray-400 text-[9px] md:text-[11px] italic leading-tight whitespace-nowrap">Lần Donate gần nhất: ${parseTimestamp(tops[i].timestamp || tops[i].lastTime || tops[i].time)}</div>
                                 </div>
                             </div>
                         `;
