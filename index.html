@@ -285,13 +285,37 @@
             window.requestAnimationFrame(step);
         }
 
+        function runProgressAnimation() {
+            progAnimTriggered = true;
+            const ct = document.getElementById('overview-content');
+            if (!ct) return;
+            animateValue("counter-current", 0, parseFloat(ct.getAttribute('data-target-money')), 2000);
+            setTimeout(() => {
+                if(document.getElementById('chart-donate')) document.getElementById('chart-donate').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-donate'));
+                if(document.getElementById('text-pct-donate')) document.getElementById('text-pct-donate').innerText = parseFloat(ct.getAttribute('data-pct-money')).toFixed(1) + "%";
+                if(document.getElementById('chart-time')) document.getElementById('chart-time').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-time'));
+                if(document.getElementById('text-pct-time')) document.getElementById('text-pct-time').innerText = parseFloat(ct.getAttribute('data-pct-time')).toFixed(1) + "%";
+            }, 500);
+            setTimeout(() => { document.querySelectorAll('.prog-milestone-card').forEach(c => c.classList.add('start-anim-card')); }, 500);
+            setTimeout(() => {
+                let vp = parseFloat(ct.getAttribute('data-visual-progress'));
+                if(document.getElementById('main-bar-horiz')) {
+                    document.getElementById('main-bar-horiz').style.width = vp + "%";
+                    if(document.getElementById('star-horiz')) document.getElementById('star-horiz').style.left = vp + "%";
+                }
+                if(document.getElementById('main-bar-vert')) {
+                    document.getElementById('main-bar-vert').style.height = vp + "%";
+                    if(document.getElementById('star-vert')) document.getElementById('star-vert').style.top = vp + "%";
+                }
+            }, 2200); 
+        }
+        
         async function loadOverview() {
             try {
                 const res = await fetch(API_URL + "?action=overview");
                 overviewDataGlobal = await res.json();
                 document.getElementById('update-time-text').innerText = globalUpdateTimeStr;
                 renderOverviewLayout();
-                setupIntersectionObserver();
             } catch (e) { document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu tiến độ.</span>`; }
         }
 
@@ -391,27 +415,7 @@
             if(os) {
                 const observer = new IntersectionObserver((entries) => {
                     if(entries[0].isIntersecting && !progAnimTriggered) {
-                        progAnimTriggered = true;
-                        const ct = document.getElementById('overview-content');
-                        animateValue("counter-current", 0, parseFloat(ct.getAttribute('data-target-money')), 2000);
-                        setTimeout(() => {
-                            document.getElementById('chart-donate').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-donate'));
-                            document.getElementById('text-pct-donate').innerText = parseFloat(ct.getAttribute('data-pct-money')).toFixed(1) + "%";
-                            document.getElementById('chart-time').style.strokeDashoffset = parseFloat(ct.getAttribute('data-offset-time'));
-                            document.getElementById('text-pct-time').innerText = parseFloat(ct.getAttribute('data-pct-time')).toFixed(1) + "%";
-                        }, 500);
-                        setTimeout(() => { document.querySelectorAll('.prog-milestone-card').forEach(c => c.classList.add('start-anim-card')); }, 500);
-                        setTimeout(() => {
-                            let vp = parseFloat(ct.getAttribute('data-visual-progress'));
-                            if(document.getElementById('main-bar-horiz')) {
-                                document.getElementById('main-bar-horiz').style.width = vp + "%";
-                                document.getElementById('star-horiz').style.left = vp + "%";
-                            }
-                            if(document.getElementById('main-bar-vert')) {
-                                document.getElementById('main-bar-vert').style.height = vp + "%";
-                                document.getElementById('star-vert').style.top = vp + "%";
-                            }
-                        }, 2200); 
+                        runProgressAnimation();
                     }
                 }, { threshold: 0.15 });
                 observer.observe(os);
@@ -774,20 +778,28 @@
                 btn.disabled = true;
                 try {
                     await fetch(API_URL + "?action=clearcache");
-                    
-                    // 2 DÒNG THÊM MỚI: MỞ KHÓA HIỆU ỨNG TIẾN ĐỘ VÀ DONOR ĐỂ CHẠY LẠI TỪ ĐẦU
-                    progAnimTriggered = false;
-                    donorAnimTriggered = false;
-                    
                     await loadOverview();
                     await loadDonorData();
+                    
+                    // SAU KHI TẢI XONG: KÍCH HOẠT LẠI CÔNG TẮC HIỆU ỨNG TỨC THÌ
+                    setTimeout(() => {
+                        runProgressAnimation();
+                        if(currentDonorTab === 'top') {
+                            confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 });
+                        }
+                    }, 300);
+                    
                     alert("Cập nhật dữ liệu mới nhất thành công!");
                 } catch(e) { alert("Có lỗi xảy ra, vui lòng thử lại sau."); } 
                 finally { btn.innerHTML = originalText; btn.disabled = false; }
             }
         }
         
-        window.onload = () => { loadOverview(); loadDonorData(); };
+        window.onload = async () => { 
+            await loadOverview(); 
+            await loadDonorData(); 
+            setupIntersectionObserver(); 
+        };
     </script>
 </body>
 </html>
