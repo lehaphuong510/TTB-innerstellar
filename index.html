@@ -600,7 +600,7 @@
                 let moneyContent = "";
                 if (data.donateData.history.length === 1) {
                     let h = data.donateData.history[0];
-                    moneyContent = `<p>Số tiền đã Donate: <span class="text-pink-400 font-bold ml-1">${formatMoney(h.submittedAmount)}</span> ${h.note ? `<span class="text-gray-400 text-xs italic ml-2">(${h.note})</span>` : ''}</p>`;
+                    moneyContent = `<p>Số tiền đã Donate: <span class="text-pink-400 font-bold ml-1">${formatMoney(h.submittedAmount)}</span> <span class="text-gray-300 text-xs italic ml-2">(${h.isDiscrepancy ? h.note : h.actualStatus})</span></p>`;
                 } else {
                     let tableRows = "";
                     data.donateData.history.forEach(h => {
@@ -608,7 +608,7 @@
                             <tr class="border-b border-white/10 last:border-0 text-sm md:text-base">
                                 <td class="p-3 text-center text-white/90">Lần ${h.turn}</td>
                                 <td class="p-3 text-right text-pink-400 font-bold tracking-wider">${formatMoney(h.submittedAmount)}</td>
-                                <td class="p-3 text-left ${h.isDiscrepancy ? 'text-gray-400 italic text-xs' : 'text-white/80'}">${h.isDiscrepancy ? h.note : 'Khớp'}</td>
+                                <td class="p-3 text-left ${h.isDiscrepancy ? 'text-gray-400 italic text-xs' : 'text-white/80'}">${h.isDiscrepancy ? h.note : h.actualStatus}</td>
                             </tr>
                         `;
                     });
@@ -616,7 +616,7 @@
                         <div class="mt-4 border border-white/20 rounded-lg overflow-hidden">
                             <table class="w-full text-left">
                                 <thead class="bg-pink-400/60 text-white text-sm md:text-base font-bold">
-                                    <tr><th class="p-3 text-center border-r border-white/10">Lần</th><th class="p-3 text-right border-r border-white/10">Số tiền form</th><th class="p-3 text-left">Ghi chú</th></tr>
+                                    <tr><th class="p-3 text-center border-r border-white/10">Lần</th><th class="p-3 text-right border-r border-white/10">Số tiền form</th><th class="p-3 text-left">Trạng thái</th></tr>
                                 </thead>
                                 <tbody class="bg-black/40">
                                     ${tableRows}
