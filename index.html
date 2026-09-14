@@ -774,6 +774,11 @@
                 btn.disabled = true;
                 try {
                     await fetch(API_URL + "?action=clearcache");
+                    
+                    // 2 DÒNG THÊM MỚI: MỞ KHÓA HIỆU ỨNG TIẾN ĐỘ VÀ DONOR ĐỂ CHẠY LẠI TỪ ĐẦU
+                    progAnimTriggered = false;
+                    donorAnimTriggered = false;
+                    
                     await loadOverview();
                     await loadDonorData();
                     alert("Cập nhật dữ liệu mới nhất thành công!");
