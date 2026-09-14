@@ -94,7 +94,7 @@
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION (ĐÃ BỎ CTA VÀ CANH GIỮA) -->
+    <!-- THANH NAVIGATION -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
         <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 justify-center items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
             <div class="flex space-x-6 lg:space-x-12 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
@@ -202,7 +202,7 @@
         </div>
     </footer>
 
-    <!-- CỤM ICON MẠNG XÃ HỘI + NÚT ADMIN (DỌC TRÊN CTA) -->
+    <!-- CỤM ICON MẠNG XÃ HỘI + NÚT ADMIN -->
     <div class="fixed bottom-24 right-6 z-50 flex flex-col items-center gap-3">
         <button onclick="forceUpdateData()" title="Admin: Xóa Cache & Làm mới dữ liệu" class="w-10 h-10 bg-gray-800/80 backdrop-blur-md rounded-full flex items-center justify-center border border-gray-500 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/50 transition-all">
             <svg class="w-5 h-5 text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
@@ -312,7 +312,8 @@
         
         async function loadOverview() {
             try {
-                const res = await fetch(API_URL + "?action=overview");
+                // CHỐNG CACHE TRÌNH DUYỆT 100%
+                const res = await fetch(API_URL + "?action=overview&t=" + new Date().getTime());
                 overviewDataGlobal = await res.json();
                 document.getElementById('update-time-text').innerText = globalUpdateTimeStr;
                 renderOverviewLayout();
@@ -408,34 +409,10 @@
         let currentDonorTab = 'top'; 
         let donorAnimTriggered = false; 
 
-        function setupIntersectionObserver() {
-            const os = document.getElementById('overview-section');
-            if(os) {
-                const observer = new IntersectionObserver((entries) => {
-                    if(entries[0].isIntersecting && !progAnimTriggered) {
-                        runProgressAnimation();
-                    }
-                }, { threshold: 0.15 });
-                observer.observe(os);
-            }
-
-            const ds = document.getElementById('donor-section');
-            if(ds) {
-                const donorObserver = new IntersectionObserver((entries) => {
-                    if(entries[0].isIntersecting && !donorAnimTriggered) {
-                        donorAnimTriggered = true;
-                        if(currentDonorTab === 'top') {
-                            setTimeout(() => { confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 }); }, 300);
-                        }
-                    }
-                }, { threshold: 0.2 });
-                donorObserver.observe(ds);
-            }
-        }
-
         async function loadDonorData() {
             try {
-                const res = await fetch(API_URL + "?action=topdonor");
+                // CHỐNG CACHE TRÌNH DUYỆT 100%
+                const res = await fetch(API_URL + "?action=topdonor&t=" + new Date().getTime());
                 donorDataGlobal = await res.json();
                 document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
                 renderDonorsView(); 
@@ -575,7 +552,8 @@
             resultBox.innerHTML = `<div class="loader mx-auto"></div> <span class="text-white/80 text-center mt-2">Đang tìm kiếm trong hệ thống...</span>`;
 
             try {
-                const res = await fetch(API_URL + `?action=lookup&sdt=${encodeURIComponent(phone)}`);
+                // CHỐNG CACHE TRÌNH DUYỆT 100%
+                const res = await fetch(API_URL + `?action=lookup&sdt=${encodeURIComponent(phone)}&t=` + new Date().getTime());
                 const data = await res.json();
 
                 if (data.error || data.status === "not_found") {
@@ -768,16 +746,19 @@
                 btn.innerHTML = `<div class="loader" style="width: 12px; height: 12px; border-width: 2px;"></div> Đang xử lý...`;
                 btn.disabled = true;
                 try {
-                    await fetch(API_URL + "?action=clearcache");
-                    await loadOverview();
-                    await loadDonorData();
+                    // XÓA CACHE CỦA GOOGLE MƯỢT MÀ
+                    await fetch(API_URL + "?action=clearcache&t=" + new Date().getTime());
                     
-                    setTimeout(() => {
+                    // GỌI TẢI LẠI ĐỘC LẬP
+                    loadOverview().then(() => {
                         runProgressAnimation();
+                    });
+                    
+                    loadDonorData().then(() => {
                         if(currentDonorTab === 'top') {
                             confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 });
                         }
-                    }, 300);
+                    });
                     
                     alert("Cập nhật dữ liệu mới nhất thành công!");
                 } catch(e) { alert("Có lỗi xảy ra, vui lòng thử lại sau."); } 
@@ -785,10 +766,35 @@
             }
         }
         
-        window.onload = async () => { 
-            await loadOverview();
-            await loadDonorData();
-            setupIntersectionObserver(); 
+        window.onload = () => { 
+            // 1. Shipper Tiến độ chạy độc lập
+            loadOverview().then(() => {
+                const os = document.getElementById('overview-section');
+                if(os) {
+                    const observer = new IntersectionObserver((entries) => {
+                        if(entries[0].isIntersecting && !progAnimTriggered) {
+                            runProgressAnimation();
+                        }
+                    }, { threshold: 0.15 });
+                    observer.observe(os);
+                }
+            });
+
+            // 2. Shipper Donor chạy độc lập
+            loadDonorData().then(() => {
+                const ds = document.getElementById('donor-section');
+                if(ds) {
+                    const donorObserver = new IntersectionObserver((entries) => {
+                        if(entries[0].isIntersecting && !donorAnimTriggered) {
+                            donorAnimTriggered = true;
+                            if(currentDonorTab === 'top') {
+                                setTimeout(() => { confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 }); }, 300);
+                            }
+                        }
+                    }, { threshold: 0.2 });
+                    donorObserver.observe(ds);
+                }
+            });
         };
     </script>
 </body>
