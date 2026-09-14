@@ -327,36 +327,38 @@
                     <div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div>
                     <img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 28px; left: 50%;">
                     
-                    <div class="absolute bottom-full mb-4 w-[150px] md:w-[200px] bg-black/80 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
-                        ${popupHtml}
-                    </div>
-
                     <div class="mt-7 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-full text-center border border-white/10 backdrop-blur-md shadow-2xl group-hover:border-[#1ce1db]/50 transition-colors">
                         <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 uppercase">Chặng ${idx+1}</p>
                         <p class="text-[#1ce1db] font-major text-base md:text-xl mb-2 drop-shadow-md">${m.name}</p>
                         <p class="text-pink-400 font-bold text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p>
+                    </div>
+
+                    <!-- ĐÃ ĐỔI XUỐNG DƯỚI -->
+                    <div class="absolute top-full mt-4 w-[150px] md:w-[200px] bg-black/90 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
+                        ${popupHtml}
                     </div>
                 </div>`;
                 
                 milestonesVertHtml += `
                 <div class="absolute w-full flex items-start animate-card prog-milestone-card group cursor-pointer" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s">
                     <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;">
-                    <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px]">
+                    <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px] relative">
                         
-                        <div class="absolute w-[150px] bg-black/80 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none ${isEven ? 'left-[10%] bottom-full mb-2' : 'right-[10%] bottom-full mb-2'}">
-                            ${popupHtml}
-                        </div>
-
                         <div class="font-helvetica bg-black/60 rounded-xl p-4 w-[280px] md:w-[340px] border border-white/10 backdrop-blur-md shadow-2xl text-left group-hover:border-[#1ce1db]/50 transition-colors">
                             <p class="text-white/80 text-xs font-bold mb-1 tracking-widest uppercase">Chặng ${idx+1}</p>
                             <p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-2 drop-shadow-md">${m.name}</p>
                             <p class="text-pink-400 font-bold text-sm md:text-base mb-4 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p>
                             <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
                         </div>
+
+                        <!-- ĐÃ ĐỔI XUỐNG DƯỚI -->
+                        <div class="absolute top-full mt-2 w-[150px] bg-black/90 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none ${isEven ? 'left-[10%]' : 'right-[10%]'}">
+                            ${popupHtml}
+                        </div>
                     </div>
                 </div>`;
             });
-
+            
             let progressHtml = `
                 <div class="hidden lg:block w-full pt-10 pb-4 relative">
                     <div class="relative w-full min-w-[900px] h-[260px] mx-auto px-10">
@@ -494,7 +496,7 @@
                     html += `<div class="flex flex-col md:flex-row justify-between gap-6 md:gap-8 w-full px-0 md:px-4">`;
                     for(let i=1; i<Math.min(3, tops.length); i++) {
                         html += `
-                            <div class="w-full md:w-1/2 flex flex-row items-center justify-start md:justify-center gap-3 md:gap-4 overflow-hidden">
+                            <div class="w-full md:w-1/2 flex flex-row items-center justify-start md:justify-center gap-3 md:gap-4">
                                 <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform group cursor-pointer">
                                     <img src="./assets/images/Top ${i+1}.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                                     <!-- POP-UP HÌNH ẢNH TOP 2, 3 -->
@@ -586,17 +588,10 @@
                 let greetingName = displayName ? `<span class="text-pink-400 font-bold font-major tracking-wider text-xl md:text-2xl mx-1">${displayName}</span>` : "";
 
                 if (data.checkStatus === "Cần liên hệ fan") {
-                    let msg = data.fansiteMessage || "Bạn nhớ liên hệ với tụi mình qua acc threads của Fansite để được hỗ trợ nha.";
-                    msg = msg.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors">LINK</a>');
-
                     resultBox.innerHTML = `
-                        <div class="text-center mb-6 animate-card start-anim-card">
-                            <p class="font-helvetica text-white/90 text-lg md:text-xl">Xin chào Partner ${greetingName},</p>
-                            <p class="font-helvetica text-white/90 text-lg md:text-xl mt-1">tụi mình <span class="text-pink-400 font-bold">${data.formStatus}</span>.</p>
-                        </div>
-                        <div class="bg-black/80 p-6 rounded-2xl border-2 border-red-400/50 font-helvetica text-center shadow-xl animate-card start-anim-card" style="animation-delay: 0.1s">
-                            <p class="text-red-400 font-major text-xl md:text-2xl mb-3 drop-shadow-md">Lời nhắn từ tụi mình</p>
-                            <div class="text-white/90 leading-relaxed text-sm md:text-base">${msg}</div>
+                        <div class="bg-black/80 p-6 md:p-8 rounded-2xl border-2 border-red-400/50 font-helvetica text-center shadow-[0_0_20px_rgba(248,113,113,0.15)] animate-card start-anim-card mx-auto max-w-2xl w-full">
+                            <p class="text-white/90 text-lg md:text-xl mb-3">Xin chào Partner ${greetingName},</p>
+                            <p class="text-white/90 text-lg md:text-xl leading-relaxed">tụi mình <span class="text-pink-400 font-bold">${data.formStatus}</span>.</p>
                         </div>
                     `;
                     return;
