@@ -386,8 +386,11 @@
                     </div>
                 </div>`;
                 
+                // TUYỆT CHIÊU: NẾU LÀ CHẶNG CUỐI (idx == 3) THÌ ĐỘN THÊM MARGIN ĐÁY BẰNG pb-32 ĐỂ ĐẨY NÚT CTA XUỐNG
+                let bottomPadding = (idx === data.milestones.length - 1) ? "pb-32" : "";
+
                 milestonesVertHtml += `
-                <div class="absolute w-full flex items-start animate-card prog-milestone-card group cursor-pointer" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s">
+                <div class="absolute w-full flex items-start animate-card prog-milestone-card group cursor-pointer ${bottomPadding}" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s">
                     <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;">
                     <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px] relative">
                         
@@ -744,7 +747,7 @@
 
                 let messageBlock = `
                     <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card" style="animation-delay: 0.4s">
-                        <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Partner nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/gskulqlw5zwmjuhd5fha" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
+                        <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Partner nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/gskulqlw5zwmjuhd5fha" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-normal md:whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
                     </div>
                 `;
 
