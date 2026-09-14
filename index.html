@@ -357,7 +357,6 @@
                         <p class="text-pink-400 font-bold text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p>
                     </div>
 
-                    <!-- ĐÃ ĐỔI XUỐNG DƯỚI -->
                     <div class="absolute top-full mt-4 w-[150px] md:w-[200px] bg-black/90 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
                         ${popupHtml}
                     </div>
@@ -375,7 +374,6 @@
                             <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
                         </div>
 
-                        <!-- ĐÃ ĐỔI XUỐNG DƯỚI -->
                         <div class="absolute top-full mt-2 w-[150px] bg-black/90 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none ${isEven ? 'left-[10%]' : 'right-[10%]'}">
                             ${popupHtml}
                         </div>
@@ -470,7 +468,6 @@
 
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || donorDataGlobal.data || [];
-                // NẾU CÓ LINK HÌNH THÌ HIỆN HÌNH, KHÔNG CÓ THÌ HIỆN TEXT CẬP NHẬT
                 let popupHtml = (donorDataGlobal.top3ImgLink) ? `<img src="${donorDataGlobal.top3ImgLink}" class="w-full h-auto rounded border border-white/20">` : `<p class="text-[10px] md:text-xs text-white text-center py-2 italic opacity-80">Tụi mình sẽ sớm cập nhật nha</p>`;
 
                 html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center bg-black/60 rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
@@ -480,7 +477,6 @@
                         <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
                             <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse group cursor-pointer">
                                 <img src="./assets/images/Top 1.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
-                                <!-- POP-UP HÌNH ẢNH TOP 1 -->
                                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-[120px] md:w-[160px] bg-black/90 backdrop-blur p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
                                     ${popupHtml}
                                 </div>
@@ -503,7 +499,6 @@
                             <div class="w-full md:w-1/2 flex flex-row items-center justify-start md:justify-center gap-3 md:gap-4">
                                 <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform group cursor-pointer">
                                     <img src="./assets/images/Top ${i+1}.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
-                                    <!-- POP-UP HÌNH ẢNH TOP 2, 3 -->
                                     <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-[100px] md:w-[130px] bg-black/90 backdrop-blur p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
                                         ${popupHtml}
                                     </div>
@@ -606,7 +601,6 @@
                 let totalKhop = 0;
                 let hasPendingOrLech = false;
 
-                // Vòng lặp tính toán: Chỉ cộng tiền Khớp, nếu có trạng thái khác thì cắm cờ
                 data.donateData.history.forEach(h => {
                     let actualLower = h.actualStatus ? h.actualStatus.toLowerCase() : "";
                     if (actualLower === "khớp") {
@@ -624,7 +618,6 @@
                     `;
                 });
 
-                // Logic Dòng Ghi chú Tổng: Nếu có lần nào chưa Khớp thì hiện câu nhắc nhở
                 let totalNote = hasPendingOrLech ? `<span class="text-gray-400 text-[11px] md:text-xs italic font-normal">Sẽ cập nhật sau khi check ngân hàng</span>` : "";
 
                 moneyContent = `
@@ -649,7 +642,6 @@
                     </div>
                 `;
                 
-
                 let personalBlock = `
                     <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.1s">
                         <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN CÁ NHÂN DONATE</div>
@@ -720,7 +712,6 @@
                         <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
                             <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
                             <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-3">
-                                
                                 <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
                                 <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
                                 <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
@@ -781,7 +772,6 @@
                     await loadOverview();
                     await loadDonorData();
                     
-                    // SAU KHI TẢI XONG: KÍCH HOẠT LẠI CÔNG TẮC HIỆU ỨNG TỨC THÌ
                     setTimeout(() => {
                         runProgressAnimation();
                         if(currentDonorTab === 'top') {
@@ -796,8 +786,8 @@
         }
         
         window.onload = async () => { 
-            await loadOverview(); 
-            await loadDonorData(); 
+            await loadOverview();
+            await loadDonorData();
             setupIntersectionObserver(); 
         };
     </script>
