@@ -740,31 +740,43 @@
         }
 
         async function forceUpdateData() {
-            if(confirm("Chức năng này dùng để ép hệ thống tải lại dữ liệu tức thì bỏ qua thời gian chờ. Bạn có chắc muốn cập nhật?")) {
-                const btn = event.currentTarget;
-                const originalText = btn.innerHTML;
-                btn.innerHTML = `<div class="loader" style="width: 12px; height: 12px; border-width: 2px;"></div> Đang xử lý...`;
-                btn.disabled = true;
-                try {
-                    // XÓA CACHE CỦA GOOGLE MƯỢT MÀ
-                    await fetch(API_URL + "?action=clearcache&t=" + new Date().getTime());
-                    
-                    // GỌI TẢI LẠI ĐỘC LẬP
-                    loadOverview().then(() => {
-                        runProgressAnimation();
-                    });
-                    
-                    loadDonorData().then(() => {
-                        if(currentDonorTab === 'top') {
-                            confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 });
-                        }
-                    });
-                    
-                    alert("Cập nhật dữ liệu mới nhất thành công!");
-                } catch(e) { alert("Có lỗi xảy ra, vui lòng thử lại sau."); } 
-                finally { btn.innerHTML = originalText; btn.disabled = false; }
+            // Thay bảng hỏi Yes/No bằng bảng nhập mật khẩu
+            const pass = prompt("⛔ CHỨC NĂNG DÀNH RIÊNG CHO ADMIN\nVui lòng nhập mật khẩu để ép hệ thống tải lại dữ liệu mới nhất:");
+            
+            // Nếu fan bấm "Hủy" (Cancel) hoặc tắt khung đi
+            if (pass === null) return; 
+
+            // CÀI MẬT KHẨU Ở ĐÂY (Cậu có thể đổi chữ "innerstellar2026" thành bất kỳ pass nào cậu muốn)
+            if (pass !== "Inner30048") {
+                alert("Mật khẩu không đúng! Bạn không thể sử dụng chức năng này.");
+                return;
             }
+
+            // Nếu nhập đúng pass thì mới cho chạy code tải dữ liệu bên dưới
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<div class="loader" style="width: 12px; height: 12px; border-width: 2px;"></div> Đang xử lý...`;
+            btn.disabled = true;
+            try {
+                // XÓA CACHE CỦA GOOGLE MƯỢT MÀ
+                await fetch(API_URL + "?action=clearcache&t=" + new Date().getTime());
+                
+                // GỌI TẢI LẠI ĐỘC LẬP
+                loadOverview().then(() => {
+                    runProgressAnimation();
+                });
+                
+                loadDonorData().then(() => {
+                    if(currentDonorTab === 'top') {
+                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 });
+                    }
+                });
+                
+                alert("Cập nhật dữ liệu mới nhất thành công!");
+            } catch(e) { alert("Có lỗi xảy ra, vui lòng thử lại sau."); } 
+            finally { btn.innerHTML = originalText; btn.disabled = false; }
         }
+        
         
         window.onload = () => { 
             // 1. Shipper Tiến độ chạy độc lập
