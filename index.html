@@ -464,13 +464,20 @@
 
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || donorDataGlobal.data || [];
+                // NẾU CÓ LINK HÌNH THÌ HIỆN HÌNH, KHÔNG CÓ THÌ HIỆN TEXT CẬP NHẬT
+                let popupHtml = (donorDataGlobal.top3ImgLink) ? `<img src="${donorDataGlobal.top3ImgLink}" class="w-full h-auto rounded border border-white/20">` : `<p class="text-[10px] md:text-xs text-white text-center py-2 italic opacity-80">Tụi mình sẽ sớm cập nhật nha</p>`;
+
                 html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center bg-black/60 rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
                 
                 if(tops[0]) {
                     html += `
                         <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
-                            <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse">
+                            <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse group cursor-pointer">
                                 <img src="./assets/images/Top 1.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
+                                <!-- POP-UP HÌNH ẢNH TOP 1 -->
+                                <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-[120px] md:w-[160px] bg-black/90 backdrop-blur p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
+                                    ${popupHtml}
+                                </div>
                             </div>
                             <div class="text-left font-helvetica flex-none flex flex-col justify-center">
                                 <div class="font-major text-[#1ce1db] text-3xl md:text-4xl mb-2 drop-shadow-md leading-none">${tops[0].nickname}</div>
@@ -488,8 +495,12 @@
                     for(let i=1; i<Math.min(3, tops.length); i++) {
                         html += `
                             <div class="w-full md:w-1/2 flex flex-row items-center justify-start md:justify-center gap-3 md:gap-4 overflow-hidden">
-                                <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform cursor-pointer">
+                                <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform group cursor-pointer">
                                     <img src="./assets/images/Top ${i+1}.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
+                                    <!-- POP-UP HÌNH ẢNH TOP 2, 3 -->
+                                    <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-[100px] md:w-[130px] bg-black/90 backdrop-blur p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
+                                        ${popupHtml}
+                                    </div>
                                 </div>
                                 <div class="text-left font-helvetica flex-1 flex flex-col justify-center h-28 md:h-32 py-1 overflow-hidden">
                                     <div class="font-major text-[#1ce1db] text-lg md:text-xl drop-shadow-md leading-none mb-1.5 md:mb-2">${tops[i].nickname}</div>
@@ -520,7 +531,6 @@
             } else {
                 const allList = donorDataGlobal.allDonors || donorDataGlobal.data || [];
                 let filteredList = [];
-                // BỘ LỌC ANONYMOUS
                 if (currentDonorTab === 'form') {
                     filteredList = allList.filter(d => d.nickname.trim().toLowerCase() !== 'anonymous');
                 } else if (currentDonorTab === 'notform') {
@@ -575,7 +585,6 @@
                 let displayName = data.nickname ? data.nickname : (data.fullName ? data.fullName : "");
                 let greetingName = displayName ? `<span class="text-pink-400 font-bold font-major tracking-wider text-xl md:text-2xl mx-1">${displayName}</span>` : "";
 
-                // CHECK CẦN LIÊN HỆ FAN
                 if (data.checkStatus === "Cần liên hệ fan") {
                     let msg = data.fansiteMessage || "Bạn nhớ liên hệ với tụi mình qua acc threads của Fansite để được hỗ trợ nha.";
                     msg = msg.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors">LINK</a>');
@@ -593,7 +602,6 @@
                     return;
                 }
 
-                // 1. THÔNG TIN CÁ NHÂN DONATE & LỊCH SỬ TIỀN BẠC
                 let moneyContent = "";
                 if (data.donateData.history.length === 1) {
                     let h = data.donateData.history[0];
@@ -632,12 +640,11 @@
                             <p>Nickname: <span class="text-pink-400 font-bold ml-1">${data.nickname}</span></p>
                             <p>Số điện thoại: <span class="text-pink-400 font-bold ml-1">${data.originalPhone}</span></p>
                             ${moneyContent}
-                            <p class="text-gray-300 text-sm md:text-base font-medium mt-3 pt-3 border-t border-white/10">Lưu ý: Thời gian đối chiếu ngân hàng và cập nhật trạng thái từ 21h - 23h mỗi ngày</p>
+                            <p class="text-gray-400 text-sm md:text-base font-medium mt-3 pt-3 border-t border-white/10">Lưu ý: Thời gian đối chiếu ngân hàng và cập nhật trạng thái từ 21h - 23h mỗi ngày</p>
                         </div>
                     </div>
                 `;
 
-                // 2. THÔNG TIN QUÀ VÀ SHIP QUÀ
                 let shipBlock = "";
                 let validTotal = (data.giftData && data.giftData.validTotal) ? data.giftData.validTotal : 0;
 
@@ -680,9 +687,9 @@
                         giftHtml = `
                             <div class="mt-6 border-t border-white/10 pt-5">
                                 <p class="font-bold text-sm md:text-base uppercase text-pink-400 mb-1 text-center">DANH SÁCH QUÀ DỰ KIẾN</p>
-                                <p class="text-sm md:text-base text-gray-300 font-medium mb-4 text-center leading-relaxed">
-                                    (tính theo tổng donate của Partner đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] ml-1">${formatMoney(validTotal)}</span>).
-                                    <br>Danh sách Quà chính thức (đặc biệt là quà Top 3) sẽ chốt chính thức sau khi kết thúc đợt Donate vào ngày 10/10/2026.
+                                <p class="text-sm md:text-base text-gray-400 font-medium mb-4 text-center leading-relaxed">
+                                    <span class="whitespace-nowrap">(tính theo tổng donate của Partner đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] mx-1">${formatMoney(validTotal)}</span>).</span>
+                                    <br>Quà Top 3 sẽ chốt chính thức sau khi kết thúc đợt Donate vào ngày 10/10/2026.
                                 </p>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                                     ${giftItems}
@@ -699,7 +706,7 @@
                                 <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
                                 <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
                                 <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
-                                <p class="text-sm md:text-base text-gray-300 font-medium mt-3 leading-relaxed">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
+                                <p class="text-sm md:text-base text-gray-400 font-medium mt-3 leading-relaxed">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
                                 ${giftHtml}
                             </div>
                         </div>
@@ -714,7 +721,6 @@
                     `;
                 }
 
-                // 3. LƯU Ý THÊM CHO TEAM
                 let teamBlock = `
                     <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.3s">
                         <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">LƯU Ý THÊM CHO TEAM @trinhtongpartners</div>
@@ -724,7 +730,6 @@
                     </div>
                 `;
 
-                // 4. ZALO GROUP
                 let messageBlock = `
                     <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card" style="animation-delay: 0.4s">
                         <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Partner nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/LINK_NHOM_ZALO_O_DAY" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
