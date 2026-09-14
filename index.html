@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innerstellar - Trịnh Thăng Bình Fan Project</title>
+    <!-- THÊM FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="./assets/images/Favicon.svg" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -25,6 +27,20 @@
             100% { filter: drop-shadow(0 0 10px rgba(28,225,219,0.4)); transform: scale(1); }
         }
         .anim-glow-pulse { animation: glowPulse 2s infinite ease-in-out; }
+
+        /* HIỆU ỨNG NHÚC NHÍCH CHO POP-UP HÌNH ẢNH */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .animate-wiggle { animation: wiggle 0.4s ease-in-out infinite; }
+
+        /* HIỆU ỨNG CHỚP TẮT CHO QUÀ TOP 3 */
+        @keyframes blink-gift {
+            0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px #f472b6); }
+            50% { opacity: 0.4; filter: drop-shadow(0 0 2px #f472b6); }
+        }
+        .animate-blink-gift { animation: blink-gift 1.5s ease-in-out infinite; border-color: #f472b6 !important; }
 
         .anim-frame-glow {
             position: relative;
@@ -78,18 +94,15 @@
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION -->
+    <!-- THANH NAVIGATION (ĐÃ BỎ CTA VÀ CANH GIỮA) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
-        <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
-            <div class="hidden md:flex flex-1 justify-center space-x-6 lg:space-x-10 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
+        <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 justify-center items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
+            <div class="flex space-x-6 lg:space-x-12 text-[12px] lg:text-[15px] font-bold tracking-wider items-center">
                 <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap">GIỚI THIỆU</a>
-                <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">TIẾN ĐỘ GÓP QUỸ</a>
+                <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap hidden md:block">TIẾN ĐỘ GÓP QUỸ</a>
                 <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">DANH SÁCH DONORS</a>
                 <a href="#lookup-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">TRA CỨU KẾT QUẢ</a>
-                <span class="text-gray-400 cursor-not-allowed leading-tight text-center flex flex-col whitespace-nowrap">TỔNG KẾT THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5">(COMING SOON)</span></span>
-            </div>
-            <div class="flex-none ml-4">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" class="bg-[#1ce1db] text-black font-bold text-xs lg:text-sm px-5 py-2.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] whitespace-nowrap">DONATE IH MÒ</a>
+                <span class="text-gray-400 cursor-not-allowed leading-tight text-center hidden md:flex flex-col whitespace-nowrap">TỔNG KẾT THU CHI <span class="text-[9px] lg:text-[10px] font-normal italic mt-0.5">(COMING SOON)</span></span>
             </div>
         </nav>
     </div>
@@ -130,12 +143,13 @@
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
                     <p id="donor-update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
                 </div>
-                <p class="font-helvetica text-pink-400 text-[16px] md:text-[18px] mt-4 italic">Cập nhật danh sách Pạt 🎀 đã donate và trạng thái Đua Top</p>
+                <p class="font-helvetica text-pink-400 text-[16px] md:text-[18px] mt-4 italic">Cập nhật danh sách Partner đã donate và trạng thái Đua Top</p>
             </div>
 
-            <div class="flex bg-black/60 rounded-full border border-white/20 p-1 mb-8">
-                <button id="tab-top-btn" onclick="switchDonorTab('top')" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase">TOP DONOR</button>
-                <button id="tab-all-btn" onclick="switchDonorTab('all')" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-400 hover:text-white uppercase">DANH SÁCH DONORS</button>
+            <div class="flex flex-wrap justify-center gap-2 bg-black/60 rounded-3xl md:rounded-full border border-white/20 p-1 mb-8 max-w-full">
+                <button id="tab-top-btn" onclick="switchDonorTab('top')" class="px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold text-xs md:text-sm transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase">TOP DONOR</button>
+                <button id="tab-form-btn" onclick="switchDonorTab('form')" class="px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold text-xs md:text-sm transition-all text-gray-400 hover:text-white uppercase">DONOR CÓ ĐIỀN FORM</button>
+                <button id="tab-notform-btn" onclick="switchDonorTab('notform')" class="px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold text-xs md:text-sm transition-all text-gray-400 hover:text-white uppercase">DONOR CHƯA ĐIỀN FORM</button>
             </div>
 
             <div id="donor-content" class="w-full relative flex flex-col items-center min-h-[300px]">
@@ -170,16 +184,11 @@
     <!-- FOOTER LIÊN HỆ -->
     <footer class="w-full bg-[#0b1021]/90 backdrop-blur-lg py-6 flex flex-col items-center justify-center border-t border-white/10 mt-10 relative z-10 px-4">
         <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-4xl w-full">
-            <div class="flex flex-col items-center md:items-start">
-                <p class="font-helvetica text-white/80 text-sm md:text-base text-center mb-2">Liên hệ tụi mình nếu có sai sót về thông tin và cần hỗ trợ nha</p>
-                <!-- NÚT ADMIN CẬP NHẬT DỮ LIỆU ĐƯỢC THÊM VÀO ĐÂY -->
-                <button onclick="forceUpdateData()" class="flex items-center gap-2 text-[10px] md:text-xs text-gray-500 hover:text-[#1ce1db] transition-colors border border-gray-600 hover:border-[#1ce1db] rounded-full px-3 py-1">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    Làm mới dữ liệu (Admin)
-                </button>
-            </div>
-            
+            <p class="font-helvetica text-white/80 text-sm md:text-base text-center mb-0">Liên hệ tụi mình nếu có sai sót về thông tin và cần hỗ trợ nha</p>
             <div class="flex gap-6 items-center">
+                <a href="https://www.threads.com/@trinhtongpartners" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="./assets/images/Threads.svg" alt="Threads" class="w-6 h-6 md:w-8 md:h-8" onerror="this.src='./assets/images/Moc.svg'">
+                </a>
                 <a href="https://www.facebook.com/trinhtongpartners/" target="_blank" class="hover:scale-110 transition-transform">
                     <img src="./assets/images/FB.svg" alt="Facebook" class="w-6 h-6 md:w-8 md:h-8">
                 </a>
@@ -193,8 +202,14 @@
         </div>
     </footer>
 
-    <!-- CỤM ICON MẠNG XÃ HỘI BÁM ĐUÔI -->
+    <!-- CỤM ICON MẠNG XÃ HỘI + NÚT ADMIN (DỌC TRÊN CTA) -->
     <div class="fixed bottom-24 right-6 z-50 flex flex-col items-center gap-3">
+        <button onclick="forceUpdateData()" title="Admin: Xóa Cache & Làm mới dữ liệu" class="w-10 h-10 bg-gray-800/80 backdrop-blur-md rounded-full flex items-center justify-center border border-gray-500 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/50 transition-all">
+            <svg class="w-5 h-5 text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        </button>
+        <a href="https://www.threads.com/@trinhtongpartners" target="_blank" class="w-10 h-10 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/20 transition-all">
+            <img src="./assets/images/Threads.svg" alt="Threads" class="w-5 h-5 object-contain opacity-90" onerror="this.src='./assets/images/Moc.svg'">
+        </a>
         <a href="https://www.facebook.com/trinhtongpartners/" target="_blank" class="w-10 h-10 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/20 transition-all">
             <img src="./assets/images/FB.svg" alt="Facebook" class="w-5 h-5 object-contain opacity-90">
         </a>
@@ -234,9 +249,7 @@
         function generateUpdateTime() {
             let now = new Date();
             let updateDate = new Date(now);
-            if (now.getHours() < 23) {
-                updateDate.setDate(updateDate.getDate() - 1); 
-            }
+            if (now.getHours() < 23) updateDate.setDate(updateDate.getDate() - 1); 
             let dd = String(updateDate.getDate()).padStart(2, '0');
             let mm = String(updateDate.getMonth() + 1).padStart(2, '0');
             let yyyy = updateDate.getFullYear();
@@ -307,10 +320,41 @@
             data.milestones.forEach((m, idx) => {
                 let pct = visualStops[idx]; 
                 let isEven = idx % 2 === 0; 
+                let popupHtml = m.imgLink ? `<img src="${m.imgLink}" class="w-full h-auto rounded border border-white/20">` : `<p class="text-[10px] md:text-xs text-white text-center py-2 italic opacity-80">Tụi mình sẽ sớm cập nhật nha</p>`;
                 
-                milestonesHorizHtml += `<div class="absolute flex flex-col items-center -translate-x-1/2 animate-card prog-milestone-card w-40 md:w-56" style="left: ${pct}%; top: 0; animation-delay: ${idx * 0.2}s"><div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div><img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 28px; left: 50%;"><div class="mt-7 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-full text-center border border-white/10 backdrop-blur-md shadow-2xl"><p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 uppercase">Chặng ${idx+1}</p><p class="text-[#1ce1db] font-major text-base md:text-xl mb-2 drop-shadow-md">${m.name}</p><p class="text-pink-400 font-bold text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p></div></div>`;
+                milestonesHorizHtml += `
+                <div class="absolute flex flex-col items-center -translate-x-1/2 animate-card prog-milestone-card w-40 md:w-56 group cursor-pointer" style="left: ${pct}%; top: 0; animation-delay: ${idx * 0.2}s">
+                    <div class="text-[#1ce1db] font-helvetica text-sm md:text-lg font-bold mb-3 drop-shadow-md whitespace-nowrap">${formatMoney(m.target)}</div>
+                    <img src="./assets/images/Moc.svg" class="absolute w-5 h-5 z-20 -translate-x-1/2" style="top: 28px; left: 50%;">
+                    
+                    <div class="absolute bottom-full mb-4 w-[150px] md:w-[200px] bg-black/80 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
+                        ${popupHtml}
+                    </div>
+
+                    <div class="mt-7 font-helvetica bg-black/60 rounded-xl p-3 md:p-4 w-full text-center border border-white/10 backdrop-blur-md shadow-2xl group-hover:border-[#1ce1db]/50 transition-colors">
+                        <p class="text-white text-[10px] md:text-xs font-bold mb-1 tracking-widest opacity-80 uppercase">Chặng ${idx+1}</p>
+                        <p class="text-[#1ce1db] font-major text-base md:text-xl mb-2 drop-shadow-md">${m.name}</p>
+                        <p class="text-pink-400 font-bold text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p>
+                    </div>
+                </div>`;
                 
-                milestonesVertHtml += `<div class="absolute w-full flex items-start animate-card prog-milestone-card" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s"><img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;"><div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px]"><div class="font-helvetica bg-black/60 rounded-xl p-4 w-[280px] md:w-[340px] border border-white/10 backdrop-blur-md shadow-2xl text-left"><p class="text-white/80 text-xs font-bold mb-1 tracking-widest uppercase">Chặng ${idx+1}</p><p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-2 drop-shadow-md">${m.name}</p><p class="text-pink-400 font-bold text-sm md:text-base mb-4 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p><div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div></div></div></div>`;
+                milestonesVertHtml += `
+                <div class="absolute w-full flex items-start animate-card prog-milestone-card group cursor-pointer" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s">
+                    <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;">
+                    <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px]">
+                        
+                        <div class="absolute w-[150px] bg-black/80 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none ${isEven ? 'left-[10%] bottom-full mb-2' : 'right-[10%] bottom-full mb-2'}">
+                            ${popupHtml}
+                        </div>
+
+                        <div class="font-helvetica bg-black/60 rounded-xl p-4 w-[280px] md:w-[340px] border border-white/10 backdrop-blur-md shadow-2xl text-left group-hover:border-[#1ce1db]/50 transition-colors">
+                            <p class="text-white/80 text-xs font-bold mb-1 tracking-widest uppercase">Chặng ${idx+1}</p>
+                            <p class="text-[#1ce1db] font-major text-xl md:text-2xl mb-2 drop-shadow-md">${m.name}</p>
+                            <p class="text-pink-400 font-bold text-sm md:text-base mb-4 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)] animate-pulse">${m.activity}</p>
+                            <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
+                        </div>
+                    </div>
+                </div>`;
             });
 
             let progressHtml = `
@@ -377,9 +421,7 @@
                     if(entries[0].isIntersecting && !donorAnimTriggered) {
                         donorAnimTriggered = true;
                         if(currentDonorTab === 'top') {
-                            setTimeout(() => {
-                                confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 });
-                            }, 300);
+                            setTimeout(() => { confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 }); }, 300);
                         }
                     }
                 }, { threshold: 0.2 });
@@ -393,23 +435,24 @@
                 donorDataGlobal = await res.json();
                 document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
                 renderDonorsView(); 
-            } catch (e) { 
-                document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
-            }
+            } catch (e) { document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr; }
         }
 
         function switchDonorTab(tab) {
             currentDonorTab = tab;
             const btnTop = document.getElementById('tab-top-btn');
-            const btnAll = document.getElementById('tab-all-btn');
+            const btnForm = document.getElementById('tab-form-btn');
+            const btnNotForm = document.getElementById('tab-notform-btn');
+            
+            const activeClass = "px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold text-xs md:text-sm transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase";
+            const inactiveClass = "px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold text-xs md:text-sm transition-all text-gray-400 hover:text-white uppercase";
+
+            btnTop.className = tab === 'top' ? activeClass : inactiveClass;
+            btnForm.className = tab === 'form' ? activeClass : inactiveClass;
+            btnNotForm.className = tab === 'notform' ? activeClass : inactiveClass;
 
             if (tab === 'top') {
-                btnTop.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase";
-                btnAll.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-400 hover:text-white uppercase";
                 setTimeout(() => { confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, zIndex: 9999 }); }, 100);
-            } else {
-                btnAll.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-[#1ce1db]/20 text-[#1ce1db] uppercase";
-                btnTop.className = "px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-400 hover:text-white uppercase";
             }
             renderDonorsView();
         }
@@ -421,7 +464,6 @@
 
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || donorDataGlobal.data || [];
-                
                 html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center bg-black/60 rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
                 
                 if(tops[0]) {
@@ -438,8 +480,7 @@
                                 </div>
                                 <div class="text-gray-400 text-sm italic leading-tight">Lần Donate gần nhất:<br>${parseTimestamp(tops[0].timestamp || tops[0].lastTime || tops[0].time)}</div>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                 }
                 
                 if(tops.length > 1) {
@@ -458,56 +499,61 @@
                                     </div>
                                     <div class="text-gray-400 text-[9px] md:text-[11px] italic leading-tight whitespace-nowrap">Lần Donate gần nhất: ${parseTimestamp(tops[i].timestamp || tops[i].lastTime || tops[i].time)}</div>
                                 </div>
-                            </div>
-                        `;
+                            </div>`;
                     }
                     html += `</div>`;
                 }
                 html += `</div></div>`; 
 
                 if(tops.length > 3) {
-                    html += `<div class="flex flex-col w-full max-w-[850px] gap-3 mt-6 bg-black/40 p-5 rounded-2xl border border-white/5 animate-card start-anim-card" style="animation-delay: 0.4s">`;
-                    html += `<div class="text-center font-helvetica text-white/80 italic text-sm md:text-base mb-2">Cố lên, sắp lọt Top rồi 😸</div>`;
-                    
+                    html += `<div class="flex flex-col w-full max-w-[850px] gap-3 mt-6 bg-black/40 p-5 rounded-2xl border border-white/5 animate-card start-anim-card" style="animation-delay: 0.4s"><div class="text-center font-helvetica text-white/80 italic text-sm md:text-base mb-2">Cố lên, sắp lọt Top rồi 😸</div>`;
                     for(let i=3; i<Math.min(5, tops.length); i++) {
                         html += `
                             <div class="flex flex-row items-center justify-between border-b border-white/10 pb-3 last:border-0 last:pb-0 gap-2 px-4 md:px-8">
                                 <div class="font-helvetica font-bold text-white text-base md:text-lg flex items-center gap-2"><span class="text-white opacity-50 text-sm italic font-normal">#${i+1}</span> ${tops[i].nickname}</div>
                                 <div class="text-white font-helvetica font-bold text-sm md:text-base tracking-widest text-right">${formatMoney(tops[i].totalAmount || tops[i].amount)}</div>
-                            </div>
-                        `;
+                            </div>`;
                     }
                     html += `</div>`;
                 }
 
             } else {
                 const allList = donorDataGlobal.allDonors || donorDataGlobal.data || [];
+                let filteredList = [];
+                // BỘ LỌC ANONYMOUS
+                if (currentDonorTab === 'form') {
+                    filteredList = allList.filter(d => d.nickname.trim().toLowerCase() !== 'anonymous');
+                } else if (currentDonorTab === 'notform') {
+                    filteredList = allList.filter(d => d.nickname.trim().toLowerCase() === 'anonymous');
+                }
+
                 html += `
                     <div class="w-full max-w-2xl bg-[url('./assets/images/bg-donor.svg')] bg-cover bg-center rounded-2xl border border-white/20 p-2 md:p-6 shadow-2xl relative animate-card start-anim-card mt-4">
                         <div class="w-full max-h-[450px] overflow-y-auto custom-scroll pr-2 space-y-2">
                 `;
-                allList.forEach((d, idx) => {
-                    html += `
-                        <div class="flex justify-between items-center py-3 font-helvetica px-4">
-                            <div class="flex flex-col text-left">
-                                <div class="text-white font-medium text-sm md:text-base mb-1">${d.nickname}</div>
-                                <div class="text-pink-400 font-bold text-sm md:text-lg tracking-wider">${formatMoney(d.amount || d.totalAmount)}</div>
+                if(filteredList.length === 0) {
+                    html += `<p class="text-white/60 text-center py-6 italic font-helvetica">Chưa có dữ liệu trong danh sách này.</p>`;
+                } else {
+                    filteredList.forEach((d, idx) => {
+                        html += `
+                            <div class="flex justify-between items-center py-3 font-helvetica px-4">
+                                <div class="flex flex-col text-left">
+                                    <div class="text-white font-medium text-sm md:text-base mb-1">${d.nickname}</div>
+                                    <div class="text-pink-400 font-bold text-sm md:text-lg tracking-wider">${formatMoney(d.amount || d.totalAmount)}</div>
+                                </div>
+                                <div class="text-right flex flex-col justify-center h-full">
+                                    <div class="text-gray-400 text-[10px] md:text-xs italic mt-auto">${parseTimestamp(d.timestamp || d.time || d.lastTime)}</div>
+                                </div>
                             </div>
-                            <div class="text-right flex flex-col justify-center h-full">
-                                <div class="text-gray-400 text-[10px] md:text-xs italic mt-auto">${parseTimestamp(d.timestamp || d.time || d.lastTime)}</div>
-                            </div>
-                        </div>
-                    `;
-                    if(idx < allList.length - 1) {
-                        html += `<img src="./assets/images/line donor.svg" class="w-full opacity-60 my-1">`;
-                    }
-                });
+                        `;
+                        if(idx < filteredList.length - 1) html += `<img src="./assets/images/line donor.svg" class="w-full opacity-60 my-1">`;
+                    });
+                }
                 html += `</div></div>`;
             }
             container.innerHTML = html;
         }
 
-        // ---- LOGIC TRA CỨU ĐÃ FIX LINK ZALO & TIÊU ĐỀ TRẮNG 20% ----
         async function searchPhone() {
             const phone = document.getElementById('phoneInput').value.trim();
             const resultBox = document.getElementById('lookup-result');
@@ -523,6 +569,27 @@
 
                 if (data.error || data.status === "not_found") {
                     resultBox.innerHTML = `<div class="bg-red-500/20 text-white p-4 md:p-6 rounded-xl border border-red-500/50 text-center leading-relaxed font-helvetica shadow-lg w-full max-w-lg mx-auto">${data.message || data.error}</div>`;
+                    return;
+                }
+
+                let displayName = data.nickname ? data.nickname : (data.fullName ? data.fullName : "");
+                let greetingName = displayName ? `<span class="text-pink-400 font-bold font-major tracking-wider text-xl md:text-2xl mx-1">${displayName}</span>` : "";
+
+                // CHECK CẦN LIÊN HỆ FAN
+                if (data.checkStatus === "Cần liên hệ fan") {
+                    let msg = data.fansiteMessage || "Bạn nhớ liên hệ với tụi mình qua acc threads của Fansite để được hỗ trợ nha.";
+                    msg = msg.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors">LINK</a>');
+
+                    resultBox.innerHTML = `
+                        <div class="text-center mb-6 animate-card start-anim-card">
+                            <p class="font-helvetica text-white/90 text-lg md:text-xl">Xin chào Partner ${greetingName},</p>
+                            <p class="font-helvetica text-white/90 text-lg md:text-xl mt-1">tụi mình <span class="text-pink-400 font-bold">${data.formStatus}</span>.</p>
+                        </div>
+                        <div class="bg-black/80 p-6 rounded-2xl border-2 border-red-400/50 font-helvetica text-center shadow-xl animate-card start-anim-card" style="animation-delay: 0.1s">
+                            <p class="text-red-400 font-major text-xl md:text-2xl mb-3 drop-shadow-md">Lời nhắn từ tụi mình</p>
+                            <div class="text-white/90 leading-relaxed text-sm md:text-base">${msg}</div>
+                        </div>
+                    `;
                     return;
                 }
 
@@ -546,18 +613,11 @@
                         <div class="mt-4 border border-white/20 rounded-lg overflow-hidden">
                             <table class="w-full text-left">
                                 <thead class="bg-pink-400/60 text-white text-sm md:text-base font-bold">
-                                    <tr>
-                                        <th class="p-3 text-center border-r border-white/10">Lần</th>
-                                        <th class="p-3 text-right border-r border-white/10">Số tiền form</th>
-                                        <th class="p-3 text-left">Ghi chú</th>
-                                    </tr>
+                                    <tr><th class="p-3 text-center border-r border-white/10">Lần</th><th class="p-3 text-right border-r border-white/10">Số tiền form</th><th class="p-3 text-left">Ghi chú</th></tr>
                                 </thead>
                                 <tbody class="bg-black/40">
                                     ${tableRows}
-                                    <tr class="bg-white/10 font-bold">
-                                        <td class="p-3 text-center text-white">TỔNG</td>
-                                        <td class="p-3 text-right text-pink-400 tracking-wider" colspan="2">${data.donateData.totalMessage}</td>
-                                    </tr>
+                                    <tr class="bg-white/10 font-bold"><td class="p-3 text-center text-white">TỔNG</td><td class="p-3 text-right text-pink-400 tracking-wider" colspan="2">${data.donateData.totalMessage}</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -572,7 +632,7 @@
                             <p>Nickname: <span class="text-pink-400 font-bold ml-1">${data.nickname}</span></p>
                             <p>Số điện thoại: <span class="text-pink-400 font-bold ml-1">${data.originalPhone}</span></p>
                             ${moneyContent}
-                            <p class="text-gray-400 text-xs italic mt-3 pt-3 border-t border-white/10">Lưu ý: Thời gian đối chiếu ngân hàng và cập nhật trạng thái từ 21h - 23h mỗi ngày</p>
+                            <p class="text-gray-300 text-sm md:text-base font-medium mt-3 pt-3 border-t border-white/10">Lưu ý: Thời gian đối chiếu ngân hàng và cập nhật trạng thái từ 21h - 23h mỗi ngày</p>
                         </div>
                     </div>
                 `;
@@ -587,12 +647,24 @@
                     if (data.giftData && data.giftData.names.length > 0) {
                         let giftItems = "";
                         data.giftData.names.forEach((name, index) => {
-                            let hasGift = data.giftData.earned[index];
-                            if (hasGift) {
+                            let hasBaseGift = data.giftData.earned[index];
+                            let hasTop3Gift = data.giftData.isTop3 && data.giftData.top3Gifts[index];
+                            let isBlinking = hasTop3Gift && !data.giftData.isEnded;
+                            let blinkClass = isBlinking ? "animate-blink-gift" : "";
+                            let popupLink = hasTop3Gift ? data.giftData.top3Img : "";
+                            
+                            let popupHtml = popupLink ? `<img src="${popupLink}" class="w-full h-auto rounded border border-white/20">` : `<p class="text-[10px] md:text-xs text-white text-center py-2 italic opacity-80">Tụi mình sẽ sớm cập nhật nha</p>`;
+
+                            if (hasBaseGift) {
                                 giftItems += `
-                                    <div class="flex flex-col items-center justify-center p-3 bg-white/5 border border-pink-400/30 rounded-lg gap-2 shadow-inner">
+                                    <div class="group relative flex flex-col items-center justify-center p-3 bg-white/5 border border-pink-400/30 rounded-lg gap-2 shadow-inner ${blinkClass} cursor-pointer transition-all hover:bg-white/10">
                                         <img src="./assets/images/checkmark.svg" class="w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_0_3px_#f472b6]" onerror="this.style.display='none'">
                                         <span class="text-pink-400 font-bold text-center text-xs md:text-sm">${name}</span>
+                                        ${hasTop3Gift ? `
+                                            <div class="absolute bottom-full mb-3 w-[120px] md:w-[150px] bg-black/90 backdrop-blur p-1.5 rounded border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
+                                                ${popupHtml}
+                                            </div>
+                                        ` : ''}
                                     </div>
                                 `;
                             } else {
@@ -608,7 +680,10 @@
                         giftHtml = `
                             <div class="mt-6 border-t border-white/10 pt-5">
                                 <p class="font-bold text-sm md:text-base uppercase text-pink-400 mb-1 text-center">DANH SÁCH QUÀ DỰ KIẾN</p>
-                                <p class="text-[10px] md:text-xs text-gray-400 italic mb-4 text-center">(tính theo tổng donate của Pạt 🎀 đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] ml-1">${formatMoney(validTotal)}</span>)</p>
+                                <p class="text-sm md:text-base text-gray-300 font-medium mb-4 text-center leading-relaxed">
+                                    (tính theo tổng donate của Partner đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] ml-1">${formatMoney(validTotal)}</span>).
+                                    <br>Danh sách Quà chính thức (đặc biệt là quà Top 3) sẽ chốt chính thức sau khi kết thúc đợt Donate vào ngày 10/10/2026.
+                                </p>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                                     ${giftItems}
                                 </div>
@@ -620,11 +695,11 @@
                         <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
                             <div class="bg-white/20 text-[#1ce1db] drop-shadow-sm font-bold font-helvetica px-5 py-3 rounded-t-xl text-sm md:text-base uppercase tracking-widest text-center">THÔNG TIN QUÀ VÀ SHIP QUÀ</div>
                             <div class="bg-black/60 p-5 md:p-6 rounded-b-xl border border-white/20 border-t-0 font-helvetica text-white/90 space-y-3">
-                                
+                                <p>Nơi nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.deliveryPlace}</span></p>
                                 <p>SĐT người nhận: <span class="text-pink-400 font-bold ml-1">${data.shippingData.phone}</span></p>
                                 <p>Địa chỉ: <span class="text-pink-400 font-bold ml-1">${data.shippingData.address}</span></p>
                                 <p>Lưu ý giao hàng: <span class="text-pink-400 font-bold ml-1">${deliveryNote}</span></p>
-                                <p class="text-[10px] md:text-xs text-gray-500 italic mt-3">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
+                                <p class="text-sm md:text-base text-gray-300 font-medium mt-3 leading-relaxed">Sau khi tụi mình book đơn ship quà về cho mọi người thì thông tin Mã vận đơn, Đơn vị giao hàng, Phí dự kiến cũng sẽ nằm ở phần này nha.</p>
                                 ${giftHtml}
                             </div>
                         </div>
@@ -633,7 +708,7 @@
                     shipBlock = `
                         <div class="flex flex-col animate-card start-anim-card" style="animation-delay: 0.2s">
                             <div class="bg-black/60 p-5 md:p-6 rounded-xl border border-pink-400/30 font-helvetica text-white/90 text-center shadow-[0_0_15px_rgba(244,114,182,0.15)]">
-                                <p class="text-sm md:text-base leading-relaxed">Xin gửi Pạt 🎀 ngàn cái ôm thắm thiết, cảm ơn Pạt 🎀 đã tin tưởng ủng hộ và đồng hành cùng <span class="text-pink-400 font-bold">@trinhtongpartners</span> trong Project này nha.</p>
+                                <p class="text-sm md:text-base leading-relaxed">Xin gửi Partner ngàn cái ôm thắm thiết, cảm ơn Partner đã tin tưởng ủng hộ và đồng hành cùng <span class="text-pink-400 font-bold">@trinhtongpartners</span> trong Project này nha.</p>
                             </div>
                         </div>
                     `;
@@ -649,19 +724,16 @@
                     </div>
                 `;
 
-                // 4. ZALO GROUP (CHUNG DÒNG INLINE TEXT)
+                // 4. ZALO GROUP
                 let messageBlock = `
                     <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card" style="animation-delay: 0.4s">
-                        <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Pạt 🎀 nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/LINK_NHOM_ZALO_O_DAY" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
+                        <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Partner nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/LINK_NHOM_ZALO_O_DAY" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
                     </div>
                 `;
 
-                let displayName = data.nickname ? data.nickname : (data.fullName ? data.fullName : "");
-                let greetingName = displayName ? `<span class="text-pink-400 font-bold font-major tracking-wider text-xl md:text-2xl mx-1">${displayName}</span>` : "";
-
                 let html = `
                     <div class="text-center mb-8 animate-card start-anim-card">
-                        <p class="font-helvetica text-white/90 text-lg md:text-xl">Xin chào Pạt 🎀 ${greetingName},</p>
+                        <p class="font-helvetica text-white/90 text-lg md:text-xl">Xin chào Partner ${greetingName},</p>
                         <p class="font-helvetica text-white/90 text-lg md:text-xl mt-1">tụi mình <span class="text-pink-400 font-bold">${data.formStatus}</span>.</p>
                     </div>
                     ${personalBlock}
@@ -672,38 +744,26 @@
 
                 resultBox.innerHTML = html;
 
-            } catch (error) { 
-                resultBox.innerHTML = `<div class="bg-red-500/20 text-white p-4 rounded-xl border border-red-500/50 text-center font-helvetica w-full max-w-lg mx-auto">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</div>`; 
-            }
+            } catch (error) { resultBox.innerHTML = `<div class="bg-red-500/20 text-white p-4 rounded-xl border border-red-500/50 text-center font-helvetica w-full max-w-lg mx-auto">Đã xảy ra lỗi kết nối. Vui lòng thử lại sau.</div>`; }
         }
 
-        // ---- HÀM ÉP CẬP NHẬT DỮ LIỆU TỪ NÚT FOOTER ----
         async function forceUpdateData() {
             if(confirm("Chức năng này dùng để ép hệ thống tải lại dữ liệu tức thì bỏ qua thời gian chờ. Bạn có chắc muốn cập nhật?")) {
                 const btn = event.currentTarget;
                 const originalText = btn.innerHTML;
                 btn.innerHTML = `<div class="loader" style="width: 12px; height: 12px; border-width: 2px;"></div> Đang xử lý...`;
                 btn.disabled = true;
-                
                 try {
-                    // Gọi API dọn rác bộ nhớ đệm
                     await fetch(API_URL + "?action=clearcache");
-                    // Tải lại 2 khu vực dữ liệu chung
                     await loadOverview();
                     await loadDonorData();
                     alert("Cập nhật dữ liệu mới nhất thành công!");
-                } catch(e) {
-                    alert("Có lỗi xảy ra, vui lòng thử lại sau.");
-                } finally {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                }
+                } catch(e) { alert("Có lỗi xảy ra, vui lòng thử lại sau."); } 
+                finally { btn.innerHTML = originalText; btn.disabled = false; }
             }
         }
-        window.onload = () => { 
-            loadOverview(); 
-            loadDonorData(); 
-        };
+        
+        window.onload = () => { loadOverview(); loadDonorData(); };
     </script>
 </body>
 </html>
