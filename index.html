@@ -64,7 +64,6 @@
     </style>
 </head>
 
-<!-- THÊM overflow-x-hidden ĐỂ KHÓA CUỘN NGANG VÀ pb-24 ĐỂ NÉ THANH BOTTOM BAR TRÊN MOBILE -->
 <body class="text-gray-800 relative overflow-x-hidden pb-24 md:pb-0">
     
     <div class="fixed inset-0 z-[-2] bg-cover bg-center" style="background-image: url('./assets/images/Background.webp');"></div>
@@ -77,11 +76,10 @@
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION (CỐ ĐỊNH CHIỀU NGANG TRÊN MOBILE) -->
+    <!-- THANH NAVIGATION (ĐÃ CĂN CHỈNH GIÃN CÁCH VÀ CHỮ CHO MOBILE) -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
-        <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-2 py-2 justify-center items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
-            <!-- ĐÃ DÙNG justify-evenly ĐỂ DÀN ĐỀU CÁC NÚT TRÊN MOBILE VÀ TỰ ĐỘNG RÚT GỌN CHỮ -->
-            <div class="flex w-full justify-evenly md:justify-center md:space-x-6 lg:space-x-12 text-[11px] md:text-[13px] lg:text-[15px] font-bold tracking-wider items-center">
+        <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 justify-center items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
+            <div class="flex w-full justify-between sm:justify-evenly md:justify-center md:space-x-6 lg:space-x-12 text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px] font-bold tracking-wider items-center">
                 <a href="#story" class="hover:text-cyan-400 transition-colors whitespace-nowrap hidden md:block">GIỚI THIỆU</a>
                 <a href="#overview-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap">TIẾN ĐỘ<span class="hidden md:inline"> GÓP QUỸ</span></a>
                 <a href="#donor-section" class="hover:text-cyan-400 transition-colors whitespace-nowrap"><span class="md:hidden">DS DONOR</span><span class="hidden md:inline">DANH SÁCH DONORS</span></a>
@@ -113,8 +111,8 @@
                 <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu tiến độ...</p>
             </div>
             
-            <!-- ĐÃ GIÃN CÁCH mt-16 ĐỂ NÚT CTA CÁCH XA CHẶNG 4 -->
-            <div class="mt-16 text-center relative z-10">
+            <!-- ĐÃ TĂNG MARGIN mt-24 ĐỂ ĐẨY NÚT CTA XUỐNG XA CHẶNG 4 HƠN TRÊN MOBILE -->
+            <div class="mt-24 md:mt-16 text-center relative z-10">
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" class="bg-[#1ce1db] text-black font-bold uppercase text-sm md:text-base px-8 py-3 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_15px_rgba(28,225,219,0.5)] inline-block">DONATE IH MÒ</a>
             </div>
         </section>
@@ -187,9 +185,7 @@
         </div>
     </footer>
 
-    <!-- ============================================== -->
     <!-- GIAO DIỆN DESKTOP: CÁC NÚT CỐ ĐỊNH NHƯ CŨ -->
-    <!-- ============================================== -->
     <div class="fixed bottom-24 right-6 z-50 hidden md:flex flex-col items-center gap-3">
         <button onclick="forceUpdateData()" title="Admin: Xóa Cache & Làm mới dữ liệu" class="w-10 h-10 bg-gray-800/80 backdrop-blur-md rounded-full flex items-center justify-center border border-gray-500 shadow-lg hover:scale-110 hover:bg-[#1ce1db]/50 transition-all">
             <svg class="w-5 h-5 text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
@@ -214,9 +210,7 @@
         <span>💸</span> DONATE IH MÒ 😸
     </a>
 
-    <!-- ============================================== -->
-    <!-- GIAO DIỆN MOBILE: THANH BOTTOM BAR CỐ ĐỊNH ĐÁY -->
-    <!-- ============================================== -->
+    <!-- GIAO DIỆN MOBILE: THANH BOTTOM BAR CỐ ĐỊNH ĐÁY (GIỮ NGUYÊN BẢN MOBILE) -->
     <div class="fixed bottom-0 left-0 w-full bg-[#0b1021]/95 backdrop-blur-md border-t border-white/10 px-4 py-2.5 z-[60] flex flex-row items-end justify-between md:hidden shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
         
         <!-- Cụm 1: Liên Hệ -->
@@ -386,11 +380,8 @@
                     </div>
                 </div>`;
                 
-                // TUYỆT CHIÊU: NẾU LÀ CHẶNG CUỐI (idx == 3) THÌ ĐỘN THÊM MARGIN ĐÁY BẰNG pb-32 ĐỂ ĐẨY NÚT CTA XUỐNG
-                let bottomPadding = (idx === data.milestones.length - 1) ? "pb-32" : "";
-
                 milestonesVertHtml += `
-                <div class="absolute w-full flex items-start animate-card prog-milestone-card group cursor-pointer ${bottomPadding}" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s">
+                <div class="absolute w-full flex items-start animate-card prog-milestone-card group cursor-pointer" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s">
                     <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;">
                     <div class="w-full flex ${isEven ? 'justify-start pr-[52%]' : 'justify-end pl-[52%]'} -translate-y-[48px] relative">
                         
@@ -419,8 +410,8 @@
                     </div>
                 </div>
 
-                <!-- ĐÃ TĂNG CHIỀU CAO TỪ 650PX LÊN 750PX ĐỂ ĐẨY NÚT CTA XUỐNG -->
-                <div class="block lg:hidden w-full relative max-w-2xl mx-auto h-[750px] mt-10 mb-8">
+                <!-- ĐÃ KÉO DÀI CHIỀU CAO H-850PX TRÊN MOBILE ĐỂ TRÁNH ĐÈ CTA -->
+                <div class="block lg:hidden w-full relative max-w-2xl mx-auto h-[850px] mt-10 mb-8">
                     <div class="relative w-full h-full">
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-full bg-gray-700/80 rounded-full"></div>
                         <div id="main-bar-vert" class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
@@ -703,10 +694,13 @@
                         giftHtml = `
                             <div class="mt-6 border-t border-white/10 pt-5">
                                 <p class="font-bold text-sm md:text-base uppercase text-pink-400 mb-1 text-center">DANH SÁCH QUÀ DỰ KIẾN</p>
+                                
+                                <!-- ĐÃ MỞ KHÓA XUỐNG DÒNG TRÊN MOBILE -->
                                 <p class="text-sm md:text-base text-gray-400 font-medium mb-4 text-center leading-relaxed">
-                                    <span class="whitespace-nowrap">(tính theo tổng donate của Partner đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] mx-1">${formatMoney(validTotal)}</span>).</span>
+                                    <span class="whitespace-normal md:whitespace-nowrap">(tính theo tổng donate của Partner đã được đối chiếu ngân hàng tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] mx-1">${formatMoney(validTotal)}</span>).</span>
                                     <br>Quà Top 3 sẽ chốt chính thức sau khi kết thúc đợt Donate vào ngày 10/10/2026.
                                 </p>
+                                
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                                     ${giftItems}
                                 </div>
@@ -747,7 +741,7 @@
 
                 let messageBlock = `
                     <div class="bg-pink-400/60 p-4 md:p-5 rounded-2xl border border-pink-400/50 font-helvetica text-center shadow-lg animate-card start-anim-card" style="animation-delay: 0.4s">
-                        <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Partner nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/gskulqlw5zwmjuhd5fha" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-normal md:whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
+                        <span class="text-black text-sm md:text-base font-bold uppercase leading-relaxed">Partner nhớ vào group Zalo để theo dõi thông báo/ cập nhật từ tụi mình nha: <a href="https://zalo.me/g/gskulqlw5zwmjuhd5fha" target="_blank" class="text-[#1ce1db] font-bold underline hover:text-white transition-colors whitespace-nowrap drop-shadow-md">LINK ZALO</a></span>
                     </div>
                 `;
 
