@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innerstellar - Trịnh Thăng Bình Fan Project</title>
+    <!-- THÊM FAVICON -->
     <link rel="icon" type="image/png" href="./assets/images/Favicon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -50,6 +51,7 @@
         }
         @keyframes runningBorder { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 
+        /* HIỆU ỨNG LUỒNG SÁNG CHO NÚT MOBILE ĐÁY */
         @keyframes shimmer-sweep {
             0% { transform: translateX(-150%) skewX(-20deg); }
             100% { transform: translateX(250%) skewX(-20deg); }
@@ -61,6 +63,7 @@
             animation: shimmer-sweep 2.5s infinite;
         }
 
+        /* BỤI SAO LẤP LÁNH (GLITTER) */
         .glitter-star {
             position: absolute; background: white; border-radius: 50%;
             animation: twinkle var(--duration) ease-in-out infinite alternate;
@@ -109,7 +112,6 @@
         </div>
 
         <img src="./assets/images/Logo.png" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-4 object-contain relative z-10">
-        <!-- Mã hóa khoảng trắng cho Title -->
         <img src="./assets/images/Title.png" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4 relative z-10">
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest relative z-10">Project by @trinhtongpartners</p>
     </section>
@@ -127,26 +129,41 @@
         </nav>
     </div>
 
-    <!-- STORY & TEXT -->
+    <!-- STORY & TEXT (UPDATE KHÔNG THANH CUỘN, CHUẨN TỌA ĐỘ) -->
     <section id="story" class="scroll-mt-28 w-full flex flex-col items-center pb-8 md:pb-12 px-4 md:px-0">
         <div class="relative w-full max-w-5xl mx-auto drop-shadow-2xl mb-12">
             
-            <!-- HÌNH NỀN PNG (Mã hóa khoảng trắng) -->
+            <!-- HÌNH NỀN PNG (Quyết định kích thước khung) -->
             <picture class="w-full block">
                 <source media="(max-width: 767px)" srcset="./assets/images/Story-frame-mobile.png">
                 <img src="./assets/images/Story-fame.png" class="w-full h-auto object-contain opacity-90" alt="Background Frame">
             </picture>
             
-            <div class="absolute top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 w-full flex justify-center">
-                <img src="./assets/images/title_story.png" alt="Giới thiệu" class="h-[40px] sm:h-[60px] md:h-[100px] object-contain drop-shadow-lg">
-            </div>
-            
-            <!-- Bóp width 70%, Đẩy chữ lấp đầy 62% bằng font size và khoảng cách dòng -->
-            <div class="absolute bottom-[10%] md:bottom-[7%] left-1/2 -translate-x-1/2 w-[70%] h-[62%] flex flex-col justify-between">
-                <div class="font-helvetica text-white/90 text-[11px] min-[375px]:text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] leading-[1.8] sm:leading-[2] md:leading-[2.2] text-justify w-full h-full flex flex-col justify-between overflow-y-auto custom-scroll pr-1 md:pr-2">
-                    <p>Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.</p>
-                    <p>Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.</p>
+            <!-- FLEX BỐ CỤC CHUẨN % CỦA CHA, CHIA KHE HỞ THEO Ý CẬU -->
+            <div class="absolute inset-0 flex flex-col items-center">
+                
+                <!-- TOP (Khoảng cách mép trên xuống Title): Mobile 10%, Desktop 7% -->
+                <div class="w-full shrink-0 h-[10%] md:h-[7%]"></div>
+                
+                <!-- TITLE -->
+                <img src="./assets/images/title_story.png" alt="Giới thiệu" class="h-[40px] sm:h-[60px] md:h-[100px] object-contain drop-shadow-lg shrink-0">
+                
+                <!-- KHE GIỮA (Từ Title xuống Body Text): Mobile 15%, Desktop 10% -->
+                <div class="w-full shrink-0 h-[15%] md:h-[10%]"></div>
+                
+                <!-- BODY TEXT: Flex-1 để ăn trọn phần hở còn lại. Width 75% -->
+                <div class="w-[75%] flex-1 flex flex-col justify-center">
+                    <div class="font-helvetica text-white/90 text-justify w-full
+                                text-[10px] min-[375px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[17px] 
+                                leading-relaxed md:leading-[1.8]">
+                        <!-- margin-bottom to rõ để đè luôn line-height, đẩy khoảng cách 2 đoạn -->
+                        <p class="mb-5 sm:mb-8 md:mb-10">Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.</p>
+                        <p>Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.</p>
+                    </div>
                 </div>
+                
+                <!-- BOTTOM (Khoảng cách Body Text xuống mép dưới): Mobile 10%, Desktop 7% -->
+                <div class="w-full shrink-0 h-[10%] md:h-[7%]"></div>
             </div>
 
         </div>
@@ -199,10 +216,8 @@
                 <div class="loader mb-4"></div> <p class="text-white">Đang tải dữ liệu...</p>
             </div>
 
-            <!-- QUÀ DÀNH CHO DONORS (Đã in hoa và bung rộng 850px) -->
             <div class="mt-20 text-center w-full flex flex-col items-center">
                 <h3 class="font-major text-[#ff5ca8] text-2xl md:text-4xl mb-6 drop-shadow-md uppercase">Quà dành cho Donors</h3>
-                <!-- Mã hóa khoảng trắng để mobile không bị lú -->
                 <picture class="w-full max-w-[850px] drop-shadow-2xl">
                     <source media="(max-width: 767px)" srcset="./assets/images/Donor%20gift%20mobile.png">
                     <img src="./assets/images/Donor%20gift%20web.png" class="w-full h-auto object-contain opacity-90" alt="Quà tặng Donors">
