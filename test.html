@@ -112,7 +112,6 @@
         </div>
 
         <img src="./assets/images/Logo.png" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-4 object-contain relative z-10">
-        <!-- ĐÃ ĐỔI ĐUÔI SANG PNG -->
         <img src="./assets/images/Title.png" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4 relative z-10">
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest relative z-10">Project by @trinhtongpartners</p>
     </section>
@@ -130,9 +129,8 @@
         </nav>
     </div>
 
-    <!-- STORY & TEXT (UPDATE TỌA ĐỘ PHẦN TRĂM CHUẨN XÁC) -->
+    <!-- STORY & TEXT (UPDATE TỌA ĐỘ VÀ KÍCH THƯỚC CHUẨN XÁC) -->
     <section id="story" class="scroll-mt-28 w-full flex flex-col items-center pb-8 md:pb-12 px-4 md:px-0">
-        <!-- Khung chứa để hình bung tự nhiên, quyết định kích thước bằng chính hình nền PNG -->
         <div class="relative w-full max-w-5xl mx-auto drop-shadow-2xl mb-12">
             
             <!-- HÌNH NỀN PNG (Xác định kích thước container) -->
@@ -146,8 +144,8 @@
                 <img src="./assets/images/title_story.png" alt="Giới thiệu" class="h-[40px] sm:h-[60px] md:h-[100px] object-contain drop-shadow-lg">
             </div>
             
-            <!-- BODY TEXT: Tính toán tọa độ chính xác: Bottom 7%, Height 62%, Width 85% -->
-            <div class="absolute bottom-[7%] left-1/2 -translate-x-1/2 w-[85%] h-[62%] flex flex-col justify-start md:justify-center">
+            <!-- BODY TEXT: Bottom 10% (Mobile) - 7% (Desktop), Height 62%, Width 70% -->
+            <div class="absolute bottom-[10%] md:bottom-[7%] left-1/2 -translate-x-1/2 w-[70%] h-[62%] flex flex-col justify-start md:justify-center">
                 <div class="font-helvetica text-white/90 text-[10px] min-[375px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[17px] leading-snug sm:leading-relaxed md:leading-[1.7] text-justify w-full h-full flex flex-col justify-evenly overflow-y-auto custom-scroll pr-1 md:pr-2">
                     <p>Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.</p>
                     <p>Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.</p>
@@ -206,7 +204,11 @@
 
             <div class="mt-20 text-center w-full flex flex-col items-center">
                 <h3 class="font-major text-[#ff5ca8] text-2xl md:text-4xl mb-6 drop-shadow-md">Quà dành cho Donors</h3>
-                <img src="./assets/images/Donors gift.png" alt="Quà tặng Donors" class="w-11/12 max-w-lg object-contain opacity-90 drop-shadow-2xl">
+                <!-- ĐÃ THAY ẢNH QUÀ ĐƠN BẰNG THẺ PICTURE CHO WEB VÀ MOBILE -->
+                <picture class="w-11/12 max-w-lg drop-shadow-2xl">
+                    <source media="(max-width: 767px)" srcset="./assets/images/Donor gift mobile.png">
+                    <img src="./assets/images/Donor gift web.png" class="w-full h-auto object-contain opacity-90" alt="Quà tặng Donors">
+                </picture>
             </div>
         </section>
 
@@ -310,6 +312,7 @@
         </a>
     </div>
 
+    <!-- UPDATE API MỚI -->
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzOlTdu-y2ggWspAbOyWmEpMRfwsnob6z2tzUsAajfhS7ARMVhTkMezbRRahrVKEqPn/exec";
         const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + "đ";
