@@ -66,30 +66,30 @@
         }
 
         /* ----------------------------------------------------- */
-        /* CÁC HIỆU ỨNG POPUP THEO YÊU CẦU ĐỂ TEST               */
+        /* ĐÃ FIX: CHỈ ANIMATE SCALE VÀ TRANSLATE-Y, BỎ TRANSLATE-X */
         /* ----------------------------------------------------- */
         
         /* 1. Zoom In (Cho Top 1) */
         .group:hover .hover-zoom { animation: popZoom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes popZoom {
-            0% { transform: translateX(-50%) translateY(10px) scale(0.5); opacity: 0; }
-            100% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+            0% { transform: translateY(10px) scale(0.5); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         /* 2. Slide Up (Cho Top 2) */
         .group:hover .hover-slide { animation: popSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes popSlide {
-            0% { transform: translateX(-50%) translateY(30px); opacity: 0; }
-            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
 
         /* 3. Bounce (Cho Top 3) */
         .group:hover .hover-bounce { animation: popBounce 0.6s cubic-bezier(0.28, 0.84, 0.42, 1) forwards; }
         @keyframes popBounce {
-            0% { transform: translateX(-50%) translateY(30px); opacity: 0; }
-            50% { transform: translateX(-50%) translateY(-15px); opacity: 1; }
-            75% { transform: translateX(-50%) translateY(5px); opacity: 1; }
-            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            0% { transform: translateY(30px); opacity: 0; }
+            50% { transform: translateY(-15px); opacity: 1; }
+            75% { transform: translateY(5px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 1; }
         }
 
         html { scroll-behavior: smooth; }
@@ -158,20 +158,12 @@
             
             <div class="absolute inset-0 flex flex-col items-center">
                 <div class="w-full shrink-0 h-[10%] md:h-[7%]"></div>
-                <img src="./assets/images/title_story.png" alt="Giới thiệu" class="h-[40px] sm:h-[60px] md:h-[100px] object-contain drop-shadow-lg shrink-0">
+                <img src="./assets/images/title_story.png" alt="Giới thiệu" class="h-[40px] sm:h-[60px] md:h-[100px] object-contain drop-shadow-lg shrink-0 opacity-0 pointer-events-none">
                 <div class="w-full shrink-0 h-[15%] md:h-[10%]"></div>
                 
-                <div class="w-[75%] flex-1 flex flex-col justify-center">
-                    <div class="font-helvetica text-white/90 text-justify w-full
-                                text-[10px] min-[375px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[17px] 
-                                leading-relaxed md:leading-[1.8]">
-                        <p class="mb-5 sm:mb-8 md:mb-10">Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.</p>
-                        <p>Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.</p>
-                    </div>
-                </div>
+                <div class="w-[75%] flex-1 flex flex-col justify-center opacity-0 pointer-events-none"></div>
                 <div class="w-full shrink-0 h-[10%] md:h-[7%]"></div>
             </div>
-
         </div>
         <img src="./assets/images/Phan%20cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </section>
@@ -331,6 +323,7 @@
         </a>
     </div>
 
+    <!-- SCRIPT XỬ LÝ DỮ LIỆU -->
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzOlTdu-y2ggWspAbOyWmEpMRfwsnob6z2tzUsAajfhS7ARMVhTkMezbRRahrVKEqPn/exec";
         const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + "đ";
@@ -466,8 +459,7 @@
             data.milestones.forEach((m, idx) => {
                 let pct = visualStops[idx]; 
                 let isEven = idx % 2 === 0; 
-                // Popup MỐC: tháo nền đen, lột vỏ, to lên.
-                let popupHtml = m.imgLink ? `<img src="${m.imgLink}" class="w-full h-auto drop-shadow-2xl">` : `<div class="bg-black/90 p-2 rounded-lg border border-white/20"><p class="text-[10px] md:text-xs text-white text-center italic opacity-80 whitespace-nowrap">Tụi mình sẽ sớm cập nhật nha</p></div>`;
+                let popupHtml = m.imgLink ? `<img src="${m.imgLink}" class="w-full h-auto rounded border border-white/20">` : `<p class="text-[10px] md:text-xs text-white text-center py-2 italic opacity-80">Tụi mình sẽ sớm cập nhật nha</p>`;
                 
                 milestonesHorizHtml += `
                 <div class="absolute flex flex-col items-center -translate-x-1/2 animate-card prog-milestone-card w-40 md:w-56 group cursor-pointer" style="left: ${pct}%; top: 0; animation-delay: ${idx * 0.2}s">
@@ -480,7 +472,7 @@
                         <p class="text-[#ff5ca8] font-bold text-xs md:text-sm leading-snug px-1 drop-shadow-[0_0_5px_rgba(255,92,168,0.8)] animate-pulse">${m.activity}</p>
                     </div>
 
-                    <div class="absolute top-full mt-4 w-[250px] md:w-[400px] opacity-0 invisible group-hover:opacity-100 group-hover:visible hover-zoom z-50 pointer-events-none origin-top">
+                    <div class="absolute top-full mt-4 w-[150px] md:w-[200px] bg-black/90 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
                         ${popupHtml}
                     </div>
                 </div>`;
@@ -499,7 +491,7 @@
                             <div class="inline-block border border-[#1ce1db] text-[#1ce1db] rounded px-3 py-1 text-sm md:text-base font-bold shadow-[inset_0_0_8px_rgba(28,225,219,0.2)]">${formatMoney(m.target)}</div>
                         </div>
 
-                        <div class="absolute top-full mt-2 w-[250px] opacity-0 invisible group-hover:opacity-100 group-hover:visible hover-zoom z-50 pointer-events-none origin-top ${isEven ? 'left-[10%]' : 'right-[10%]'}">
+                        <div class="absolute top-full mt-2 w-[150px] bg-black/90 backdrop-blur-md p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none ${isEven ? 'left-[10%]' : 'right-[10%]'}">
                             ${popupHtml}
                         </div>
                     </div>
@@ -572,7 +564,6 @@
             if (currentDonorTab === 'top') {
                 const tops = donorDataGlobal.topDonors || donorDataGlobal.data || [];
                 
-                // MÃ HÓA POPUP: LỘT VIỀN ĐEN, CHỈ CÓ HÌNH. TO ĐÙNG.
                 let popupHtml = (donorDataGlobal.top3ImgLink) ? `<img src="${donorDataGlobal.top3ImgLink}" class="w-full h-auto drop-shadow-2xl">` : `<div class="bg-black/90 p-2 rounded-lg border border-white/20"><p class="text-[10px] md:text-xs text-white text-center italic opacity-80 whitespace-nowrap">Tụi mình sẽ sớm cập nhật nha</p></div>`;
 
                 html += `<div class="w-full max-w-[850px] mx-auto animate-card start-anim-card mt-4"><div class="flex flex-col items-center bg-black/60 rounded-[1.5rem] p-6 md:p-10 w-full gap-8 anim-frame-glow">`;
@@ -582,10 +573,14 @@
                         <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
                             <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse group cursor-pointer">
                                 <img src="./assets/images/Top%201.png" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
-                                <!-- HIỆU ỨNG ZOOM (TOP 1) -->
-                                <div class="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 w-[300px] md:w-[450px] opacity-0 invisible group-hover:opacity-100 group-hover:visible hover-zoom z-50 pointer-events-none origin-bottom">
-                                    ${popupHtml}
+                                
+                                <!-- ĐÃ FIX WRAPPER POPUP: MOBILE LEFT-0 ĐỂ TRÁNH TRÀN VIỀN -->
+                                <div class="absolute bottom-full mb-4 left-0 md:left-1/2 md:-translate-x-1/2 z-50 pointer-events-none">
+                                    <div class="w-[260px] sm:w-[300px] md:w-[450px] opacity-0 invisible group-hover:opacity-100 group-hover:visible hover-zoom origin-bottom-left md:origin-bottom">
+                                        ${popupHtml}
+                                    </div>
                                 </div>
+                                
                             </div>
                             <div class="text-left font-helvetica flex-none flex flex-col justify-center">
                                 <div class="font-major text-[#1ce1db] text-3xl md:text-4xl mb-2 drop-shadow-md leading-none">${tops[0].nickname}</div>
@@ -601,16 +596,20 @@
                 if(tops.length > 1) {
                     html += `<div class="flex flex-col md:flex-row justify-between gap-6 md:gap-8 w-full px-0 md:px-4">`;
                     for(let i=1; i<Math.min(3, tops.length); i++) {
-                        // HIỆU ỨNG SLIDE (TOP 2) VÀ BOUNCE (TOP 3)
                         let hoverAnim = (i === 1) ? 'hover-slide' : 'hover-bounce';
                         
                         html += `
                             <div class="w-full md:w-1/2 flex flex-row items-center justify-start md:justify-center gap-3 md:gap-4">
                                 <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform group cursor-pointer">
                                     <img src="./assets/images/Top%20${i+1}.png" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
-                                    <div class="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 w-[300px] md:w-[450px] opacity-0 invisible group-hover:opacity-100 group-hover:visible ${hoverAnim} z-50 pointer-events-none origin-bottom">
-                                        ${popupHtml}
+                                    
+                                    <!-- ĐÃ FIX WRAPPER POPUP: MOBILE LEFT-0 ĐỂ TRÁNH TRÀN VIỀN -->
+                                    <div class="absolute bottom-full mb-4 left-0 md:left-1/2 md:-translate-x-1/2 z-50 pointer-events-none">
+                                        <div class="w-[260px] sm:w-[300px] md:w-[450px] opacity-0 invisible group-hover:opacity-100 group-hover:visible ${hoverAnim} origin-bottom-left md:origin-bottom">
+                                            ${popupHtml}
+                                        </div>
                                     </div>
+                                    
                                 </div>
                                 <div class="text-left font-helvetica flex-1 flex flex-col justify-center h-28 md:h-32 py-1 overflow-hidden">
                                     <div class="font-major text-[#1ce1db] text-lg md:text-xl drop-shadow-md leading-none mb-1.5 md:mb-2">${tops[i].nickname}</div>
@@ -784,7 +783,6 @@
                             let blinkClass = isBlinking ? "animate-blink-gift" : "";
                             let popupLink = hasTop3Gift ? data.giftData.top3Img : "";
                             
-                            // POPUP TRONG PHẦN TRA CỨU: LỘT VIỀN ĐEN
                             let popupHtml = popupLink ? `<img src="${popupLink}" class="w-full h-auto drop-shadow-2xl">` : `<div class="bg-black/90 p-2 rounded-lg border border-white/20"><p class="text-[10px] md:text-xs text-white text-center italic opacity-80 whitespace-nowrap">Tụi mình sẽ sớm cập nhật nha</p></div>`;
 
                             if (hasBaseGift) {
