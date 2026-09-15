@@ -65,7 +65,7 @@
             100% { opacity: 1; transform: scale(1.8); box-shadow: 0 0 12px 3px rgba(255, 255, 255, 1); } 
         }
 
-        /* PURE CSS CHO HIỆU ỨNG POPUP (TRỊ BỆNH CHROME TÀNG HÌNH) */
+        /* PURE CSS POPUP */
         .donor-item { position: relative; z-index: 10; cursor: pointer; }
         .donor-item:hover { z-index: 100; }
 
@@ -167,7 +167,7 @@
         </div>
     </section>
 
-    <!-- PHÂN CÁCH 1 ĐÃ ĐƯỢC CHUẨN HÓA KHOẢNG CÁCH -->
+    <!-- PHÂN CÁCH 1 -->
     <div class="w-full flex justify-center my-12 md:my-16 px-4">
         <img src="./assets/images/Phan%20cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </div>
@@ -195,7 +195,7 @@
         </section>
     </div>
 
-    <!-- PHÂN CÁCH 2 ĐÃ ĐƯỢC CHUẨN HÓA KHOẢNG CÁCH -->
+    <!-- PHÂN CÁCH 2 -->
     <div class="w-full flex justify-center my-12 md:my-16 px-4">
         <img src="./assets/images/Phan%20cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </div>
@@ -231,7 +231,7 @@
         </section>
     </div>
 
-    <!-- PHÂN CÁCH 3 ĐÃ ĐƯỢC CHUẨN HÓA KHOẢNG CÁCH -->
+    <!-- PHÂN CÁCH 3 -->
     <div class="w-full flex justify-center my-12 md:my-16 px-4">
         <img src="./assets/images/Phan%20cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </div>
@@ -242,7 +242,7 @@
             <img src="./assets/images/title_tracuu.png" alt="Tra cứu Thông tin Donate" class="h-[60px] md:h-[100px] object-contain drop-shadow-lg mx-auto mb-6">
             <p class="font-helvetica text-white/80 text-sm md:text-base text-center max-w-2xl mb-8 px-4">Hãy nhập số điện thoại đã điền trong form để tra cứu lịch sử Donate của mình. Các thông tin dưới đây chỉ hiển thị với bạn</p>
             
-            <!-- ĐÃ FIX UI BUTTON MOBILE -->
+            <!-- ĐÃ FIX Ô NHẬP VÀ NÚT TÌM KIẾM TRÊN MOBILE -->
             <div class="flex flex-col md:flex-row gap-4 md:gap-2 mb-6 w-full max-w-xl justify-center items-center px-4">
                 <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 md:p-4 rounded-full w-full outline-none focus:ring-2 focus:ring-[#1ce1db] transition-all bg-white/90 text-black shadow-lg text-center md:text-left">
                 <button onclick="searchPhone()" class="shrink-0 group hover:scale-105 transition-transform drop-shadow-lg flex justify-center w-[160px] md:w-auto">
@@ -256,10 +256,9 @@
     </div> 
 
     <!-- BỘ KHUNG MODAL POP-UP HIỂN THỊ MEME -->
-    <div id="meme-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden bg-black/80 backdrop-blur-sm transition-opacity duration-300 opacity-0">
-        <div class="relative w-11/12 max-w-md transition-transform duration-500 ease-out scale-50" id="meme-modal-content">
-            <button onclick="closeMemeModal()" class="absolute -top-12 right-0 text-white/80 hover:text-[#ff5ca8] font-bold text-4xl transition-colors">&times;</button>
-            <img id="meme-img" src="" class="w-full h-auto rounded-2xl drop-shadow-[0_0_20px_rgba(28,225,219,0.4)] object-contain max-h-[80vh]">
+    <div id="meme-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden bg-black/80 backdrop-blur-sm transition-opacity duration-300 opacity-0 px-4">
+        <div class="relative w-full max-w-md transition-transform duration-500 ease-out scale-50" id="meme-modal-content">
+            <!-- Nội dung Meme sẽ được nhét bằng Javascript vào đây -->
         </div>
     </div>
 
@@ -422,24 +421,18 @@
             }, 2200); 
         }
 
-        // ==========================================
-        // GỘP API: TẢI ĐỒNG THỜI TIẾN ĐỘ + TOP DONOR
-        // ==========================================
         async function loadInitData() {
             try {
-                // Gọi API init gộp
                 const res = await fetch(API_URL + "?action=init&t=" + new Date().getTime());
                 const data = await res.json();
                 
-                // FALLBACK: Lỡ Apps Script chưa cập nhật lệnh action=init thì nó sẽ trả về rỗng. Mình tự động quay về gọi lẻ.
                 if(!data.overview || !data.donor) {
-                    console.warn("Hệ thống chưa tìm thấy hàm gộp Init. Đang tự động chuyển sang gọi lẻ...");
+                    console.warn("Hệ thống đang chuyển sang gọi lẻ...");
                     await loadOverview();
                     await loadDonorData();
                     return;
                 }
 
-                // Nếu có hàm Init, xử lý data ngay và luôn
                 overviewDataGlobal = data.overview;
                 donorDataGlobal = data.donor;
 
@@ -518,7 +511,7 @@
                 
                 let bottomPadding = (idx === data.milestones.length - 1) ? "pb-36" : "";
 
-                // ĐÃ FIX BỆNH ĐÈ LINE: w-[140px] cho mobile lùn
+                // ĐÃ FIX BỆNH ĐÈ LINE TRÊN MOBILE NHỎ BẰNG w-[140px]
                 milestonesVertHtml += `
                 <div class="absolute w-full flex items-start animate-card prog-milestone-card group cursor-pointer ${bottomPadding}" style="top: ${pct}%; left: 0; animation-delay: ${idx * 0.2}s">
                     <img src="./assets/images/Moc.svg" class="absolute w-6 h-6 -translate-x-1/2 z-20 left-1/2" style="margin-top: -12px;">
@@ -710,7 +703,10 @@
             content.classList.add('scale-50');
             modal.classList.remove('opacity-100');
             modal.classList.add('opacity-0');
-            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+            // Tắt video nếu có để nó không phát tiếng ngầm
+            const videoEl = content.querySelector('video');
+            if (videoEl) videoEl.pause();
+            setTimeout(() => { modal.classList.add('hidden'); content.innerHTML = ''; }, 300);
         }
 
         async function searchPhone() {
@@ -731,11 +727,22 @@
                     return;
                 }
 
-                // NẾU CÓ TRẢ VỀ MEMELINK TỪ SHEET -> BẬT POPUP MEME
+                // ==========================================
+                // HIỂN THỊ MEME (HỖ TRỢ MP4 AUTO-PLAY & MUTE)
+                // ==========================================
                 if (data.memeLink) {
-                    document.getElementById('meme-img').src = data.memeLink;
                     const modal = document.getElementById('meme-modal');
                     const content = document.getElementById('meme-modal-content');
+                    const isVideo = data.memeLink.toLowerCase().endsWith('.mp4');
+                    
+                    let mediaHtml = '';
+                    if (isVideo) {
+                        mediaHtml = `<video src="${data.memeLink}" autoplay loop muted playsinline class="w-full h-auto rounded-2xl drop-shadow-[0_0_20px_rgba(28,225,219,0.4)] object-contain max-h-[80vh]"></video>`;
+                    } else {
+                        mediaHtml = `<img src="${data.memeLink}" class="w-full h-auto rounded-2xl drop-shadow-[0_0_20px_rgba(28,225,219,0.4)] object-contain max-h-[80vh]">`;
+                    }
+                    
+                    content.innerHTML = `<button onclick="closeMemeModal()" class="absolute -top-12 right-0 text-white/80 hover:text-[#ff5ca8] font-bold text-4xl transition-colors">&times;</button>` + mediaHtml;
                     modal.classList.remove('hidden');
                     
                     // Delay nhẹ để chạy CSS animation nở ra
