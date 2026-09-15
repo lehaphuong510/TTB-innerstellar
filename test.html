@@ -112,7 +112,8 @@
         </div>
 
         <img src="./assets/images/Logo.png" alt="Trịnh Tổng Partners Logo" class="h-20 md:h-28 mb-4 object-contain relative z-10">
-        <img src="./assets/images/Title.svg" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4 relative z-10">
+        <!-- ĐÃ ĐỔI ĐUÔI SANG PNG -->
+        <img src="./assets/images/Title.png" alt="Inner Stellar - The Light Within" class="w-11/12 max-w-4xl object-contain mb-4 relative z-10">
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest relative z-10">Project by @trinhtongpartners</p>
     </section>
 
@@ -129,22 +130,30 @@
         </nav>
     </div>
 
-    <!-- STORY & TEXT (PADDING 50PX ĐỒNG BỘ CẢ 2 BẢN) -->
+    <!-- STORY & TEXT (UPDATE TỌA ĐỘ PHẦN TRĂM CHUẨN XÁC) -->
     <section id="story" class="scroll-mt-28 w-full flex flex-col items-center pb-8 md:pb-12 px-4 md:px-0">
-        <!-- ĐÃ ĐỔI p-[50px] XUYÊN SUỐT CHO CẢ MOBILE VÀ DESKTOP ĐỂ KHÓA SAFE ZONE -->
-        <div class="relative w-full max-w-5xl drop-shadow-2xl mb-12 flex flex-col items-center justify-center p-[50px] md:aspect-[10/6.5] min-h-[450px] md:min-h-0 mx-auto">
-            <picture class="absolute inset-0 w-full h-full z-[-1]">
-                <source media="(max-width: 767px)" srcset="./assets/images/Story-frame-mobile.svg">
-                <img src="./assets/images/Story-fame.svg" class="w-full h-full object-fill opacity-90" alt="Background Frame">
+        <!-- Khung chứa để hình bung tự nhiên, quyết định kích thước bằng chính hình nền PNG -->
+        <div class="relative w-full max-w-5xl mx-auto drop-shadow-2xl mb-12">
+            
+            <!-- HÌNH NỀN PNG (Xác định kích thước container) -->
+            <picture class="w-full block">
+                <source media="(max-width: 767px)" srcset="./assets/images/Story-frame-mobile.png">
+                <img src="./assets/images/Story-fame.png" class="w-full h-auto object-contain opacity-90" alt="Background Frame">
             </picture>
             
-            <img src="./assets/images/title_story.svg" alt="Giới thiệu" class="h-[50px] md:h-[100px] object-contain mb-4 md:mb-6 drop-shadow-lg shrink-0">
-            
-            <!-- Đã điều chỉnh size text cho phù hợp với PADDING 50 trên Desktop -->
-            <div class="font-helvetica text-white/90 text-[11px] min-[375px]:text-[12px] sm:text-[14px] md:text-[14px] lg:text-base leading-relaxed md:leading-relaxed text-justify w-full z-10 flex-1 flex flex-col justify-center">
-                <p class="mb-2 md:mb-4">Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.</p>
-                <p>Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.</p>
+            <!-- TITLE: Nằm trên cùng -->
+            <div class="absolute top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 w-full flex justify-center">
+                <img src="./assets/images/title_story.png" alt="Giới thiệu" class="h-[40px] sm:h-[60px] md:h-[100px] object-contain drop-shadow-lg">
             </div>
+            
+            <!-- BODY TEXT: Tính toán tọa độ chính xác: Bottom 7%, Height 62%, Width 85% -->
+            <div class="absolute bottom-[7%] left-1/2 -translate-x-1/2 w-[85%] h-[62%] flex flex-col justify-start md:justify-center">
+                <div class="font-helvetica text-white/90 text-[10px] min-[375px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[17px] leading-snug sm:leading-relaxed md:leading-[1.7] text-justify w-full h-full flex flex-col justify-evenly overflow-y-auto custom-scroll pr-1 md:pr-2">
+                    <p>Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.</p>
+                    <p>Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.</p>
+                </div>
+            </div>
+
         </div>
         <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80" alt="Divider">
     </section>
@@ -155,7 +164,7 @@
         <!-- TIẾN ĐỘ -->
         <section id="overview-section" class="scroll-mt-28 w-full flex flex-col items-center">
             <div class="text-center mb-8 w-full">
-                <img src="./assets/images/title_tiendogopquy.svg" alt="Tiến độ góp quỹ" class="h-[60px] md:h-[100px] object-contain drop-shadow-lg mx-auto mb-3">
+                <img src="./assets/images/title_tiendogopquy.png" alt="Tiến độ góp quỹ" class="h-[60px] md:h-[100px] object-contain drop-shadow-lg mx-auto mb-3">
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
                     <p id="update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
                 </div>
@@ -167,8 +176,8 @@
             
             <div class="mt-24 md:mt-16 text-center relative z-10">
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" class="group inline-block transition-transform hover:scale-105 drop-shadow-[0_0_15px_rgba(28,225,219,0.5)]">
-                    <img src="./assets/images/CTA df.svg" class="h-12 md:h-16 object-contain block group-hover:hidden" alt="Donate">
-                    <img src="./assets/images/CTA hover.svg" class="h-12 md:h-16 object-contain hidden group-hover:block" alt="Donate Hover">
+                    <img src="./assets/images/CTA df.png" class="h-12 md:h-16 object-contain block group-hover:hidden" alt="Donate">
+                    <img src="./assets/images/CTA hover.png" class="h-12 md:h-16 object-contain hidden group-hover:block" alt="Donate Hover">
                 </a>
             </div>
         </section>
@@ -178,7 +187,7 @@
             <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80 mb-8" alt="Divider">
             
             <div class="text-center mb-8 w-full">
-                <img src="./assets/images/title_danhsachdonor.svg" alt="Danh sách donors" class="h-[60px] md:h-[100px] object-contain drop-shadow-lg mx-auto mb-3">
+                <img src="./assets/images/title_danhsachdonor.png" alt="Danh sách donors" class="h-[60px] md:h-[100px] object-contain drop-shadow-lg mx-auto mb-3">
                 <div class="inline-block bg-black/60 backdrop-blur px-5 py-1.5 rounded-full border border-white/10 mt-2">
                     <p id="donor-update-time-text" class="font-helvetica text-gray-300 text-xs md:text-sm italic">Đang cập nhật...</p>
                 </div>
@@ -205,14 +214,14 @@
         <section id="lookup-section" class="scroll-mt-28 w-full flex flex-col items-center pt-10">
             <img src="./assets/images/Phan cach.svg" class="w-3/4 max-w-md h-auto opacity-80 mb-8" alt="Divider">
             
-            <img src="./assets/images/title_tracuu.svg" alt="Tra cứu Thông tin Donate" class="h-[60px] md:h-[100px] object-contain drop-shadow-lg mx-auto mb-6">
+            <img src="./assets/images/title_tracuu.png" alt="Tra cứu Thông tin Donate" class="h-[60px] md:h-[100px] object-contain drop-shadow-lg mx-auto mb-6">
             <p class="font-helvetica text-white/80 text-sm md:text-base text-center max-w-2xl mb-8 px-4">Hãy nhập số điện thoại đã điền trong form để tra cứu lịch sử Donate của mình. Các thông tin dưới đây chỉ hiển thị với bạn</p>
             
             <div class="flex gap-2 mb-6 w-full max-w-xl justify-center items-center px-4">
                 <input type="text" id="phoneInput" placeholder="Nhập số điện thoại của bạn..." class="font-helvetica border-0 p-3 md:p-4 rounded-full w-full outline-none focus:ring-2 focus:ring-[#1ce1db] transition-all bg-white/90 text-black shadow-lg">
                 <button onclick="searchPhone()" class="shrink-0 group hover:scale-105 transition-transform drop-shadow-lg">
-                    <img src="./assets/images/Tra cuu df.svg" alt="Tra cứu ngay" class="h-12 md:h-14 object-contain block group-hover:hidden">
-                    <img src="./assets/images/Tra cuu hover.svg" alt="Tra cứu hover" class="h-12 md:h-14 object-contain hidden group-hover:block">
+                    <img src="./assets/images/Tra cuu df.png" alt="Tra cứu ngay" class="h-12 md:h-14 object-contain block group-hover:hidden">
+                    <img src="./assets/images/Tra cuu hover.png" alt="Tra cứu hover" class="h-12 md:h-14 object-contain hidden group-hover:block">
                 </button>
             </div>
             
@@ -264,8 +273,8 @@
     <!-- NÚT CTA CỐ ĐỊNH DESKTOP -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3bHMckxxrZeXBpa3up5eOJBA6qLmZmuw9L6XqzFDqyx-s2w/viewform?usp=dialog" target="_blank" 
        class="fixed bottom-6 right-6 z-50 hidden md:flex group transition-transform hover:scale-105 animate-bounce drop-shadow-[0_0_15px_rgba(255,92,168,0.5)]">
-        <img src="./assets/images/CTA df.svg" class="h-14 lg:h-16 object-contain block group-hover:hidden" alt="Donate">
-        <img src="./assets/images/CTA hover.svg" class="h-14 lg:h-16 object-contain hidden group-hover:block" alt="Donate Hover">
+        <img src="./assets/images/CTA df.png" class="h-14 lg:h-16 object-contain block group-hover:hidden" alt="Donate">
+        <img src="./assets/images/CTA hover.png" class="h-14 lg:h-16 object-contain hidden group-hover:block" alt="Donate Hover">
     </a>
 
     <!-- GIAO DIỆN MOBILE: THANH BOTTOM BAR CỐ ĐỊNH ĐÁY -->
@@ -331,7 +340,6 @@
         }
         generateUpdateTime();
 
-        // HÀM MỚI: QUYẾT ĐỊNH XEM DÙNG GIỜ CỦA APPS SCRIPT HAY GIỜ HỆ THỐNG
         function applyUpdateTime(customTimeFromApi) {
             let displayTime = customTimeFromApi ? `Thời điểm cập nhật: ${customTimeFromApi}` : globalUpdateTimeStr;
             let updateTextEl = document.getElementById('update-time-text');
@@ -398,10 +406,7 @@
             try {
                 const res = await fetch(API_URL + "?action=overview&t=" + new Date().getTime());
                 overviewDataGlobal = await res.json();
-                
-                // KIỂM TRA XEM CÓ LẤY ĐƯỢC GIỜ TỪ Ô T2 KHÔNG
                 applyUpdateTime(overviewDataGlobal.customUpdateTime);
-                
                 renderOverviewLayout();
             } catch (e) { document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu tiến độ.</span>`; }
         }
@@ -486,7 +491,7 @@
                         <div class="absolute top-[36px] left-0 right-0 h-2 bg-gray-700/80 rounded-full"></div>
                         <div id="main-bar-horiz" class="absolute top-[36px] left-0 h-2 bg-[#1ce1db] rounded-full w-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
                         ${milestonesHorizHtml}
-                        <div id="star-horiz" class="absolute top-[36px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="left: 0%;"><img src="./assets/images/Star bullet.svg" class="w-8 md:w-10 animate-spin" style="animation-duration: 4s;"></div>
+                        <div id="star-horiz" class="absolute top-[36px] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="left: 0%;"><img src="./assets/images/Star bullet.png" class="w-8 md:w-10 animate-spin" style="animation-duration: 4s;"></div>
                     </div>
                 </div>
 
@@ -495,7 +500,7 @@
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-full bg-gray-700/80 rounded-full"></div>
                         <div id="main-bar-vert" class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 bg-[#1ce1db] rounded-full h-0 transition-all duration-[2000ms] ease-out shadow-[0_0_15px_#1ce1db] z-10"></div>
                         ${milestonesVertHtml}
-                        <div id="star-vert" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="top: 0%;"><img src="./assets/images/Star bullet.svg" class="w-10 animate-spin" style="animation-duration: 4s;"></div>
+                        <div id="star-vert" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-[2000ms] ease-out" style="top: 0%;"><img src="./assets/images/Star bullet.png" class="w-10 animate-spin" style="animation-duration: 4s;"></div>
                     </div>
                 </div>
             `;
@@ -510,10 +515,7 @@
             try {
                 const res = await fetch(API_URL + "?action=topdonor&t=" + new Date().getTime());
                 donorDataGlobal = await res.json();
-                
-                // KIỂM TRA XEM CÓ LẤY ĐƯỢC GIỜ TỪ Ô T2 KHÔNG
                 applyUpdateTime(donorDataGlobal.customUpdateTime);
-                
                 renderDonorsView(); 
             } catch (e) { document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr; }
         }
@@ -555,7 +557,7 @@
                     html += `
                         <div class="flex flex-row items-center justify-center w-full max-w-max mx-auto gap-6 md:gap-10 pb-4">
                             <div class="relative w-32 h-36 md:w-40 md:h-48 shrink-0 anim-glow-pulse group cursor-pointer">
-                                <img src="./assets/images/Top 1.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
+                                <img src="./assets/images/Top 1.png" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-[120px] md:w-[160px] bg-black/90 backdrop-blur p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
                                     ${popupHtml}
                                 </div>
@@ -577,7 +579,7 @@
                         html += `
                             <div class="w-full md:w-1/2 flex flex-row items-center justify-start md:justify-center gap-3 md:gap-4">
                                 <div class="relative w-24 h-28 md:w-28 md:h-32 shrink-0 hover:scale-105 transition-transform group cursor-pointer">
-                                    <img src="./assets/images/Top ${i+1}.svg" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
+                                    <img src="./assets/images/Top ${i+1}.png" class="w-full h-full object-contain" onerror="this.src='./assets/images/Moc.svg'">
                                     <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-[100px] md:w-[130px] bg-black/90 backdrop-blur p-1.5 rounded-lg border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
                                         ${popupHtml}
                                     </div>
@@ -615,6 +617,11 @@
                     filteredList = allList.filter(d => d.nickname.trim().toLowerCase() !== 'anonymous');
                 } else if (currentDonorTab === 'notform') {
                     filteredList = allList.filter(d => d.nickname.trim().toLowerCase() === 'anonymous');
+                    filteredList.sort((a, b) => {
+                        let da = new Date(a.timestamp || a.time || a.lastTime || 0).getTime();
+                        let db = new Date(b.timestamp || b.time || b.lastTime || 0).getTime();
+                        return db - da;
+                    });
                 }
 
                 html += `
@@ -754,7 +761,7 @@
                             if (hasBaseGift) {
                                 giftItems += `
                                     <div class="group relative flex flex-col items-center justify-center p-3 bg-white/5 border border-[#ff5ca8]/30 rounded-lg gap-2 shadow-inner ${blinkClass} cursor-pointer transition-all hover:bg-white/10">
-                                        <img src="./assets/images/checkmark.svg" class="w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_0_3px_#ff5ca8]" onerror="this.style.display='none'">
+                                        <img src="./assets/images/checkmark.png" class="w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_0_3px_#ff5ca8]" onerror="this.style.display='none'">
                                         <span class="text-[#ff5ca8] font-bold text-center text-xs md:text-sm">${name}</span>
                                         ${hasTop3Gift ? `
                                             <div class="absolute bottom-full mb-3 w-[120px] md:w-[150px] bg-black/90 backdrop-blur p-1.5 rounded border border-[#1ce1db]/40 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:animate-wiggle transition-all duration-300 z-50 pointer-events-none">
