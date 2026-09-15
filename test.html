@@ -9,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        /* ĐÃ ĐỔI TOÀN BỘ SANG FONT HELVETICA NEUE */
         @font-face { font-family: 'HelveticaNeue'; src: url('./assets/fonts/HelveticaNeue.ttc') format('truetype'); }
         .font-helvetica { font-family: 'HelveticaNeue', sans-serif; }
         .font-major { font-family: 'HelveticaNeue', sans-serif; font-weight: bold; }
@@ -64,7 +63,7 @@
             animation: shimmer-sweep 2.5s infinite;
         }
 
-        /* TĂNG CƯỜNG ĐỘ SÁNG HIỆU ỨNG BỤI SAO LẤP LÁNH (GLITTER) */
+        /* BỤI SAO LẤP LÁNH (GLITTER) */
         .glitter-star {
             position: absolute; background: white; border-radius: 50%;
             animation: twinkle var(--duration) ease-in-out infinite alternate;
@@ -88,14 +87,12 @@
 
 <body class="text-gray-800 relative overflow-x-hidden pb-24 md:pb-0">
     
-    <!-- TÁCH BACKGROUND CHO MOBILE VÀ DESKTOP -->
     <div class="fixed inset-0 z-[-2] bg-cover bg-center md:hidden" style="background-image: url('./assets/images/Backgroundmobile.webp');"></div>
     <div class="fixed inset-0 z-[-2] bg-cover bg-center hidden md:block" style="background-image: url('./assets/images/Backgroundweb.webp');"></div>
     <div class="fixed inset-0 z-[-1] bg-black/40 backdrop-blur-[2px]"></div>
 
-    <!-- HERO BANNER (ĐÃ GIẢM pt-20 CÒN pt-10 VÀ RẢI ĐẬM GLITTER) -->
+    <!-- HERO BANNER -->
     <section id="hero" class="w-full flex flex-col items-center pt-6 md:pt-10 pb-6 relative">
-        <!-- BỤI SAO LẤP LÁNH (TĂNG SỐ LƯỢNG LÊN 15 HẠT SÁNG RỰC) -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <div class="glitter-star" style="top: 15%; left: 20%; --duration: 1.5s; width: 6px; height: 6px;"></div>
             <div class="glitter-star" style="top: 25%; left: 10%; --duration: 2.1s; width: 8px; height: 8px;"></div>
@@ -119,7 +116,7 @@
         <p class="font-helvetica text-white/80 text-[16px] md:text-[18px] tracking-widest relative z-10">Project by @trinhtongpartners</p>
     </section>
 
-    <!-- THANH NAVIGATION (ĐÃ CĂN CHỈNH GIÃN CÁCH VÀ CHỮ CHO MOBILE) -->
+    <!-- THANH NAVIGATION -->
     <div class="sticky top-4 z-50 w-full flex justify-center px-4 mb-16 md:mb-24">
         <nav class="flex w-full max-w-5xl bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 justify-center items-center text-white font-helvetica shadow-2xl min-h-[50px] md:min-h-[60px] uppercase">
             <div class="flex w-full justify-between sm:justify-evenly md:justify-center md:space-x-6 lg:space-x-12 text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px] font-bold tracking-wider items-center">
@@ -132,10 +129,10 @@
         </nav>
     </div>
 
-    <!-- STORY & TEXT -->
+    <!-- STORY & TEXT (PADDING 50PX ĐỒNG BỘ CẢ 2 BẢN) -->
     <section id="story" class="scroll-mt-28 w-full flex flex-col items-center pb-8 md:pb-12 px-4 md:px-0">
-        <!-- ĐÃ KHÓA SAFE ZONE p-[50px], CHỮ CO GIÃN THEO MÀN HÌNH -->
-        <div class="relative w-full max-w-5xl drop-shadow-2xl mb-12 flex flex-col items-center justify-center p-[50px] md:p-[60px] md:aspect-[10/6.5] min-h-[450px] md:min-h-0 mx-auto">
+        <!-- ĐÃ ĐỔI p-[50px] XUYÊN SUỐT CHO CẢ MOBILE VÀ DESKTOP ĐỂ KHÓA SAFE ZONE -->
+        <div class="relative w-full max-w-5xl drop-shadow-2xl mb-12 flex flex-col items-center justify-center p-[50px] md:aspect-[10/6.5] min-h-[450px] md:min-h-0 mx-auto">
             <picture class="absolute inset-0 w-full h-full z-[-1]">
                 <source media="(max-width: 767px)" srcset="./assets/images/Story-frame-mobile.svg">
                 <img src="./assets/images/Story-fame.svg" class="w-full h-full object-fill opacity-90" alt="Background Frame">
@@ -143,8 +140,8 @@
             
             <img src="./assets/images/title_story.svg" alt="Giới thiệu" class="h-[50px] md:h-[100px] object-contain mb-4 md:mb-6 drop-shadow-lg shrink-0">
             
-            <!-- Chữ linh hoạt text-[11px] đến text-lg để nhét vừa khít Safe Zone -->
-            <div class="font-helvetica text-white/90 text-[11px] min-[375px]:text-[12px] sm:text-[14px] md:text-base lg:text-lg leading-relaxed md:leading-relaxed text-justify w-full z-10 flex-1 flex flex-col justify-center">
+            <!-- Đã điều chỉnh size text cho phù hợp với PADDING 50 trên Desktop -->
+            <div class="font-helvetica text-white/90 text-[11px] min-[375px]:text-[12px] sm:text-[14px] md:text-[14px] lg:text-base leading-relaxed md:leading-relaxed text-justify w-full z-10 flex-1 flex flex-col justify-center">
                 <p class="mb-2 md:mb-4">Thay vì cuộc viễn chinh tìm kiếm hào quang bên ngoài thế giới, Innerstellar là chuyến du hành ngược dòng vào sâu thẳm nội tâm. Trịnh Thăng Bình lựa chọn định danh bản thân bằng sự thấu suốt chính mình, tự tin bước đi với những giá trị nguyên bản nhất. Ánh sáng bền bỉ nhất của một nghệ sĩ không đến từ ánh đèn sân khấu phản chiếu, mà xuất phát từ nội lực bên trong. Trịnh Thăng Bình không gồng mình để khoác lên tấm áo hào nhoáng; anh bước ra với phong thái của một người đàn ông đã đi qua đủ chông gai để hiểu rõ giá trị của mình. Sự lấp lánh của anh chính là sự chân thật - khi người nghệ sĩ dám viết, dám hát bằng trọn vẹn vốn sống và tình yêu nghệ thuật.</p>
                 <p>Khi sự chân thật từ sâu thẳm nội tâm được cất lên, nó tạo thành lực hút tự nhiên kéo những tâm hồn đồng điệu lại gần nhau. Ở đó, Trịnh Thăng Bình được đứng giữa dải ngân hà của riêng mình - nơi từng đốm sáng cùng anh thắp lên một vùng trời rực rỡ - để anh nhận ra, mình chưa từng lẻ loi trên hành trình vượt chông gai này.</p>
             </div>
@@ -305,7 +302,7 @@
     </div>
 
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbwyYkPL5AYZ3hox4lNjtCz5F113R-O34Y9Ij2YFzyQNWzTeutSeqf1X85z-TAqFtiGi/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbzOlTdu-y2ggWspAbOyWmEpMRfwsnob6z2tzUsAajfhS7ARMVhTkMezbRRahrVKEqPn/exec";
         const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + "đ";
 
         function parseTimestamp(val) {
@@ -333,6 +330,16 @@
             globalUpdateTimeStr = `Thời điểm cập nhật: 23:00 ${dd}/${mm}/${yyyy}`;
         }
         generateUpdateTime();
+
+        // HÀM MỚI: QUYẾT ĐỊNH XEM DÙNG GIỜ CỦA APPS SCRIPT HAY GIỜ HỆ THỐNG
+        function applyUpdateTime(customTimeFromApi) {
+            let displayTime = customTimeFromApi ? `Thời điểm cập nhật: ${customTimeFromApi}` : globalUpdateTimeStr;
+            let updateTextEl = document.getElementById('update-time-text');
+            if (updateTextEl) updateTextEl.innerText = displayTime;
+            
+            let donorUpdateTextEl = document.getElementById('donor-update-time-text');
+            if (donorUpdateTextEl) donorUpdateTextEl.innerText = displayTime;
+        }
 
         let overviewDataGlobal = null;
         let progAnimTriggered = false;
@@ -391,7 +398,10 @@
             try {
                 const res = await fetch(API_URL + "?action=overview&t=" + new Date().getTime());
                 overviewDataGlobal = await res.json();
-                document.getElementById('update-time-text').innerText = globalUpdateTimeStr;
+                
+                // KIỂM TRA XEM CÓ LẤY ĐƯỢC GIỜ TỪ Ô T2 KHÔNG
+                applyUpdateTime(overviewDataGlobal.customUpdateTime);
+                
                 renderOverviewLayout();
             } catch (e) { document.getElementById('overview-content').innerHTML = `<span class="text-red-500">Lỗi tải dữ liệu tiến độ.</span>`; }
         }
@@ -406,7 +416,6 @@
             const donateDashOffset = 188.5 - (188.5 * moneyStatPct / 100);
             const timeDashOffset = 188.5 - (188.5 * timeStatPct / 100);
             
-            // ĐÃ BẺ SỐ TIỀN KHỔNG LỒ LÀM 2 DÒNG TRÊN MOBILE
             let statsHtml = `<div class="text-center w-full mb-12">
                 <div class="font-major font-bold tracking-wider drop-shadow-lg mb-8 md:mb-10 flex flex-col md:flex-row justify-center items-center">
                     <div class="text-[#1ce1db] text-[40px] md:text-5xl leading-none mb-2 md:mb-0" id="counter-current">0</div>
@@ -501,7 +510,10 @@
             try {
                 const res = await fetch(API_URL + "?action=topdonor&t=" + new Date().getTime());
                 donorDataGlobal = await res.json();
-                document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr;
+                
+                // KIỂM TRA XEM CÓ LẤY ĐƯỢC GIỜ TỪ Ô T2 KHÔNG
+                applyUpdateTime(donorDataGlobal.customUpdateTime);
+                
                 renderDonorsView(); 
             } catch (e) { document.getElementById('donor-update-time-text').innerText = globalUpdateTimeStr; }
         }
@@ -603,12 +615,6 @@
                     filteredList = allList.filter(d => d.nickname.trim().toLowerCase() !== 'anonymous');
                 } else if (currentDonorTab === 'notform') {
                     filteredList = allList.filter(d => d.nickname.trim().toLowerCase() === 'anonymous');
-                    // ĐÃ FIX: SẮP XẾP TỪ MỚI NHẤT XUỐNG CŨ NHẤT DỰA VÀO TIMESTAMP
-                    filteredList.sort((a, b) => {
-                        let da = new Date(a.timestamp || a.time || a.lastTime || 0).getTime();
-                        let db = new Date(b.timestamp || b.time || b.lastTime || 0).getTime();
-                        return db - da;
-                    });
                 }
 
                 html += `
@@ -663,7 +669,6 @@
                     resultBox.innerHTML = `
                         <div class="bg-black/80 p-6 md:p-8 rounded-2xl border-2 border-red-400/50 font-helvetica text-center shadow-[0_0_20px_rgba(248,113,113,0.15)] animate-card start-anim-card mx-auto max-w-2xl w-full">
                             <p class="text-white/90 text-lg md:text-xl mb-3">Xin chào Partner ${greetingName},</p>
-                            <!-- ĐÃ THÁO BỎ font-bold THEO YÊU CẦU -->
                             <p class="text-white/90 text-lg md:text-xl leading-relaxed">tụi mình <span class="text-white/80">${data.formStatus}</span>.</p>
                         </div>
                     `;
@@ -771,13 +776,10 @@
                         giftHtml = `
                             <div class="mt-6 border-t border-white/10 pt-5">
                                 <p class="font-bold text-sm md:text-base uppercase text-[#ff5ca8] mb-1 text-center">DANH SÁCH QUÀ DỰ KIẾN</p>
-                                
-                                <!-- ĐÃ RÚT GỌN CÂU CHỮ THEO YÊU CẦU -->
                                 <p class="text-sm md:text-base text-gray-400 font-medium mb-4 text-center leading-relaxed">
                                     <span class="whitespace-normal md:whitespace-nowrap">(tính theo tổng donate của Partner đã đối chiếu NH tới thời điểm hiện tại: <span class="font-bold text-[#1ce1db] mx-1">${formatMoney(validTotal)}</span>).</span>
                                     <br>Quà Top 3 sẽ chốt chính thức sau khi kết thúc đợt Donate vào ngày 10/10/2026.
                                 </p>
-                                
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                                     ${giftItems}
                                 </div>
@@ -825,7 +827,6 @@
                 let html = `
                     <div class="text-center mb-8 animate-card start-anim-card">
                         <p class="font-helvetica text-white/90 text-lg md:text-xl">Xin chào Partner ${greetingName},</p>
-                        <!-- ĐÃ THÁO BỎ font-bold Ở TRẠNG THÁI -->
                         <p class="font-helvetica text-white/90 text-lg md:text-xl mt-1">tụi mình <span class="text-white/80">${data.formStatus}</span>.</p>
                     </div>
                     ${personalBlock}
